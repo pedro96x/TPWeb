@@ -171,7 +171,29 @@ public ArrayList<Persona> getAll() {
 			
 			e.printStackTrace();
 		}
-		
+	
+	
+//									Carga manual para probar que funcionaran otras cosas 
+//		Persona p = new Persona();
+//		p.setApellido("Probando");
+//		p.setDni(123456);
+//		p.setHabilitado(true);
+//		p.setId(1000);
+//		p.setNombre("esto");
+//		p.setPass("12345");
+//		p.setUser("pedroxxx");
+//		
+//		Persona pe = new Persona();
+//		pe.setApellido("Probando2");
+//		pe.setDni(1234567777);
+//		pe.setHabilitado(true);
+//		pe.setId(1001);
+//		pe.setNombre("esto2");
+//		pe.setPass("12345");
+//		pe.setUser("pedroxxx2");
+//		
+//		personas.add(p);
+//		personas.add(pe);
 		return personas;
 		
 	}

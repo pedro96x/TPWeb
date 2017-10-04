@@ -30,8 +30,6 @@ public class aABMPersonas extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.getRequestDispatcher("WEB-INF/ABMPersonasWeb.jsp").forward(request, response);
-		
 		
 	}
 
@@ -45,10 +43,14 @@ public class aABMPersonas extends HttpServlet {
 		try {
 			CtrlPersona ctrl= new CtrlPersona();
 			request.setAttribute("listaPersonas", ctrl.getAll());
+			request.getRequestDispatcher("WEB-INF/ABMPersonasWeb.jsp").forward(request, response);
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		
 	}
 
 }

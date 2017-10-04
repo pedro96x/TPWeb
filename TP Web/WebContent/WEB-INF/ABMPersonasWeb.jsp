@@ -61,11 +61,11 @@
   
   
   <table>
-		<% ArrayList<Persona> listaPers;
+	<%-- 	<% ArrayList<Persona> listaPers;
 		listaPers = (ArrayList<Persona>)request.getAttribute("listaPersonas");%>
 			<%
 	
-			
+			if (listaPers != null){
 			 for(Persona p : listaPers){ 
 				
 			/* Persona	p = listaPers[2];  */
@@ -78,13 +78,16 @@
 			<td><%=p.getNombre() %></td>
 		</tr>
 		<%
-			 } 
-		%>
+			 } }
+			else {%>
+			 <p> No hay Personas para mostrar </p>  
+			 <% }
+		%> --%>
 	</table>
   
   
   
-  <%--             
+             
   <table class="table table-hover">
   
 
@@ -105,6 +108,7 @@
     
       <%
 			ArrayList<Persona>listaPers=(ArrayList<Persona>)request.getAttribute("listaPersonas");
+			if (listaPers != null){
 			for(Persona p : listaPers){
 		%>
   
@@ -122,7 +126,12 @@
     	 <td><label><input type="checkbox" value="true"></label></td>  
        <% }%>
       
-      <%} %>
+      <%}
+			}
+			else {%>
+			 <p> No hay Personas para mostrar </p>  
+			 <% }
+		%>
       
       
       
@@ -149,7 +158,7 @@
       </tr> -->
     </tbody>
   </table>
- --%>
+ 
 
   <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Agregar Persona</button>
   <div class="modal fade" id="myModal" role="dialog">

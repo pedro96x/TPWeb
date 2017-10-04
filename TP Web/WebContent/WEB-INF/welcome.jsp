@@ -34,7 +34,10 @@
           <li><a href="#">Modificaciones</a></li>
         </ul>
       </li>
-      <li><a href="aABMPersonas" action="aABMPersonas" method="get">ABM Personas</a></li> 
+      
+      <!-- <li><a href="#" action="aABMPersonas" method="post">ABM Personas</a></li>   -->
+      <!--  No lo pude hacer andar con un hyperlink, lo cambie por un boton mas abajo  -->
+      
       <li><a href="#">Tipo de Auto</a></li>
       <li><a href="#">Mis reservas</a></li>
     </ul>
@@ -44,6 +47,11 @@
 	<div class="container">
   <h3>Bienvenido <%=((Persona)session.getAttribute("user")).getNombre() %></h3>
   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse nec posuere tellus. Etiam faucibus lorem vel viverra mollis. Nulla ligula felis, imperdiet at libero finibus, vulputate porttitor dolor.</p>
+  
+   <form class="form-signin" name="signin" action="aABMPersonas" method="post">
+        
+        <button class="btn btn-lg btn-primary btn-block" type="submit">ABM Personas</button> 
+  
 </div>
 	
 	
