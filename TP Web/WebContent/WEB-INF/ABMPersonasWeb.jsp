@@ -59,8 +59,8 @@
 <div class="container">
   <h2>Administrar Personas</h2>
   <p>En esta tabla se muestran todas las personas registradas</p>
- 
-  
+ <h3>Bienvenido session <%=((Persona)session.getAttribute("user")).getNombre() %></h3>
+ <p> bienvenido <%= (String)request.getAttribute("nombrePer") %> </p>
   
   <table>
 	<%-- 	<% ArrayList<Persona> listaPers;

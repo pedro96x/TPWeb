@@ -97,7 +97,7 @@
     <thead>
       <tr>
         <th>ID</th>
-        <th>Modelo</th>
+         <th>Modelo</th> 
         <th>Patente</th>
         <th>Fecha inicio</th>
         <th>Fecha fin</th>
@@ -110,14 +110,14 @@
     <tbody>
     
       <%
-			ArrayList<Reserva>listaRes=(ArrayList<Reserva>)request.getAttribute("listaReservas");
+			ArrayList<Reserva>listaRes=(ArrayList<Reserva>)request.getAttribute("listaRes");
 			if (listaRes != null){
 			for(Reserva r : listaRes){
 		%>
   
       <tr>
 		<td><%= r.getId() %></td>   		
-		<td><%= r.getAutoReservado().getTipo().getNombre() %></td>    
+	    <td><%= r.getAutoReservado().getTipo().getNombre() %></td>   
         <td><%= r.getAutoReservado().getNombre() %></td>
         <td><%= r.getFechaIni() %></td>
         <td><%= r.getFechaFin() %></td>

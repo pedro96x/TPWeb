@@ -1,15 +1,18 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.jasper.tagplugins.jstl.core.ForEach;
+
 import controladores.CtrlPersona;
 import controladores.CtrlReserva;
 import entidades.Persona;
+import entidades.Reserva;
 
 /**
  * Servlet implementation class aMisReservas
@@ -41,25 +44,75 @@ public class aMisReservas extends HttpServlet {
 		// TODO Auto-generated method stub
 //		doGet(request, response);
 		
-		try {
+//		try {
+//			CtrlReserva ctrl= new CtrlReserva();
+//			int id = 0;
+//			ArrayList<Reserva>listaRes=new ArrayList<Reserva>();
+//			
+//			 id = ((Persona) request.getSession().getAttribute("user")).getId();
+//			
+//			listaRes = ctrl.getReservasAFututoByIdPersona(id);
+//			
+////			if ((Persona) request.getSession().getAttribute("user")!=null &&
+////					(ctrl.getReservasAFututoByIdPersona(((Persona) request.getSession().getAttribute("user")).getId()) != null)){
+////				
+////			 id = ((Persona) request.getSession().getAttribute("user")).getId();
+//			
+//			
+//			request.setAttribute("listaReservas", listaRes);
+//			
+//			request.getRequestDispatcher("WEB-INF/ABMReservas.jsp").forward(request, response);
+//			
+//					
+////			request.setAttribute("listaReservas", ctrl.getReservasAFututoByIdPersona(4));
+//			
+////			request.getRequestDispatcher("WEB-INF/ABMReservas.jsp").forward(request, response);
+////			}
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		
+		try{
 			CtrlReserva ctrl= new CtrlReserva();
+			int id = 0;
+			ArrayList<Reserva>listaRes=new ArrayList<Reserva>();
 			
-			if ((Persona) request.getSession().getAttribute("user")!=null &&
-					(ctrl.getReservasAFututoByIdPersona(((Persona) request.getSession().getAttribute("user")).getId()) != null)){
-			int id = ((Persona) request.getSession().getAttribute("user")).getId();
-			request.setAttribute("listaReservas", ctrl.getReservasAFututoByIdPersona(id));
+			id = ((Persona) request.getSession().getAttribute("user")).getId();
 			
-			request.getRequestDispatcher("WEB-INF/ABMReservas.jsp").forward(request, response);
+			listaRes = ctrl.getReservasAFututoByIdPersona(id);
 			
-					
-//			request.setAttribute("listaReservas", ctrl.getReservasAFututoByIdPersona(4));
+			request.setAttribute("listaRes", listaRes);
 			
 			request.getRequestDispatcher("WEB-INF/ABMReservas.jsp").forward(request, response);
-			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			
 		}
+		 catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		
+		
+		
+//		try {
+//			CtrlPersona ctrl= new CtrlPersona();
+//			String nombre = "nulo";
+//			
+//			nombre = ((Persona) request.getSession().getAttribute("user")).getNombre();
+//			
+//			request.setAttribute("nombrePer", nombre);
+//			request.setAttribute("listaPersonas", ctrl.getAll());
+//			request.getRequestDispatcher("WEB-INF/ABMPersonasWeb.jsp").forward(request, response);
+//			
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		
+		
+		
+		
 		
 	}
 
