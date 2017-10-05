@@ -9,6 +9,7 @@
   <title>ABM Personas</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="style/font-awesome.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -120,10 +121,12 @@
         <td><%= p.getUser() %></td>
         <td><%= p.getPass() %></td>
         <%if (p.isHabilitado()){ %>
-        <td><label><input type="checkbox" value="true" checked="checked"></label></td>
+      <td><label><i class="fa fa-check" aria-hidden="true"></i></label></td>
+       <!--  <td><label><input type="checkbox" value="true" checked="checked"></label></td> -->
         <%}
        else {%>
-    	 <td><label><input type="checkbox" value="true"></label></td>  
+   <td><label><i class="fa fa-times" aria-hidden="true"></i></label></td>
+    	 <!-- <td><label><input type="checkbox" value="true"></label></td>   -->
        <% }%>
       
       <%}
@@ -166,7 +169,7 @@
       
         <!-- Modal content-->
         <div class="modal-content">
-        <form class="form-signin" name="signin" action="AgregarPersona" method="post">
+        
         
         
           <div class="modal-header">
@@ -178,7 +181,8 @@
             
             <p>Complete todos los campos  </p>
             
-            <form class="form-horizontal">
+            <form class="form-horizontal"  action="AgregarPersona" method="post">
+           
 
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="usr">Nombre:</label>

@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <link rel="icon" href="http://getbootstrap.com/favicon.ico">
 
-    <title>Play JavaCraft!</title>
+    <title>Ingresar</title>
 
     <!-- Bootstrap core CSS -->
     <link href="style/bootstrap.css" rel="stylesheet">
@@ -32,12 +32,17 @@
 
     <div class="container">
 
-      <form class="form-signin" name="signin" action="start" method="post">
+      <form class="form-horizontal" name="signin" action="start" method="post">
         <h2 class="form-signin-heading">Login</h2>
-        <label for="inputUser" class="sr-only">User</label>
-        <input name="user" id="inputUser" class="form-control" placeholder="User" required="" autofocus="" type="">
-        <label for="inputPass" class="sr-only">Password</label>
-        <input name="pass" id="inputPass" class="form-control" placeholder="Password" required="" type="Password">
+        <br>
+        <!-- <label for="inputUser" class="sr-only">User</label> -->
+        
+        <input name="user" id="inputUser" class="form-control" placeholder="User" required="" autofocus="" type="" value="admin">
+          <br>
+        <!-- <label for="inputPass" class="sr-only">Password</label> -->
+        
+        <input name="pass" id="inputPass" class="form-control" placeholder="Password" required="" type="Password" value="admin">
+          <br>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button>
       </form>
 
