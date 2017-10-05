@@ -1,13 +1,17 @@
 package entidades;
 
+import java.io.Serializable;
 import java.util.Date;//Que diferencia hay entre java.util.Date y java.sql.Date? Cual se debe usar?
 
-public class Reserva {
+public class Reserva implements Serializable {
 	private int id;
 	Auto autoReservado;
 	java.sql.Date fechaIni;
 	java.sql.Date fechaFin;
 	int idPersona;
+	String detalle;
+	
+	public Reserva (){}
 	
 	public java.sql.Date getFechaIni() {
 		return fechaIni;
@@ -21,7 +25,7 @@ public class Reserva {
 	public void setFechaFin(java.sql.Date fechaFin) {
 		this.fechaFin = fechaFin;
 	}
-	String detalle;
+	
 	
 	
 	public int getId() {

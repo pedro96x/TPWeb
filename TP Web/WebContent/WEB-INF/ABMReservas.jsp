@@ -1,12 +1,13 @@
 <%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="entidades.Persona"%>
+<%@page import="entidades.*"%>
+<%@page import="controladores.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>ABM Personas</title>
+  <title>Mis Reservas</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="style/font-awesome.min.css" rel="stylesheet">
@@ -57,8 +58,8 @@
 
 
 <div class="container">
-  <h2>Administrar Personas</h2>
-  <p>En esta tabla se muestran todas las personas registradas</p>
+  <h2>Administrar Reservas</h2>
+  <p>En esta tabla se muestran todas sus reservas</p>
  
   
   
@@ -96,12 +97,12 @@
     <thead>
       <tr>
         <th>ID</th>
-        <th>Nombre</th>
-        <th>Apellido</th>
-        <th>DNI</th>
-        <th>Usuario</th>
-        <th>Contraseña</th>
-        <th>Habilitado</th>
+        <th>Modelo</th>
+        <th>Patente</th>
+        <th>Fecha inicio</th>
+        <th>Fecha fin</th>
+        <th>Detalle</th>
+        
        
        
       </tr>
@@ -109,62 +110,44 @@
     <tbody>
     
       <%
-			ArrayList<Persona>listaPers=(ArrayList<Persona>)request.getAttribute("listaPersonas");
-			if (listaPers != null){
-			for(Persona p : listaPers){
+			ArrayList<Reserva>listaRes=(ArrayList<Reserva>)request.getAttribute("listaReservas");
+			if (listaRes != null){
+			for(Reserva r : listaRes){
 		%>
   
       <tr>
-        <td><%= p.getId() %></td>
-        <td><%= p.getNombre() %></td>
-        <td><%= p.getApellido() %></td>
-        <td><%= p.getDni() %></td>
-        <td><%= p.getUser() %></td>
-        <td><%= p.getPass() %></td>
-        <%if (p.isHabilitado()){ %>
+		<td><%= r.getId() %></td>   		
+		<td><%= r.getAutoReservado().getTipo().getNombre() %></td>    
+        <td><%= r.getAutoReservado().getNombre() %></td>
+        <td><%= r.getFechaIni() %></td>
+        <td><%= r.getFechaFin() %></td>
+        <td><%= r.getDetalle() %></td>
+       
+        <%-- <%if (p.isHabilitado()){ %>
       <td><label><i class="fa fa-check" aria-hidden="true"></i></label></td>
        <!--  <td><label><input type="checkbox" value="true" checked="checked"></label></td> -->
         <%}
        else {%>
    <td><label><i class="fa fa-times" aria-hidden="true"></i></label></td>
     	 <!-- <td><label><input type="checkbox" value="true"></label></td>   -->
-       <% }%>
+       <% }%> --%>
       
       <%}
 			}
 			else {%>
-			 <p> No hay Personas para mostrar </p>  
+			 <p> No hay Reservas para mostrar </p>  
 			 <% }
 		%>
       
       
       
       
-     <!--  <tr>
-          <td>7</td>
-          <td>Guido</td>
-          <td>Fabio</td>
-          <td>3956478</td>
-          <td>guido679</td>
-          <td>1234</td>
-          <td><label><input type="checkbox" value="true"></label></td>
-          <td>Usuario</td>
-      </tr>
-      <tr>
-          <td>10</td>
-          <td>Miguel</td>
-          <td>Oliveros</td>
-          <td>19456759</td>
-          <td>cubano54</td>
-          <td>freecuban</td>
-          <td><label><input type="checkbox" value=""></label></td>
-          <td>Gerente</td>
-      </tr> -->
+    
     </tbody>
   </table>
  
 
-  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Agregar Persona</button>
+  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Agregar Reserva</button>
   <div class="modal fade" id="myModal" role="dialog">
       <div class="modal-dialog">
       
@@ -175,7 +158,7 @@
         
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Agregar nueva persona</h4>
+            <h4 class="modal-title">Agregar nueva Reserva</h4>
           </div>
           <div class="modal-body">
 

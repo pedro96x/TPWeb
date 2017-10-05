@@ -49,8 +49,13 @@
   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse nec posuere tellus. Etiam faucibus lorem vel viverra mollis. Nulla ligula felis, imperdiet at libero finibus, vulputate porttitor dolor.</p>
   
    <form class="form-signin" name="signin" action="aABMPersonas" method="post">
-        
-        <button class="btn btn-lg btn-primary btn-block" type="submit">ABM Personas</button> 
+   <button class="btn btn-lg btn-primary btn-block" type="submit">ABM Personas</button> 
+  </form>
+  
+  <form class="form-signin" name="signin" action="aMisReservas" method="post">
+   <button class="btn btn-lg btn-primary btn-block" type="submit">Mis Reservas</button> 
+  </form>
+  
   
 </div>
 	
