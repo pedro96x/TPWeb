@@ -166,6 +166,9 @@
       
         <!-- Modal content-->
         <div class="modal-content">
+        <form class="form-signin" name="signin" action="AgregarPersona" method="post">
+        
+        
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
             <h4 class="modal-title">Agregar nueva persona</h4>
@@ -180,28 +183,28 @@
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="usr">Nombre:</label>
                     <div class="col-sm-10"> 
-                    <input type="text" class="form-control" id="nombre"placeholder="Ingrese Nombre">
+                    <input name="nombre" type="text" class="form-control" id="nombre"placeholder="Ingrese Nombre">
                   </div>
                   </div>
 
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="usr">Apellido:</label>
                     <div class="col-sm-10"> 
-                    <input type="text" class="form-control" id="apellido" placeholder="Ingrese Apellido">
+                    <input name="apellido" type="text" class="form-control" id="apellido" placeholder="Ingrese Apellido">
                 </div>
               </div>
 
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="usr">DNI:</label>
                     <div class="col-sm-10"> 
-                    <input type="text" class="form-control" id="dni" placeholder="Ingrese DNI">
+                    <input name="dni" type="text" class="form-control" id="dni" placeholder="Ingrese DNI">
                   </div>
                 </div>
 
                   <div class="form-group">
                       <label class="control-label col-sm-2" for="usr">Usuario:</label>
                       <div class="col-sm-10"> 
-                      <input type="text" class="form-control" id="usuario" placeholder="Ingrese Usuario">
+                      <input name="user" type="text" class="form-control" id="usuario" placeholder="Ingrese Usuario">
                     </div> 
                   </div>
 
@@ -209,13 +212,23 @@
                   <label class="control-label col-sm-2" for="pwd">Contraseña:</label>
                   <div class="col-sm-10"> 
                     
-                    <input type="password" id="password" placeholder="Ingrese contraseña" name="password" class="form-control" data-toggle="password">
+                    <input name="pass" type="password" id="password" placeholder="Ingrese contraseña" name="password" class="form-control" data-toggle="password">
                   </div>
                 </div>
 
-                
+                <div class="form-group">
+                      <label class="control-label col-sm-2" for="usr">Habilitado:</label>
+                      <div class="col-sm-10"> 
+                     <input name="habilitado" type="checkbox" value="true" >
+                    </div> 
+                  </div>
 
-                  <div class="container">
+
+
+
+
+
+                  <!-- <div class="container">
                       <label class="control-label col-sm-2" for="pwd2">Tipo:</label>
                       <div class="col-sm-10"> 
                   <div class="btn-group">
@@ -225,7 +238,7 @@
                   </div>
                 </div>
               </div>
-
+ -->
                 
              
 
@@ -239,6 +252,12 @@
                     <div class="col-sm-10"> 
                     <button type="submit" class="btn btn-success">Aceptar</button>
                   </div>
+                
+                
+                
+                
+                
+                
                 
 
               </div>
