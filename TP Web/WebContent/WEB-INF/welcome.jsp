@@ -39,6 +39,7 @@
       <!--  No lo pude hacer andar con un hyperlink, lo cambie por un boton mas abajo  -->
       
       <li><a href="#">Tipo de Auto</a></li>
+       <li><a href="#">Autos</a></li>
       <li><a href="#">Mis reservas</a></li>
     </ul>
   </div>
@@ -49,7 +50,11 @@
   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse nec posuere tellus. Etiam faucibus lorem vel viverra mollis. Nulla ligula felis, imperdiet at libero finibus, vulputate porttitor dolor.</p>
   
    <form class="form-signin" name="signin" action="aABMPersonas" method="post">
-   <button class="btn btn-lg btn-primary btn-block" type="submit">ABM Personas</button> 
+   <button class="btn btn-lg btn-primary btn-block" type="submit">Gestionar Personas</button> 
+  </form>
+  
+  <form class="form-signin" name="signin" action="aABMAutos" method="post">
+   <button class="btn btn-lg btn-primary btn-block" type="submit">Gestionar Autos</button> 
   </form>
   
   <form class="form-signin" name="signin" action="aMisReservas" method="post">
