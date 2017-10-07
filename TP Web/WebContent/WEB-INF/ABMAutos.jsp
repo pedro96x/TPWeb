@@ -24,27 +24,18 @@
 
 
   <nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <a class="navbar-brand" href="#">Alquiler de Autos</a>
-      </div>
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Home</a></li>
-        <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Autos
-          <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Alta</a></li>
-            <li><a href="#">Baja</a></li>
-            <li><a href="#">Modificaciones</a></li>
-          </ul>
-        </li>
-        <li><a href="WEB-INF/ABMsWeb.jsp">s</a></li>
-        <li><a href="#">Tipo de Auto</a></li>
-        <li><a href="#">Mis reservas</a></li>
-      </ul>
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Alquiler de Autos</a>
     </div>
-  </nav>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="Start">Home</a></li>
+      <li><a href="aABMPersonas">Personas</a></li> 
+      <li><a href="aABMAutos">Autos</a></li> 
+      <li><a href="aMisReservas">Mis Reservas</a></li>     
+    </ul>
+  </div>
+</nav>
 
 
 

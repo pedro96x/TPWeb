@@ -40,50 +40,7 @@ public class CtrlReserva {
 		return arrayMismoTipoAutos;
 	}
 		
-//		if(reservas.size()>0){
-//			
-//		for (int i = 0; i < reservas.size(); i++) {
-//			for (int j = 0; j < arrayMismoTipoAutos.size(); j++) {
-//				if(arrayMismoTipoAutos.get(j).getId()==reservas.get(i).getAutoReservado().getId()){
-//					if(NuevoDate.seSolapan(reservas.get(i).getFechaIni(),reservas.get(i).getFechaFin(),fechaI,fechaF)){
-//						System.out.println("se solapan");
-//						
-//						
-//					}
-//					else{
-//						autosDisponibles.add(arrayMismoTipoAutos.get(j));
-//						
-//					}
-//					
-//				}
-//				else{
-//					autosDisponibles.add(arrayMismoTipoAutos.get(j));
-//					
-//				}
-//			}
-//			
-//		}
-//		}
-//		else{
-//			for (int i = 0; i < arrayMismoTipoAutos.size(); i++) {
-//				autosDisponibles.add(arrayMismoTipoAutos.get(i));
-//				
-//			}
-//		}
-//		
-//		
-//		int cont=0;
-//		for (int i = 0; i < autosDisponibles.size(); i++) {
-//			for (int j = 0; j < autosDisponibles.size(); j++) {
-//				if(autosDisponibles.get(j).equals(autosDisponibles.get(i))){
-//					cont++;
-//				}
-//				if(cont!=reservas.size()){
-//					autosDisponibles.remove(autosDisponibles.get(j));
-//				}
-//		}}
-//		return autosDisponibles;
-//	}
+
 
 	public ArrayList<Reserva> getReservasAFututoByIdPersona(int id) {
 		return dataRes.getReservasAFututoByIdPersona(id);

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import controladores.CtrlLogin;
 import controladores.CtrlPersona;
+import entidades.Persona;
 
 
 /**
@@ -30,7 +31,12 @@ public class Start extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+//		response.getWriter().append("Served at: ").append(request.getContextPath());
+//		doPost(request, response);
+		request.getRequestDispatcher("WEB-INF/welcome.jsp").forward(request, response);
+		
+		
+		
 	}
 
 	/**

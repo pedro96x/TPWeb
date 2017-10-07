@@ -89,100 +89,7 @@
 
 
 <div class="container">
-  <h2>Administrar Reservas</h2>
-  <p>En esta tabla se muestran todas sus reservas</p>
   
-  
- 
-  </form>
-  
-  
-  <table>
-	<%-- 	<% ArrayList<Persona> listaPers;
-		listaPers = (ArrayList<Persona>)request.getAttribute("listaPersonas");%>
-			<%
-	
-			if (listaPers != null){
-			 for(Persona p : listaPers){ 
-				
-			/* Persona	p = listaPers[2];  */
-			
-			
-		%>
-		<tr>
-			<td><%=p.getDni() %></td>
-			<td><%=p.getApellido() %></td>
-			<td><%=p.getNombre() %></td>
-		</tr>
-		<%
-			 } }
-			else {%>
-			 <p> No hay Personas para mostrar </p>  
-			 <% }
-		%> --%>
-	</table>
-  
-  
-  
-             
-  <table class="table table-hover">
-  
-
-    <thead>
-      <tr>
-        <th>ID</th>
-         <th>Modelo</th> 
-        <th>Patente</th>
-        <th>Fecha inicio</th>
-        <th>Fecha fin</th>
-        <th>Detalle</th>
-        
-       
-       
-      </tr>
-    </thead>
-    <tbody>
-    
-      <%
-			ArrayList<Reserva>listaRes=(ArrayList<Reserva>)request.getAttribute("listaRes");
-			if (listaRes != null){
-			for(Reserva r : listaRes){
-		%>
-  
-      <tr>
-		<td><%= r.getId() %></td>   		
-	    <td><%= r.getAutoReservado().getTipo().getNombre() %></td>   
-        <td><%= r.getAutoReservado().getNombre() %></td>
-        <td><%= r.getFechaIni() %></td>
-        <td><%= r.getFechaFin() %></td>
-        <td><%= r.getDetalle() %></td>
-       
-        <%-- <%if (p.isHabilitado()){ %>
-      <td><label><i class="fa fa-check" aria-hidden="true"></i></label></td>
-       <!--  <td><label><input type="checkbox" value="true" checked="checked"></label></td> -->
-        <%}
-       else {%>
-   <td><label><i class="fa fa-times" aria-hidden="true"></i></label></td>
-    	 <!-- <td><label><input type="checkbox" value="true"></label></td>   -->
-       <% }%> --%>
-      
-      <%}
-			}
-			else {%>
-			 <p> No hay Reservas para mostrar </p>  
-			 <% }
-		%>
-      
-      
-      
-      
-    
-    </tbody>
-  </table>
-  
-<form class="form-signin" name="signin" action="aNuevaReserva1" method="post">
-   <button class="btn btn-lg btn-primary btn-block" type="submit">Agregar posta reseerva</button> 
-  </form>
 
   <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Agregar Reserva</button>
   <div class="modal fade" id="myModal" role="dialog">
@@ -191,7 +98,7 @@
         <!-- Modal content-->
         <div class="modal-content">
         
-          <form class="form-horizontal"  action="AgregarPersona" method="post">
+          <form class="form-horizontal"  action="AgregarReserva" method="post">
         
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -208,7 +115,7 @@
  					<label class="control-label col-sm-2" for="usr">Inicio:</label>
  					<div class="col-sm-10">
                			<div class='input-group date' id='divMiCalendario1'>            
-                            <input type='text' id="txtFechaInicio" class="form-control" placeholder="Ingrese fecha de inicio" readonly/>
+                            <input type='text' name="fechaInicio" id="txtFechaInicio" class="form-control" value="<%= (String)request.getAttribute("FechaInicio") %>" readonly/>
                             <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
                             </span>
                         </div>
@@ -219,7 +126,7 @@
  					<label class="control-label col-sm-2" for="usr">Fin:</label>
  					<div class="col-sm-10">
                			<div class='input-group date' id='divMiCalendario2'>            
-                            <input type='text' id="txtFechaFin" class="form-control" placeholder="Ingrese fecha de fin" readonly/>
+                            <input type='text' name="fechaFin" id="txtFechaFin" class="form-control"  value="<%= (String)request.getAttribute("FechaFin") %>" readonly/>
                             <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
                             </span>
                         </div>
@@ -229,102 +136,54 @@
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="usr">Detalle:</label>
                     <div class="col-sm-10"> 
-                    <input name="apellido" type="text" class="form-control" id="apellido" placeholder="Ingrese detalle">
+                    <input name="apellido" name="detalle" type="text" class="form-control" id="apellido" placeholder="Ingrese detalle" value=<%=(String)request.getAttribute("detalle")%> readonly>
                 </div>
               </div>
 
 
 
-<% 
-CtrlTipoAuto ctrlTipoAuto = new CtrlTipoAuto();
-ArrayList<TipoAuto> listaTipos = ctrlTipoAuto.getArrayList(); 
-%>
+
 			<div class="form-group">
                 <label class="control-label col-sm-2" for="usr">Modelo:</label>
                 <div class="col-sm-10">
-					<select class="form-control" id="tipoAuto">  <!-- Como tomo datos de un select? es lo mismo que un imput? -->
-				        <%for(TipoAuto t: listaTipos){
-				        %><option><%= t.getNombre() %></option><%}%>
+					<select class="form-control" name="nombreTipo" id="tipoAuto">  <!-- Como tomo datos de un select? es lo mismo que un imput? -->
+				        <option><%= (String)request.getAttribute("nombreTipo") %></option>
       				</select>
       			</div>	
 			</div>
 
-<%
+ <%
 CtrlAuto ctrlAuto = new CtrlAuto();
-ArrayList<Auto> listaAutos = ctrlAuto.getArrayList();
+ArrayList<Auto> listaAuto = new ArrayList<Auto>() ;
+listaAuto= (ArrayList<Auto>)request.getAttribute("listaAutos");
 %>
 			<div class="form-group">
                 <label class="control-label col-sm-2" for="usr">Auto:</label>
                 <div class="col-sm-10">
-					<select class="form-control" id="auto">  <!-- Como tomo datos de un select? es lo mismo que un imput? -->
-				        <%for(Auto a : listaAutos){%>
+					<select class="form-control" name="nombreAuto" id="auto">  <!-- Como tomo datos de un select? es lo mismo que un imput? -->
+				        <%for(Auto a : listaAuto){%>
 				        <option><%=a.getNombre() %></option><%}%>
       				</select>
       			</div>	
 			</div>
+ 
 
 
-
-
-
-
-
-
-
-
-
-
-<!-- 
-<script
-	src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-<script>
-var options = {
-		color : ["red","green","blue"],
-		
-		country : ["Spain","Germany","France"]
-}
-
-$(function(){
-	var fillSecondary = function(){
-		var selected = $('#tipoAuto').val();
-		$('#auto').empty();
-		options[selected].forEach(function(element,index){
-			$('#auto').append('<option value="'+element+'">'+element+'</option>');
-		});
-	}
-	$('#primary').change(fillSecondary);
-	fillSecondary();
-});
-</script> -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                  <!-- <div class="container">
-                      <label class="control-label col-sm-2" for="pwd2">Tipo:</label>
-                      <div class="col-sm-10"> 
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-primary">Admin</button>
-                    <button type="button" class="btn btn-primary">Gerente</button>
-                    <button type="button" class="btn btn-primary">Usuario</button>
-                  </div>
-                </div>
-              </div>
- -->
+                 
+                 
+          
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
                 
              
 
@@ -350,14 +209,11 @@ $(function(){
            </form>
 
         </div>
-        <!-- Script para ocultar la contraseña-->
-        <script type="text/javascript"> 
-          $("#password").password('toggle');     
-        </script>
+       
         
       </div>
     </div>
-</div> 
+</div>
 
 </body>
 </html>

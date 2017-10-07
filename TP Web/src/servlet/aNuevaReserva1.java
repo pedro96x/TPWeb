@@ -1,26 +1,29 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import controladores.CtrlPersona;
-
+import controladores.CtrlReserva;
+import entidades.Persona;
+import entidades.Reserva;
 
 /**
- 
+ * Servlet implementation class aNuevaReserva1
  */
-@WebServlet("/aABMPersonas")
-public class aABMPersonas extends HttpServlet {
+@WebServlet("/aNuevaReserva1")
+public class aNuevaReserva1 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public aABMPersonas() {
+    public aNuevaReserva1() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,7 +33,7 @@ public class aABMPersonas extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doPost(request, response);
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
@@ -40,15 +43,24 @@ public class aABMPersonas extends HttpServlet {
 		// TODO Auto-generated method stub
 //		doGet(request, response);
 		
-		try {
-			CtrlPersona ctrl= new CtrlPersona();
-			request.setAttribute("listaPersonas", ctrl.getAll());
-			request.getRequestDispatcher("WEB-INF/ABMPersonasWeb.jsp").forward(request, response);
+		try{
+			CtrlReserva ctrl= new CtrlReserva();
+			int id = 0;
+			ArrayList<Reserva>listaRes=new ArrayList<Reserva>();
 			
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			id = ((Persona) request.getSession().getAttribute("user")).getId();
+			
+			listaRes = ctrl.getReservasAFututoByIdPersona(id);
+			
+			request.setAttribute("listaRes", listaRes);
+			
+			request.getRequestDispatcher("WEB-INF/NuevaReserva1.jsp").forward(request, response);
+			
 		}
+		 catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		
 		
 	}
