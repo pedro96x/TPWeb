@@ -11,7 +11,7 @@ import controladores.CtrlAuto;
 import controladores.CtrlPersona;
 
 /**
- * Servlet implementation class aABMAutos
+ * Servlet implementation class aABMAutosd
  */
 @WebServlet("/aABMAutos")
 public class aABMAutos extends HttpServlet {

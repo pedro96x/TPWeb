@@ -1,4 +1,4 @@
-<%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
+<%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%> 
 <%@page import="java.util.ArrayList"%>
 <%@page import="entidades.Auto"%>
 <%@page import="entidades.Persona"%>
@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>ABM Autos</title>
+  <title>Gestionar Autos</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="style/font-awesome.min.css" rel="stylesheet">
