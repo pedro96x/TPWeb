@@ -93,6 +93,7 @@
         <th>Usuario</th>
         <th>Contraseña</th>
         <th>Habilitado</th>
+        <th></th>
        
        
       </tr>
@@ -120,38 +121,21 @@
    <td><label><i class="fa fa-times" aria-hidden="true"></i></label></td>
     	 <!-- <td><label><input type="checkbox" value="true"></label></td>   -->
        <% }%>
+       <td><a class="btn btn-danger" href="path/to/settings" aria-label="Delete" data-toggle="modal" data-target="#<%=p.getId()%>">
+  <i class="fa fa-trash-o" aria-hidden="true"></i>
+</a>  
+<a class="btn btn-primary" href="path/to/settings" aria-label="Delete" data-toggle="modal" data-target="#mod<%=p.getId()%>">
+  <i class="fa fa-pencil" aria-hidden="true"></i>
+</a></td>
       
       <%}
 			}
 			else {%>
 			 <p> No hay Personas para mostrar </p>  
 			 <% }
-		%>
-      
-      
-      
-      
-     <!--  <tr>
-          <td>7</td>
-          <td>Guido</td>
-          <td>Fabio</td>
-          <td>3956478</td>
-          <td>guido679</td>
-          <td>1234</td>
-          <td><label><input type="checkbox" value="true"></label></td>
-          <td>Usuario</td>
-      </tr>
-      <tr>
-          <td>10</td>
-          <td>Miguel</td>
-          <td>Oliveros</td>
-          <td>19456759</td>
-          <td>cubano54</td>
-          <td>freecuban</td>
-          <td><label><input type="checkbox" value=""></label></td>
-          <td>Gerente</td>
-      </tr> -->
-    </tbody>
+		%>  
+		     
+      </tbody>
   </table>
  
 
@@ -168,12 +152,13 @@
             <button type="button" class="close" data-dismiss="modal">&times;</button>
             <h4 class="modal-title">Agregar nueva persona</h4>
           </div>
+          <form class="form-horizontal"  action="AgregarPersona" method="post">
           <div class="modal-body">
 
             
             <p>Complete todos los campos  </p>
             
-            <form class="form-horizontal"  action="AgregarPersona" method="post">
+            
            
 
                 <div class="form-group">
@@ -218,27 +203,7 @@
                      <input name="habilitado" type="checkbox" value="true" >
                     </div> 
                   </div>
-
-
-
-
-
-
-                  <!-- <div class="container">
-                      <label class="control-label col-sm-2" for="pwd2">Tipo:</label>
-                      <div class="col-sm-10"> 
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-primary">Admin</button>
-                    <button type="button" class="btn btn-primary">Gerente</button>
-                    <button type="button" class="btn btn-primary">Usuario</button>
-                  </div>
-                </div>
-              </div>
- -->
-                
-             
-
-
+                  
               </div>
 
               <div class="modal-footer">
@@ -248,14 +213,6 @@
                     <div class="col-sm-10"> 
                     <button type="submit" class="btn btn-success">Aceptar</button>
                   </div>
-                
-                
-                
-                
-                
-                
-                
-
               </div>
            </form>
 
@@ -267,6 +224,238 @@
         
       </div>
     </div>
+    
+    
+    
+   <!--  Aca voy a crear un modal de delete por cada persona -->
+   
+   
+    <%
+			
+			if (listaPers != null){
+			for(Persona p : listaPers){
+		%>
+   
+   
+   
+     <div class="modal fade" id="<%=p.getId() %>" role="dialog">
+      <div class="modal-dialog">
+      
+        <!-- Modal content-->
+        <div class="modal-content">
+        
+        
+        
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Agregar nueva persona</h4>
+          </div>
+          <form class="form-horizontal"  action="EliminarPersona" method="post">
+          <div class="modal-body">
+   
+            <p>¿Esta seguro que desea eliminar a esta persona?</p>
+            
+            <div class="form-group">
+                    <label class="control-label col-sm-2" for="usr">ID:</label>
+                    <div class="col-sm-10"> 
+                    <input name="idPersona" type="text" class="form-control" id="nombre"value="<%=p.getId()%> " readonly>
+                  </div>
+                  </div>
+            
+                 <div class="form-group">
+                    <label class="control-label col-sm-2" for="usr">Nombre:</label>
+                    <div class="col-sm-10"> 
+                    <input name="nombre" type="text" class="form-control" id="nombre"value="<%=p.getNombre()%> " readonly>
+                  </div>
+                  </div>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="usr">Apellido:</label>
+                    <div class="col-sm-10"> 
+                    <input name="apellido" type="text" class="form-control" id="apellido" value=<%=p.getApellido()%>  readonly>
+                </div>
+              </div>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="usr">DNI:</label>
+                    <div class="col-sm-10"> 
+                    <input name="dni" type="text" class="form-control" id="dni" value=<%=p.getDni()%> readonly>
+                  </div>
+                </div>
+
+                  <div class="form-group">
+                      <label class="control-label col-sm-2" for="usr">Usuario:</label>
+                      <div class="col-sm-10"> 
+                      <input name="user" type="text" class="form-control" id="usuario" value=<%=p.getUser()%> readonly>
+                    </div> 
+                  </div>
+
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="pwd">Contraseña:</label>
+                  <div class="col-sm-10"> 
+                  
+                    <input name="pass" type="text" class="form-control" id="password" value=<%=p.getPass()%> readonly>
+                    
+                  </div>
+                </div>
+
+                <div class="form-group">
+                      <label class="control-label col-sm-2" for="usr">Habilitado:</label>
+                      <div class="col-sm-10"> 
+                      
+                       <%if (p.isHabilitado()){ %>
+    
+       <input name="habilitado" type="checkbox" value="true" checked="checked" readonly="readonly" >
+        <%}
+       else {%>
+   <input name="habilitado" type="checkbox" value="true" readonly="readonly" >
+       <% }%>
+                      
+             
+                    </div> 
+                  </div>
+                  
+                  
+                  
+                  
+              </div>
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+
+                
+                    <div class="col-sm-10"> 
+                    <button type="submit" class="btn btn-success">Aceptar</button>
+                  </div>
+              </div>
+           </form>
+
+        </div>
+       
+        
+      </div>
+    </div>
+    
+    <%}} %>
+    
+     <!--  Aca voy a crear un modal de delete por cada persona -->
+     
+     <!--  Aca voy a crear un modal de actualizar por cada persona -->
+     
+     
+     <%
+			
+			if (listaPers != null){
+			for(Persona p : listaPers){
+		%>
+   
+   
+   
+     <div class="modal fade" id="mod<%=p.getId() %>" role="dialog">
+      <div class="modal-dialog">
+      
+        <!-- Modal content-->
+        <div class="modal-content">
+        
+        
+        
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Modificar persona</h4>
+          </div>
+          <form class="form-horizontal"  action="ModificarPersona" method="post">
+          <div class="modal-body">
+   
+            <p>Modifique los campos que desee</p>
+            
+            <div class="form-group">
+                    <label class="control-label col-sm-2" for="usr">ID:</label>
+                    <div class="col-sm-10"> 
+                    <input name="idPersona" type="text" class="form-control" id="nombre"value="<%=p.getId()%>" readonly>
+                  </div>
+                  </div>
+            
+                 <div class="form-group">
+                    <label class="control-label col-sm-2" for="usr">Nombre:</label>
+                    <div class="col-sm-10"> 
+                    <input name="nombre" type="text" class="form-control" id="nombre"value="<%=p.getNombre()%> " >
+                  </div>
+                  </div>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="usr">Apellido:</label>
+                    <div class="col-sm-10"> 
+                    <input name="apellido" type="text" class="form-control" id="apellido" value=<%=p.getApellido()%>  >
+                </div>
+              </div>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="usr">DNI:</label>
+                    <div class="col-sm-10"> 
+                    <input name="dni" type="text" class="form-control" id="dni" value=<%=p.getDni()%> >
+                  </div>
+                </div>
+
+                  <div class="form-group">
+                      <label class="control-label col-sm-2" for="usr">Usuario:</label>
+                      <div class="col-sm-10"> 
+                      <input name="user" type="text" class="form-control" id="usuario" value=<%=p.getUser()%> >
+                    </div> 
+                  </div>
+
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="pwd">Contraseña:</label>
+                  <div class="col-sm-10"> 
+                  
+                    <input name="pass" type="text" class="form-control" id="password" value=<%=p.getPass()%> >
+                    
+                  </div>
+                </div>
+
+                <div class="form-group">
+                      <label class="control-label col-sm-2" for="usr">Habilitado:</label>
+                      <div class="col-sm-10"> 
+                      
+                       <%if (p.isHabilitado()){ %>
+    
+       <input name="habilitado" type="checkbox" value="true" checked="checked"  >
+        <%}
+       else {%>
+   <input name="habilitado" type="checkbox" value="true"  >
+       <% }%>
+                      
+             
+                    </div> 
+                  </div>
+                  
+                  
+                  
+                  
+              </div>
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+
+                
+                    <div class="col-sm-10"> 
+                    <button type="submit" class="btn btn-success">Aceptar</button>
+                  </div>
+              </div>
+           </form>
+
+        </div>
+       
+        
+      </div>
+    </div>
+     
+     <%}} %>
+     <!--  Aca voy a crear un modal de actualizar por cada persona -->
+    
+    
+    
+    
+    
 </div>
 
 </body>
