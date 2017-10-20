@@ -8,7 +8,7 @@ import entidades.*;
 
 public class CtrlTipoAuto {
 	
-	private DataTipoAuto dataTipoAuto;
+	 DataTipoAuto dataTipoAuto;
 	
 	public CtrlTipoAuto(){
 		dataTipoAuto = new DataTipoAuto();

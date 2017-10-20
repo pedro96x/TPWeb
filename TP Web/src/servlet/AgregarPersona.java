@@ -70,11 +70,14 @@ public class AgregarPersona extends HttpServlet {
 //			if(habilitado == "false"){p.setHabilitado(false);}
 			
 			CtrlPersona ctrl= new CtrlPersona();
-			
+			try {
 			ctrl.alta(p);
 			request.setAttribute("listaPersonas", ctrl.getAll());
 			request.getRequestDispatcher("WEB-INF/ABMPersonasWeb.jsp").forward(request, response);
-			
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

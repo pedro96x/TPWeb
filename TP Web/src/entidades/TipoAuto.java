@@ -1,6 +1,8 @@
 package entidades;
 
-public class TipoAuto { //Esta clase va a representar el modelo de auto. Ejemplo nombre = "Renault Scénic" 
+import java.io.Serializable;
+
+public class TipoAuto implements Serializable { //Esta clase va a representar el modelo de auto. Ejemplo nombre = "Renault Scénic" 
 	private int id;
 	String nombre;
 	int cantMaxReservas; //Cantidad maxima de autos de igual tipo que puede reservar un usuario al mismo tiempo 

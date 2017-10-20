@@ -53,30 +53,7 @@
  <h3>Bienvenido session <%=((Persona)session.getAttribute("user")).getNombre() %></h3>
  <p> bienvenido <%= (String)request.getAttribute("nombrePer") %> </p>
   
-  <table>
-	<%-- 	<% ArrayList<Persona> listaPers;
-		listaPers = (ArrayList<Persona>)request.getAttribute("listaPersonas");%>
-			<%
-	
-			if (listaPers != null){
-			 for(Persona p : listaPers){ 
-				
-			/* Persona	p = listaPers[2];  */
-			
-			
-		%>
-		<tr>
-			<td><%=p.getDni() %></td>
-			<td><%=p.getApellido() %></td>
-			<td><%=p.getNombre() %></td>
-		</tr>
-		<%
-			 } }
-			else {%>
-			 <p> No hay Personas para mostrar </p>  
-			 <% }
-		%> --%>
-	</table>
+ 
   
   
   
@@ -248,7 +225,7 @@
         
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Agregar nueva persona</h4>
+            <h4 class="modal-title">Eliminar Persona</h4>
           </div>
           <form class="form-horizontal"  action="EliminarPersona" method="post">
           <div class="modal-body">
