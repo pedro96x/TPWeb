@@ -2,12 +2,13 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="entidades.Auto"%>
 <%@page import="entidades.Persona"%>
+<%@page import="entidades.TipoAuto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Gestionar Autos</title>
+  <title>ABM Autos</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="style/font-awesome.min.css" rel="stylesheet">
@@ -52,32 +53,9 @@
   <h2>Administrar Autos</h2>
   <p>En esta tabla se muestran todas los autos registrados</p>
  <h3>Bienvenido session <%=((Persona)session.getAttribute("user")).getNombre() %></h3>
- 
+ <p> bienvenido <%= (String)request.getAttribute("nombrePer") %> </p>
   
-  <table>
-	<%-- 	<% ArrayList<Auto> listaAut;
-		listaAut = (ArrayList<Autos>)request.getAttribute("listaAutos");%>
-			<%
-	
-			if (listaAutos != null){
-			 for(Auto a : listaAutos){ 
-				
-			/* Auto	a = listaAutos[2];  */
-			
-			
-		%>
-		<tr>
-			<td><%=p.getId() %></td>
-			<td><%=p.getNombre() %></td>
-			<td><%=p.getTipo().getNombre() %></td>
-		</tr>
-		<%
-			 } }
-			else {%>
-			 <p> No hay Autos para mostrar </p>  
-			 <% }
-		%> --%>
-	</table>
+ 
   
   
   
@@ -90,7 +68,6 @@
         <th>ID</th>
         <th>Nombre</th>
         <th>Tipo</th>
-        
        
        
       </tr>
@@ -98,59 +75,43 @@
     <tbody>
     
       <%
-			ArrayList<Auto>listaAutos=(ArrayList<Auto>)request.getAttribute("listaAutos");
-			if (listaAutos != null){
-			for(Auto a : listaAutos){
-		%>
-  
-      <tr>
-        <td><%= a.getId() %></td>
-        <td><%= a.getNombre() %></td>
-        <td><%= a.getTipo().getNombre() %></td>
-       
-      
-      <td><label><i class="fa fa-check" aria-hidden="true"></i></label></td>
-       <!--  <td><label><input type="checkbox" value="true" checked="checked"></label></td> -->
-        <%}
+      String car="No tiene tipo";
+		ArrayList<Auto>listaAutos=(ArrayList<Auto>)request.getAttribute("listaAutos");
+		ArrayList<TipoAuto>listaTiposAuto=(ArrayList<TipoAuto>)request.getAttribute("listaTiposAuto");
+		if (listaAutos != null){
+		for(int i=0;i<listaAutos.size();i++){
+			for(int j=0;j<listaTiposAuto.size();j++){
+				
+				if(listaAutos.get(i).getTipo().getId()==listaTiposAuto.get(j).getId()){
+					car=listaTiposAuto.get(j).getNombre();
+			}
+		}
+			%>
+
+<tr>
+  <td><%= listaAutos.get(i).getId() %></td>
+  <td><%= listaAutos.get(i).getNombre() %></td>
+  <td><%= car %></td>
      
-   
-  
+       <td><a class="btn btn-primary" href="path/to/settings" aria-label="Delete" data-toggle="modal" data-target="#mod<%=listaAutos.get(i).getId()%>">
+  			<i class="fa fa-pencil" aria-hidden="true"></i>
+	</a>
+	<a class="btn btn-danger" href="path/to/settings" aria-label="Delete" data-toggle="modal" data-target="#<%=listaAutos.get(i).getId()%>">
+  <i class="fa fa-trash-o" aria-hidden="true"></i>
+	</a>  </td>
       
-     
+      <%}
 			}
 			else {%>
 			 <p> No hay autos para mostrar </p>  
 			 <% }
-		%>
-      
-      
-      
-      
-     <!--  <tr>
-          <td>7</td>
-          <td>Guido</td>
-          <td>Fabio</td>
-          <td>3956478</td>
-          <td>guido679</td>
-          <td>1234</td>
-          <td><label><input type="checkbox" value="true"></label></td>
-          <td>Usuario</td>
-      </tr>
-      <tr>
-          <td>10</td>
-          <td>Miguel</td>
-          <td>Oliveros</td>
-          <td>19456759</td>
-          <td>cubano54</td>
-          <td>freecuban</td>
-          <td><label><input type="checkbox" value=""></label></td>
-          <td>Gerente</td>
-      </tr> -->
-    </tbody>
+		%>  
+		     
+      </tbody>
   </table>
  
 
-  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Agregar </button>
+  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal"> Agregar Auto</button>
   <div class="modal fade" id="myModal" role="dialog">
       <div class="modal-dialog">
       
@@ -161,79 +122,113 @@
         
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Agregar nuevo auto</h4>
+            <h4 class="modal-title"> Agregar Nuevo Auto</h4>
           </div>
+          <form class="form-horizontal"  action="AgregarAuto" method="post">
           <div class="modal-body">
 
             
             <p>Complete todos los campos  </p>
             
-            <form class="form-horizontal"  action="AgregarAuto" method="post">
+            
            
 
-                <div class="form-group">
+              <div class="form-group">
+                    <label class="control-label col-sm-2" for="usr">Descripción: </label>
+                    <div class="col-sm-10"> 
+                    <input name="descripcion" type="text" class="form-control" id="descripcion"placeholder="Ingrese descripcion:">
+                  </div>
+                  </div>
+
+              
+
+			<div class="form-group">
+                <label class="control-label col-sm-2" for="usr">Modelo:</label>
+                <div class="col-sm-10">
+					<select class="form-control" name="nombreTipo" id="tipoAuto">  <!-- Como tomo datos de un select? es lo mismo que un imput? -->
+				        <%for(int j=0;j<listaTiposAuto.size();j++){
+				        %><option><%=listaTiposAuto.get(j).getNombre() %></option><%}%>
+      				</select>
+      			</div>	
+			</div>
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+
+                
+                    <div class="col-sm-10"> 
+                    <button type="submit" class="btn btn-success">Aceptar</button>
+                  </div>
+              </div>
+           </form>
+
+        </div>
+      
+    
+    
+    
+   <!--  Aca voy a crear un modal de delete por cada persona -->
+   
+    <%car="bmw";
+				if (listaAutos != null){
+					for(int i=0;i<listaAutos.size();i++){
+						for(int j=0;j<listaTiposAuto.size();j++){
+							if(listaAutos.get(i).getTipo().getId()==listaTiposAuto.get(j).getId()){
+								car=listaTiposAuto.get(j).getNombre();
+						}
+					}
+		%>
+   
+   
+   
+     <div class="modal fade" id="<%=listaAutos.get(i).getId() %>" role="dialog">
+      <div class="modal-dialog">
+      
+        <!-- Modal content-->
+        <div class="modal-content">
+        
+        
+        
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Eliminar Auto</h4>
+          </div>
+          <form class="form-horizontal"  action="EliminarAuto" method="post">
+          <div class="modal-body">
+   
+            <p>¿Esta seguro que desea eliminar a este auto?</p>
+            
+            <div class="form-group">
+                    <label class="control-label col-sm-2" for="usr">ID:</label>
+                    <div class="col-sm-10"> 
+                    <input name="idPersona" type="text" class="form-control" id="idA"value="<%=listaAutos.get(i).getId()%> " readonly>
+                  </div>
+                  </div>
+            
+                 <div class="form-group">
                     <label class="control-label col-sm-2" for="usr">Nombre:</label>
                     <div class="col-sm-10"> 
-                    <input name="nombre" type="text" class="form-control" id="nombre"placeholder="Ingrese Nombre">
+                    <input name="nombre" type="text" class="form-control" id="nombre"value="<%=listaAutos.get(i).getNombre()%> " readonly>
                   </div>
                   </div>
 
-                <div class="form-group">
-                    <label class="control-label col-sm-2" for="usr">Apellido:</label>
+                     <div class="form-group">
+                    <label class="control-label col-sm-2" for="usr">Tipo:</label>
                     <div class="col-sm-10"> 
-                    <input name="apellido" type="text" class="form-control" id="apellido" placeholder="Ingrese Apellido">
+                    <input name="apellido" type="text" class="form-control" id="tipo" value=<%=car%>  >
                 </div>
               </div>
-
-                <div class="form-group">
-                    <label class="control-label col-sm-2" for="usr">DNI:</label>
-                    <div class="col-sm-10"> 
-                    <input name="dni" type="text" class="form-control" id="dni" placeholder="Ingrese DNI">
-                  </div>
-                </div>
-
-                  <div class="form-group">
-                      <label class="control-label col-sm-2" for="usr">Usuario:</label>
-                      <div class="col-sm-10"> 
-                      <input name="user" type="text" class="form-control" id="usuario" placeholder="Ingrese Usuario">
-                    </div> 
-                  </div>
-
-                <div class="form-group">
-                  <label class="control-label col-sm-2" for="pwd">Contraseña:</label>
-                  <div class="col-sm-10"> 
-                    
-                    <input name="pass" type="password" id="password" placeholder="Ingrese contraseña" name="password" class="form-control" data-toggle="password">
-                  </div>
-                </div>
-
-                <div class="form-group">
-                      <label class="control-label col-sm-2" for="usr">Habilitado:</label>
-                      <div class="col-sm-10"> 
-                     <input name="habilitado" type="checkbox" value="true" >
-                    </div> 
-                  </div>
-
-
-
-
-
-
-                  <!-- <div class="container">
-                      <label class="control-label col-sm-2" for="pwd2">Tipo:</label>
-                      <div class="col-sm-10"> 
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-primary">Admin</button>
-                    <button type="button" class="btn btn-primary">Gerente</button>
-                    <button type="button" class="btn btn-primary">Usuario</button>
-                  </div>
-                </div>
-              </div>
- -->
-                
              
 
+                
+               
+              
 
+              
+                  
+                  
+                  
+                  
               </div>
 
               <div class="modal-footer">
@@ -243,25 +238,113 @@
                     <div class="col-sm-10"> 
                     <button type="submit" class="btn btn-success">Aceptar</button>
                   </div>
-                
-                
-                
-                
-                
-                
-                
-
               </div>
            </form>
 
         </div>
-        <!-- Script para ocultar la contraseña-->
-        <script type="text/javascript"> 
-          $("#password").password('toggle');     
-        </script>
+       
         
       </div>
     </div>
+    
+    <%}} %>
+    
+     <!--  Aca voy a crear un modal de delete por cada persona -->
+     
+     <!--  Aca voy a crear un modal de actualizar por cada persona -->
+     
+     
+     <%car="bmw";
+				if (listaAutos != null){
+					for(int i=0;i<listaAutos.size();i++){
+						for(int j=0;j<listaTiposAuto.size();j++){
+							
+							if(listaAutos.get(i).getTipo().getId()==listaTiposAuto.get(j).getId()){
+								car=listaTiposAuto.get(j).getNombre();
+						}
+					}
+		%>
+   
+   
+   
+     <div class="modal fade" id="mod<%=listaAutos.get(i).getId()%>" role="dialog">
+      <div class="modal-dialog">
+      
+        <!-- Modal content-->
+        <div class="modal-content">
+        
+        
+        
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Modificar Auto</h4>
+          </div>
+          <form class="form-horizontal"  action="ModificarAuto" method="post">
+          <div class="modal-body">
+   
+            <p>Modifique los campos que desee</p>
+            
+            <div class="form-group">
+                    <label class="control-label col-sm-2" for="usr">ID:</label>
+                    <div class="col-sm-10"> 
+                    <input name="idPersona" type="text" class="form-control" id="idA"value="<%=listaAutos.get(i).getId()%>" readonly>
+                  </div>
+                  </div>
+            
+                 <div class="form-group">
+                    <label class="control-label col-sm-2" for="usr">Nombre:</label>
+                    <div class="col-sm-10"> 
+                    <input name="nombre" type="text" class="form-control" id="nombre"value="<%=listaAutos.get(i).getNombre()%> " >
+                  </div>
+                  </div>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="usr">Tipo:</label>
+                    <div class="col-sm-10"> 
+                    <input name="apellido" type="text" class="form-control" id="tipo" value=<%=car%>  >
+                </div>
+              </div>
+
+               
+
+                 
+               
+
+             
+                      
+             
+                    </div> 
+                
+                  
+                  
+                  
+                  
+           
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+
+                
+                    <div class="col-sm-10"> 
+                    <button type="submit" class="btn btn-success">Aceptar</button>
+                  </div>
+              </div>
+               
+           </form>
+ 		 </div>
+        </div>
+       
+        
+      </div>
+    </div>
+     
+     <%}} %>
+     <!--  Aca voy a crear un modal de actualizar por cada persona -->
+    
+    
+    
+    
+    
 </div>
 
 </body>

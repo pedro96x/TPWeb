@@ -32,6 +32,7 @@ public class DataAuto {
 					auto.setId(rs.getInt("id_auto"));
 					auto.setTipo(tipoAuto);
 					auto.setNombre(rs.getString("nombre"));
+					
 				}
 			} catch (SQLException e){
 				e.printStackTrace();

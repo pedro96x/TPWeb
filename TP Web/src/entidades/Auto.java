@@ -8,6 +8,7 @@ public class Auto implements Serializable{ //Esta clase va a representar a cada 
 	String nombre;
 	TipoAuto tipo;
 	
+	
 public Auto() {
 		
 	}

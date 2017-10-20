@@ -53,30 +53,7 @@
   <p>En la siguiente tabla se muestran todas las personas registradas</p>
  
   
-  <table>
-	<%-- 	<% ArrayList<Persona> listaPers;
-		listaPers = (ArrayList<Persona>)request.getAttribute("listaPersonas");%>
-			<%
-	
-			if (listaPers != null){
-			 for(Persona p : listaPers){ 
-				
-			/* Persona	p = listaPers[2];  */
-			
-			
-		%>
-		<tr>
-			<td><%=p.getDni() %></td>
-			<td><%=p.getApellido() %></td>
-			<td><%=p.getNombre() %></td>
-		</tr>
-		<%
-			 } }
-			else {%>
-			 <p> No hay Personas para mostrar </p>  
-			 <% }
-		%> --%>
-	</table>
+ 
   
   
   

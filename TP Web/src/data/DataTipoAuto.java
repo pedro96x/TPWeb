@@ -147,9 +147,7 @@ public ArrayList<TipoAuto> getArrayList() {
 			tipoauto.setCantMaxReservas((rs.getInt("cant_max_res")));
 			tipoauto.setLimMaxDeTiempoDeReserva((rs.getInt("lim_max_tiempo_reserva")));
 			tipoauto.setMinDiasDeAnti((rs.getInt("dias_de_ant_nec")));
-			arrayTiposAutos.add(tipoauto);
-			
-			
+			arrayTiposAutos.add(tipoauto);	
 		}
 	} catch (SQLException e){
 		e.printStackTrace();
@@ -162,29 +160,8 @@ public ArrayList<TipoAuto> getArrayList() {
 	} catch (SQLException e){
 		e.printStackTrace();
 	}
-	
-	return arrayTiposAutos;
-	
-	
-	 
-}
-
-
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	return arrayTiposAutos;	 
+}		
 }
 
 	
