@@ -4,12 +4,15 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.sun.javafx.collections.NonIterableChange.SimpleRemovedChange;
 
 import controladores.CtrlAuto;
 import controladores.CtrlReserva;
@@ -47,25 +50,68 @@ public class aNuevaReserva2 extends HttpServlet {
 //		doGet(request, response);
 		
 		
-		String fechaInicio =request.getParameter("fechaInicio");
-		String fechaFin=request.getParameter("fechaFin");		
+		String stringFechaInicio =request.getParameter("fechaInicio");
+		String stringFechaFin=request.getParameter("fechaFin");		
 		String detalle=request.getParameter("detalle");
 		String nombreTipo =request.getParameter("nombreTipo");
 		
 		
+		SimpleDateFormat formatoInput=new SimpleDateFormat("MM/dd/yyyy");
+		SimpleDateFormat formatoOutput=new SimpleDateFormat("yyyy-MM-dd");
+		
+		
+		String stringFechaInicioReformateada;
+		String stringFechaFinReformateada;
+		try {
+			Date fechaInicio=formatoInput.parse(stringFechaInicio);
+			
+			stringFechaInicioReformateada = formatoOutput.format(fechaInicio);
+			
+			
+			
+			Date fechaFin=formatoInput.parse(stringFechaFin);
+			
+			stringFechaFinReformateada = formatoOutput.format(fechaFin);
+
+		
+		/*
+		
 		SimpleDateFormat formatoDelTexto = new SimpleDateFormat("MM/dd/yyyy");
+		Date dateIn = new Date();
+		Date dateFn = new Date();
 		try {
-			formatoDelTexto.parse(fechaInicio);
+			dateIn = formatoDelTexto.parse(fechaInicio);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try {
-			formatoDelTexto.parse(fechaFin);
+		 dateFn =formatoDelTexto.parse(fechaFin);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		
+		
+		SimpleDateFormat formatoJoda = new SimpleDateFormat("yyyy-MM-dd");
+		Date dateJodaIn = new Date();
+		Date dateJodaFn = new Date();
+		try {
+			dateJodaIn = formatoJoda.parse(fechaInicio);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			dateJodaFn =formatoJoda.parse(fechaFin);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		*/
+		
+		
 		
 		CtrlAuto ctrlAuto = new CtrlAuto();
 		CtrlTipoAuto ctrlTipoAuto = new CtrlTipoAuto();
@@ -82,16 +128,21 @@ public class aNuevaReserva2 extends HttpServlet {
 		
 		CtrlReserva ctrlReserva = new CtrlReserva();
 		
-		ArrayList<Auto> listaAutosDisponibles = ctrlReserva.getAutosDisponibles(fechaInicio, fechaFin, listaAutos);
+		ArrayList<Auto> listaAutosDisponibles = ctrlReserva.getAutosDisponibles(stringFechaInicioReformateada, stringFechaFinReformateada, listaAutos);
+
 		
 		
 		request.setAttribute("listaAutos", listaAutosDisponibles);
 		
-		request.setAttribute("fechaInicio", fechaInicio);
-		request.setAttribute("fechaFin", fechaFin);
+		
+		request.setAttribute("fechaInicio", stringFechaInicio);
+		request.setAttribute("fechaFin", stringFechaFin);
 		request.setAttribute("detalle", detalle);
 		request.setAttribute("nombreTipo", nombreTipo);
-		
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
 		request.getRequestDispatcher("WEB-INF/NuevaReserva2.jsp").forward(request, response);
 		
 		

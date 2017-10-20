@@ -49,12 +49,17 @@
  });
  });
  </script>
-   
-   
- 
    <!--  necesario para el calendario -->
-  
-  
+   
+   
+   
+  <!--  necesario para que el modal se abra al inicio -->
+  <script type="text/javascript">
+    $(window).load(function(){
+        $('#myModal').modal('show');
+    });
+    </script>
+  <!--  necesario para que el modal se abra al inicio -->
   
 </head>
 <body>

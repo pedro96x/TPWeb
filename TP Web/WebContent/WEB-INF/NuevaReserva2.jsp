@@ -111,7 +111,7 @@
             
           
            
-				 <div class="form-group">
+				 <%-- <div class="form-group">
  					<label class="control-label col-sm-2" for="usr">Inicio:</label>
  					<div class="col-sm-10">
                			<div class='input-group date' id='divMiCalendario1'>            
@@ -131,8 +131,20 @@
                             </span>
                         </div>
                     </div>
-                 </div>
+                 </div> --%>
 
+				 <div class="form-group">
+                    <label class="control-label col-sm-2" for="usr">Inicio:</label>
+                    <div class="col-sm-10"> 
+                    <input  type="text" name="fechaInicio" id="txtFechaInicio" class="form-control" placeholder="Ingrese detalle" value=<%=(String)request.getAttribute("fechaInicio")%> readonly>
+                </div>
+              </div>
+               <div class="form-group">
+                    <label class="control-label col-sm-2" for="usr">Fin:</label>
+                    <div class="col-sm-10"> 
+                    <input name="fechaFin" id="txtFechaFin" type="text" class="form-control"  placeholder="Ingrese detalle" value=<%=(String)request.getAttribute("fechaFin")%> readonly>
+                </div>
+              </div>
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="usr">Detalle:</label>
                     <div class="col-sm-10"> 
@@ -140,20 +152,25 @@
                 </div>
               </div>
 
+				<div class="form-group">
+                    <label class="control-label col-sm-2" for="usr">Modelo:</label>
+                    <div class="col-sm-10"> 
+                    <input name="nombreTipo" id="tipoAuto" type="text" class="form-control" readonly= "true" value="<%=(String)request.getAttribute("nombreTipo")%>" >
+                </div>
+              </div> 
 
 
-
-			<div class="form-group">
+			<%-- <div class="form-group">
                 <label class="control-label col-sm-2" for="usr">Modelo:</label>
                 <div class="col-sm-10">
-					<select class="form-control" name="nombreTipo" id="tipoAuto">  <!-- Como tomo datos de un select? es lo mismo que un imput? -->
+					<select class="form-control" name="nombreTipo" id="tipoAuto" readonly>  <!-- Como tomo datos de un select? es lo mismo que un imput? -->
 				        <option><%= (String)request.getAttribute("nombreTipo") %></option>
       				</select>
       			</div>	
-			</div>
+			</div> --%>
 
  <%
-CtrlAuto ctrlAuto = new CtrlAuto();
+/* CtrlAuto ctrlAuto = new CtrlAuto(); */
 ArrayList<Auto> listaAuto = new ArrayList<Auto>() ;
 listaAuto= (ArrayList<Auto>)request.getAttribute("listaAutos");
 %>

@@ -48,10 +48,10 @@
 
 
 <div class="container">
+<h3>Bienvenido <%=((Persona)session.getAttribute("user")).getNombre() %></h3>
   <h2>Administrar Personas</h2>
-  <p>En esta tabla se muestran todas las personas registradas</p>
- <h3>Bienvenido session <%=((Persona)session.getAttribute("user")).getNombre() %></h3>
- <p> bienvenido <%= (String)request.getAttribute("nombrePer") %> </p>
+  <p>En la siguiente tabla se muestran todas las personas registradas</p>
+ 
   
   <table>
 	<%-- 	<% ArrayList<Persona> listaPers;
@@ -114,11 +114,11 @@
         <td><%= p.getUser() %></td>
         <td><%= p.getPass() %></td>
         <%if (p.isHabilitado()){ %>
-      <td><label><i class="fa fa-check" aria-hidden="true"></i></label></td>
+      <td><label><i class="fa fa-check" style="font-size:20px;color:green;" aria-hidden="true"></i></label></td>
        <!--  <td><label><input type="checkbox" value="true" checked="checked"></label></td> -->
         <%}
        else {%>
-   <td><label><i class="fa fa-times" aria-hidden="true"></i></label></td>
+   <td><label><i class="fa fa-times" style="font-size:20px;color:red;" aria-hidden="true"></i></label></td>
     	 <!-- <td><label><input type="checkbox" value="true"></label></td>   -->
        <% }%>
        <td><a class="btn btn-danger" href="path/to/settings" aria-label="Delete" data-toggle="modal" data-target="#<%=p.getId()%>">
@@ -248,7 +248,7 @@
         
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Agregar nueva persona</h4>
+            <h4 class="modal-title">Eliminar persona</h4>
           </div>
           <form class="form-horizontal"  action="EliminarPersona" method="post">
           <div class="modal-body">
@@ -304,11 +304,12 @@
                       <div class="col-sm-10"> 
                       
                        <%if (p.isHabilitado()){ %>
-    
-       <input name="habilitado" type="checkbox" value="true" checked="checked" readonly="readonly" >
+    <i class="fa fa-check" style="font-size:20px;color:green;" aria-hidden="true"></i>
+    <!--    <input name="habilitado" type="checkbox" value="true" checked="checked" readonly="readonly" > -->
         <%}
        else {%>
-   <input name="habilitado" type="checkbox" value="true" readonly="readonly" >
+       <i class="fa fa-times" style="font-size:20px;color:red;" aria-hidden="true"></i>
+ <!--   <input name="habilitado" type="checkbox" value="true" readonly="readonly" > -->
        <% }%>
                       
              

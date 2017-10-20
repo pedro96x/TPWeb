@@ -15,7 +15,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-show-password/1.0.3/bootstrap-show-password.min.js"></script>
-  
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
   
   
  <!--  necesario para el calendario -->
@@ -57,7 +57,9 @@
   
   
 </head>
-<body>
+
+<body ng-app=""> <!-- body para el angular -->
+<!-- <body> -->
 
 
 
@@ -184,6 +186,12 @@
    <button class="btn btn-lg btn-primary btn-block" type="submit">Agregar posta reseerva</button> 
   </form>
 
+
+
+
+
+
+
   <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Agregar Reserva</button>
   <div class="modal fade" id="myModal" role="dialog">
       <div class="modal-dialog">
@@ -191,7 +199,7 @@
         <!-- Modal content-->
         <div class="modal-content">
         
-          <form class="form-horizontal"  action="AgregarPersona" method="post">
+          <form class="form-horizontal"  action="AgregarReserva" method="post">
         
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -208,7 +216,7 @@
  					<label class="control-label col-sm-2" for="usr">Inicio:</label>
  					<div class="col-sm-10">
                			<div class='input-group date' id='divMiCalendario1'>            
-                            <input type='text' id="txtFechaInicio" class="form-control" placeholder="Ingrese fecha de inicio" readonly/>
+                            <input name="fechaInicio" type='text' id="txtFechaInicio" class="form-control" placeholder="Ingrese fecha de inicio" readonly/>
                             <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
                             </span>
                         </div>
@@ -219,7 +227,7 @@
  					<label class="control-label col-sm-2" for="usr">Fin:</label>
  					<div class="col-sm-10">
                			<div class='input-group date' id='divMiCalendario2'>            
-                            <input type='text' id="txtFechaFin" class="form-control" placeholder="Ingrese fecha de fin" readonly/>
+                            <input name="fechaFin" type='text' id="txtFechaFin" class="form-control" placeholder="Ingrese fecha de fin" readonly/>
                             <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
                             </span>
                         </div>
@@ -229,7 +237,7 @@
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="usr">Detalle:</label>
                     <div class="col-sm-10"> 
-                    <input name="apellido" type="text" class="form-control" id="apellido" placeholder="Ingrese detalle">
+                    <input name="detalle" type="text" class="form-control" id="apellido" placeholder="Ingrese detalle">
                 </div>
               </div>
 
@@ -242,26 +250,53 @@ ArrayList<TipoAuto> listaTipos = ctrlTipoAuto.getArrayList();
 			<div class="form-group">
                 <label class="control-label col-sm-2" for="usr">Modelo:</label>
                 <div class="col-sm-10">
-					<select class="form-control" id="tipoAuto">  <!-- Como tomo datos de un select? es lo mismo que un imput? -->
-				        <%for(TipoAuto t: listaTipos){
-				        %><option><%= t.getNombre() %></option><%}%>
+					<select class="form-control" name="nombreTipo" id="tipoAuto" ng-model="myVar" >  <!-- Como tomo datos de un select? es lo mismo que un imput? -->
+				        <%for(TipoAuto t: listaTipos){%>
+				        <option value=<%=t.getId()%>>
+				        <%= t.getNombre()%>
+				        </option>
+				        <%}%>
       				</select>
       			</div>	
 			</div>
 
+
+
+
+
+
+
+
 <%
 CtrlAuto ctrlAuto = new CtrlAuto();
 ArrayList<Auto> listaAutos = ctrlAuto.getArrayList();
-%>
-			<div class="form-group">
-                <label class="control-label col-sm-2" for="usr">Auto:</label>
-                <div class="col-sm-10">
-					<select class="form-control" id="auto">  <!-- Como tomo datos de un select? es lo mismo que un imput? -->
-				        <%for(Auto a : listaAutos){%>
-				        <option><%=a.getNombre() %></option><%}%>
-      				</select>
-      			</div>	
-			</div>
+
+for (TipoAuto t : listaTipos ){
+ArrayList<Auto> autosDelMismoTipo = ctrlAuto.getAutosByID(t.getId());
+
+/* Tenemos que cambiar este ctrlAuto.getAutosByID( id) por uno que solo nos devuelva los disponibles */
+
+
+
+	%>
+<div ng-switch="myVar">
+	<div ng-switch-when=<%=t.getId()%>>
+		<div class="form-group">
+		    <label class="control-label col-sm-2" for="usr">Auto:</label>
+		    <div class="col-sm-10">
+				<select class="form-control" name="nombreAuto" id="auto">  <!-- Como tomo datos de un select? es lo mismo que un imput? -->
+			        <%for(Auto a : autosDelMismoTipo){%>
+			        <option><%=a.getNombre()%></option>
+			        <%}%>
+					</select>
+				</div>	
+		</div>
+	</div>
+</div>	
+
+		<%
+	}
+%>		
 
 
 
