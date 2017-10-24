@@ -172,6 +172,15 @@ public class DataReserva {
 		
 		
 	}
+	
+//	public ArrayList<Auto> getAutosDisponibles (date fechain, date fechaFin, TipoAuto tipo ){
+//		
+//	}
+	
+	
+	
+	
+	
 	}
 
 	

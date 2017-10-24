@@ -220,6 +220,8 @@ ArrayList<Auto> listaAutos = ctrlAuto.getArrayList();
         
       </div>
     </div>
+
+
 </div>
 
 </body>

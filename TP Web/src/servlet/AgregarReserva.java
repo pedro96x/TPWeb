@@ -99,7 +99,7 @@ public class AgregarReserva extends HttpServlet {
 		ArrayList<Auto> autos= ctrlAuto.getArrayList();
 		
 		for(Auto  a: autos){
-			if (a.getNombre()== nombreAuto){res.setAutoReservado(a);}
+			if (a.getNombre().equals(nombreAuto)){res.setAutoReservado(a);}
 		}
 		
 		

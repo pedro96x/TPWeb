@@ -148,7 +148,7 @@
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="usr">Detalle:</label>
                     <div class="col-sm-10"> 
-                    <input name="apellido" name="detalle" type="text" class="form-control" id="apellido" placeholder="Ingrese detalle" value=<%=(String)request.getAttribute("detalle")%> readonly>
+                    <input name="detalle" type="text" class="form-control" id="apellido" placeholder="Ingrese detalle" value=<%=(String)request.getAttribute("detalle")%> readonly>
                 </div>
               </div>
 

@@ -121,14 +121,17 @@ public class aNuevaReserva2 extends HttpServlet {
 		TipoAuto tipoAuto = new TipoAuto();
 		
 		for(TipoAuto  tipo :  listaTipoAuto){
-			if(tipo.getNombre() == nombreTipo ){ tipoAuto= tipo;}
+			if(tipo.getNombre().equals(nombreTipo) ){ tipoAuto= tipo;}
 		} 
 		
 		ArrayList<Auto> listaAutos = ctrlAuto.getAutosByID(tipoAuto.getId());
 		
 		CtrlReserva ctrlReserva = new CtrlReserva();
 		
-		ArrayList<Auto> listaAutosDisponibles = ctrlReserva.getAutosDisponibles(stringFechaInicioReformateada, stringFechaFinReformateada, listaAutos);
+		ArrayList<Auto> listaAutosDisponibles = ctrlReserva.getAutosDisponibles(
+				stringFechaInicioReformateada  /*"2018-01-01"*/ ,
+				stringFechaFinReformateada  /*"2018-01-05"*/ ,
+				listaAutos);
 
 		
 		

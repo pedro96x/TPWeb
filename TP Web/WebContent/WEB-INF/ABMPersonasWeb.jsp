@@ -90,6 +90,7 @@
         <td><%= p.getDni() %></td>
         <td><%= p.getUser() %></td>
         <td><%= p.getPass() %></td>
+        
         <%if (p.isHabilitado()){ %>
       <td><label><i class="fa fa-check" style="font-size:20px;color:green;" aria-hidden="true"></i></label></td>
        <!--  <td><label><input type="checkbox" value="true" checked="checked"></label></td> -->
@@ -98,6 +99,8 @@
    <td><label><i class="fa fa-times" style="font-size:20px;color:red;" aria-hidden="true"></i></label></td>
     	 <!-- <td><label><input type="checkbox" value="true"></label></td>   -->
        <% }%>
+       
+       
        <td><a class="btn btn-danger" href="path/to/settings" aria-label="Delete" data-toggle="modal" data-target="#<%=p.getId()%>">
   <i class="fa fa-trash-o" aria-hidden="true"></i>
 </a>  

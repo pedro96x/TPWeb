@@ -74,7 +74,7 @@ public class aMisReservas extends HttpServlet {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
-		
+			
 		try{
 			CtrlReserva ctrl= new CtrlReserva();
 			int id = 0;

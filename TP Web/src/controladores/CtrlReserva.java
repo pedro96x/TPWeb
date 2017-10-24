@@ -30,7 +30,9 @@ public class CtrlReserva {
 		
 		for (int i = 0; i < reservas.size(); i++) {
 			for (int j = 0; j < arrayMismoTipoAutos.size(); j++) {
-				if((reservas.get(i).getAutoReservado().getId()==arrayMismoTipoAutos.get(j).getId())&&(NuevoDate.seSolapan(reservas.get(i).getFechaIni(),reservas.get(i).getFechaFin(),fechaI,fechaF))){
+				java.sql.Date f1 = reservas.get(i).getFechaIni();
+				java.sql.Date f2 = reservas.get(i).getFechaFin();
+				if((reservas.get(i).getAutoReservado().getId()==arrayMismoTipoAutos.get(j).getId())&&(NuevoDate.seSolapan(f1,f2,fechaI,fechaF))){
 					arrayMismoTipoAutos.remove(arrayMismoTipoAutos.get(j));
 					
 				}
