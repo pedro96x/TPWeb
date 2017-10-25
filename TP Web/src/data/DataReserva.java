@@ -172,6 +172,34 @@ public class DataReserva {
 		
 		
 	}
+
+	public void update(Reserva res) {
+		PreparedStatement stmt=null;
+		
+		try{
+			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("update reservas set id = ?, fechain = ?, fechafin = ?, detalle = ?, auto_reservado = ?, id_persona = ? WHERE id = ?");
+			
+			stmt.setInt(1, res.getId());
+			stmt.setDate(2, res.getFechaIni() );
+			stmt.setDate(3, res.getFechaFin() );
+			stmt.setString(4, res.getDetalle());
+			stmt.setInt(5	, res.getAutoReservado().getId());
+			stmt.setInt(6, res.getIdPersona() );
+			stmt.setInt(7, res.getId());
+			
+			stmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+	    }
+		
+		try {
+			if(stmt!=null)stmt.close();
+			FactoryConexion.getInstancia().releaseConn();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 	
 //	public ArrayList<Auto> getAutosDisponibles (date fechain, date fechaFin, TipoAuto tipo ){
 //		

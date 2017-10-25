@@ -98,11 +98,11 @@
         <!-- Modal content-->
         <div class="modal-content">
         
-          <form class="form-horizontal"  action="AgregarReserva" method="post">
+          <form class="form-horizontal"  action="ModificarReserva" method="post">
         
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Agregar nueva Reserva</h4>
+            <h4 class="modal-title">Modificar los campos</h4>
           </div>
           <div class="modal-body">
 
@@ -110,28 +110,13 @@
             <p>Complete todos los campos  </p>
             
           
-           
-				 <%-- <div class="form-group">
- 					<label class="control-label col-sm-2" for="usr">Inicio:</label>
- 					<div class="col-sm-10">
-               			<div class='input-group date' id='divMiCalendario1'>            
-                            <input type='text' name="fechaInicio" id="txtFechaInicio" class="form-control" value="<%= (String)request.getAttribute("FechaInicio") %>" readonly/>
-                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
-                            </span>
-                        </div>
-                    </div>
-                 </div>
 
-				 <div class="form-group">
- 					<label class="control-label col-sm-2" for="usr">Fin:</label>
- 					<div class="col-sm-10">
-               			<div class='input-group date' id='divMiCalendario2'>            
-                            <input type='text' name="fechaFin" id="txtFechaFin" class="form-control"  value="<%= (String)request.getAttribute("FechaFin") %>" readonly/>
-                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
-                            </span>
-                        </div>
-                    </div>
-                 </div> --%>
+				<div class="form-group">
+                    <label class="control-label col-sm-2" for="usr">ID:</label>
+                    <div class="col-sm-10"> 
+                    <input name="idReserva" type="text" class="form-control" id="idReserva" value=<%=(String)request.getAttribute("idReserva")%> readonly>
+                  </div>
+                </div>
 
 				 <div class="form-group">
                     <label class="control-label col-sm-2" for="usr">Inicio:</label>
@@ -173,13 +158,18 @@
 /* CtrlAuto ctrlAuto = new CtrlAuto(); */
 ArrayList<Auto> listaAuto = new ArrayList<Auto>() ;
 listaAuto= (ArrayList<Auto>)request.getAttribute("listaAutos");
+String nombreAuto = (String)request.getAttribute("nombreAuto");
 %>
 			<div class="form-group">
                 <label class="control-label col-sm-2" for="usr">Auto:</label>
                 <div class="col-sm-10">
 					<select class="form-control" name="nombreAuto" id="auto">  <!-- Como tomo datos de un select? es lo mismo que un imput? -->
-				        <%for(Auto a : listaAuto){%>
-				        <option><%=a.getNombre() %></option><%}%>
+				        <%for(Auto a : listaAuto){
+				        if(nombreAuto.equals(a.getNombre()) )
+				        {%><option selected=><%=a.getNombre() %></option><%}
+				        else{ %><option selected=><%=a.getNombre() %></option><%} %>
+				        
+				        <%}%>
       				</select>
       			</div>	
 			</div>

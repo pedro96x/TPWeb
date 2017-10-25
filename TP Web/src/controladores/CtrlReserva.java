@@ -52,5 +52,10 @@ public class CtrlReserva {
 		dataRes.deleteById(id);
 		
 	}
+
+	public void update(Reserva res) {
+		dataRes.update(res);
+		
+	}
 	
 }

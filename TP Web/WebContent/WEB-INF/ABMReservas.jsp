@@ -2,6 +2,8 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="entidades.*"%>
 <%@page import="controladores.*"%>
+<%@page import="java.text.ParseException"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -49,7 +51,24 @@
  });
  });
  </script>
-   
+ <script>
+ $(function() {
+ $("#divMiCalendario3").datepicker({
+ onSelect: function(date) {
+ alert(date);
+ }
+ });
+ });
+ </script>
+ <script>
+ $(function() {
+ $("#divMiCalendario4").datepicker({
+ onSelect: function(date) {
+ alert(date);
+ }
+ });
+ });
+ </script>  
    
  
    <!--  necesario para el calendario -->
@@ -64,7 +83,7 @@
 
 
 
-
+ <!--  Menu  -->
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -78,55 +97,13 @@
     </ul>
   </div>
 </nav>
-
-
-
-
-
-
-
-
-
-
-
-
+ <!--  Menu  -->
+ 
 <div class="container">
   <h2>Administrar Reservas</h2>
   <p>En esta tabla se muestran todas sus reservas</p>
   
-  
- 
-  </form>
-  
-  
-  <table>
-	<%-- 	<% ArrayList<Persona> listaPers;
-		listaPers = (ArrayList<Persona>)request.getAttribute("listaPersonas");%>
-			<%
-	
-			if (listaPers != null){
-			 for(Persona p : listaPers){ 
-				
-			/* Persona	p = listaPers[2];  */
-			
-			
-		%>
-		<tr>
-			<td><%=p.getDni() %></td>
-			<td><%=p.getApellido() %></td>
-			<td><%=p.getNombre() %></td>
-		</tr>
-		<%
-			 } }
-			else {%>
-			 <p> No hay Personas para mostrar </p>  
-			 <% }
-		%> --%>
-	</table>
-  
-  
-  
-             
+
   <table class="table table-hover">
   
 
@@ -160,12 +137,14 @@
         <td><%= r.getFechaFin() %></td>
         <td><%= r.getDetalle() %></td>
        
-          <td><a class="btn btn-danger" href="path/to/settings" aria-label="Delete" data-toggle="modal" data-target="#<%=r.getId()%>">
-  <i class="fa fa-trash-o" aria-hidden="true"></i>
-</a>  
-<a class="btn btn-primary" href="path/to/settings" aria-label="Delete" data-toggle="modal" data-target="#mod<%=r.getId()%>">
-  <i class="fa fa-pencil" aria-hidden="true"></i>
-</a></td>
+        <td>
+        	<a class="btn btn-danger" href="path/to/settings" aria-label="Delete" data-toggle="modal" data-target="#<%=r.getId()%>">
+ 				<i class="fa fa-trash-o" aria-hidden="true"></i>
+			</a>  
+			<a class="btn btn-primary" href="path/to/settings" aria-label="Delete" data-toggle="modal" data-target="#mod<%=r.getId()%>">
+  				<i class="fa fa-pencil" aria-hidden="true"></i>
+			</a>
+		</td>
       
       <%}
 			}
@@ -181,16 +160,8 @@
     </tbody>
   </table>
   
-  
-<!--   Esto ya no sirve 
-<form class="form-signin" name="signin" action="aNuevaReserva1" method="post">
-   <button class="btn btn-info btn-lg" type="submit">Agregar Reserva</button>
-</form>
- 		Esto ya no sirve-->
 
-
-
-<!-- Intento de eliminar una pagina -->
+<!-- Primer modal de Agregar reserva -->
 
   <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Agregar Reserva</button>
   <div class="modal fade" id="myModal" role="dialog">
@@ -198,20 +169,13 @@
       
         <!-- Modal content-->
         <div class="modal-content">
-        
           <form class="form-horizontal"  action="aNuevaReserva2" method="post">
-        
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
             <h4 class="modal-title">Agregar nueva Reserva</h4>
           </div>
           <div class="modal-body">
-
-            
             <p>Complete todos los campos  </p>
-            
-          
-           
 				 <div class="form-group">
  					<label class="control-label col-sm-2" for="usr">Inicio:</label>
  					<div class="col-sm-10">
@@ -222,7 +186,6 @@
                         </div>
                     </div>
                  </div>
-
 				 <div class="form-group">
  					<label class="control-label col-sm-2" for="usr">Fin:</label>
  					<div class="col-sm-10">
@@ -233,16 +196,12 @@
                         </div>
                     </div>
                  </div>
-
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="usr">Detalle:</label>
                     <div class="col-sm-10"> 
                     <input name="detalle" type="text" class="form-control" id="apellido" placeholder="Ingrese detalle">
                 </div>
               </div>
-
-
-
 <% 
 CtrlTipoAuto ctrlTipoAuto = new CtrlTipoAuto();
 ArrayList<TipoAuto> listaTipos = ctrlTipoAuto.getArrayList(); 
@@ -256,250 +215,28 @@ ArrayList<TipoAuto> listaTipos = ctrlTipoAuto.getArrayList();
       				</select>
       			</div>	
 			</div>
-
-<%-- <%
-CtrlAuto ctrlAuto = new CtrlAuto();
-ArrayList<Auto> listaAutos = ctrlAuto.getArrayList();
-%>
-			<div class="form-group">
-                <label class="control-label col-sm-2" for="usr">Auto:</label>
-                <div class="col-sm-10">
-					<select class="form-control" id="auto">  <!-- Como tomo datos de un select? es lo mismo que un imput? -->
-				        <%for(Auto a : listaAutos){%>
-				        <option><%=a.getNombre() %></option><%}%>
-      				</select>
-      			</div>	
-			</div>
- --%>
-
-
-                  <!-- <div class="container">
-                      <label class="control-label col-sm-2" for="pwd2">Tipo:</label>
-                      <div class="col-sm-10"> 
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-primary">Admin</button>
-                    <button type="button" class="btn btn-primary">Gerente</button>
-                    <button type="button" class="btn btn-primary">Usuario</button>
-                  </div>
-                </div>
               </div>
- -->
-                
-             
-
-
-              </div>
-
               <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-
-                
                     <div class="col-sm-10"> 
-                    <button type="submit" class="btn btn-success">Aceptar</button>
+                    <button type="submit" class="btn btn-primary">Continuar</button>
                   </div>
-                
-                
-                
-                
-                
-                
-                
-
               </div>
            </form>
-
-        </div>
-        <!-- Script para ocultar la contraseña-->
-        <script type="text/javascript"> 
-          $("#password").password('toggle');     
-        </script>
-        
+        </div>  
       </div>
     </div>
 
-<!-- Intento de eliminar una pagina -->
+<!-- Primer modal de Agregar reserva -->
 
 
-
-<!-- Anterior modal de reserva -->
-
-<%--   <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Agregar Reserva</button>
-  <div class="modal fade" id="myModal" role="dialog">
-      <div class="modal-dialog">
-      
-        <!-- Modal content-->
-        <div class="modal-content">
-        
-          <form class="form-horizontal"  action="AgregarReserva" method="post">
-        
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Agregar nueva Reserva</h4>
-          </div>
-          <div class="modal-body">
-
-            
-            <p>Complete todos los campos  </p>
-            
-          
-           
-				 <div class="form-group">
- 					<label class="control-label col-sm-2" for="usr">Inicio:</label>
- 					<div class="col-sm-10">
-               			<div class='input-group date' id='divMiCalendario1'>            
-                            <input name="fechaInicio" type='text' id="txtFechaInicio" class="form-control" placeholder="Ingrese fecha de inicio" readonly/>
-                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
-                            </span>
-                        </div>
-                    </div>
-                 </div>
-
-				 <div class="form-group">
- 					<label class="control-label col-sm-2" for="usr">Fin:</label>
- 					<div class="col-sm-10">
-               			<div class='input-group date' id='divMiCalendario2'>            
-                            <input name="fechaFin" type='text' id="txtFechaFin" class="form-control" placeholder="Ingrese fecha de fin" readonly/>
-                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
-                            </span>
-                        </div>
-                    </div>
-                 </div>
-
-                <div class="form-group">
-                    <label class="control-label col-sm-2" for="usr">Detalle:</label>
-                    <div class="col-sm-10"> 
-                    <input name="detalle" type="text" class="form-control" id="apellido" placeholder="Ingrese detalle">
-                </div>
-              </div>
-
-
-
-<% 
-CtrlTipoAuto ctrlTipoAuto = new CtrlTipoAuto();
-ArrayList<TipoAuto> listaTipos = ctrlTipoAuto.getArrayList(); 
-%>
-			<div class="form-group">
-                <label class="control-label col-sm-2" for="usr">Modelo:</label>
-                <div class="col-sm-10">
-					<select class="form-control" name="nombreTipo" id="tipoAuto" ng-model="myVar" >  <!-- Como tomo datos de un select? es lo mismo que un imput? -->
-				        <%for(TipoAuto t: listaTipos){%>
-				        <option value=<%=t.getId()%>>
-				        <%= t.getNombre()%>
-				        </option>
-				        <%}%>
-      				</select>
-      			</div>	
-			</div>
-
-
-<%
-CtrlAuto ctrlAuto = new CtrlAuto();
-ArrayList<Auto> listaAutos = ctrlAuto.getArrayList();
-
-for (TipoAuto t : listaTipos ){
-ArrayList<Auto> autosDelMismoTipo = ctrlAuto.getAutosByID(t.getId());
-
-/* Tenemos que cambiar este ctrlAuto.getAutosByID( id) por uno que solo nos devuelva los disponibles */
-
-
-
-	%>
-<div ng-switch="myVar">
-	<div ng-switch-when=<%=t.getId()%>>
-		<div class="form-group">
-		    <label class="control-label col-sm-2" for="usr">Auto:</label>
-		    <div class="col-sm-10">
-				<select class="form-control" name="nombreAuto" id="auto">  <!-- Como tomo datos de un select? es lo mismo que un imput? -->
-			        <%for(Auto a : autosDelMismoTipo){%>
-			        <option><%=a.getNombre()%></option>
-			        <%}%>
-					</select>
-				</div>	
-		</div>
-	</div>
-</div>	
-
-		<%
-	}
-%>		
-
-
-<!-- 
-<script
-	src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-<script>
-var options = {
-		color : ["red","green","blue"],
-		
-		country : ["Spain","Germany","France"]
-}
-
-$(function(){
-	var fillSecondary = function(){
-		var selected = $('#tipoAuto').val();
-		$('#auto').empty();
-		options[selected].forEach(function(element,index){
-			$('#auto').append('<option value="'+element+'">'+element+'</option>');
-		});
-	}
-	$('#primary').change(fillSecondary);
-	fillSecondary();
-});
-</script> -->
-
-
-
-                  <!-- <div class="container">
-                      <label class="control-label col-sm-2" for="pwd2">Tipo:</label>
-                      <div class="col-sm-10"> 
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-primary">Admin</button>
-                    <button type="button" class="btn btn-primary">Gerente</button>
-                    <button type="button" class="btn btn-primary">Usuario</button>
-                  </div>
-                </div>
-              </div>
- -->
-
-
-              </div>
-
-              <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-
-                
-                    <div class="col-sm-10"> 
-                    <button type="submit" class="btn btn-success">Aceptar</button>
-                  </div>
-                
-
-
-              </div>
-           </form>
-
-        </div>
-        <!-- Script para ocultar la contraseña-->
-        <script type="text/javascript"> 
-          $("#password").password('toggle');     
-        </script>
-        
-      </div>
-    </div> --%>
-
-<!-- Anterior modal de reserva -->
-
-
-
-
-   
+ <!--  Modal DELETE -->
     <%
 			
 			if (listaRes != null){
 			for(Reserva r : listaRes){
 		%>
-   
-   
-   
+
      <div class="modal fade" id="<%=r.getId() %>" role="dialog">
       <div class="modal-dialog">
       
@@ -521,37 +258,32 @@ $(function(){
                     <label class="control-label col-sm-2" for="usr">ID:</label>
                     <div class="col-sm-10"> 
                     <input name="idReserva" type="text" class="form-control" id="nombre"value="<%=r.getId()%>" readonly>
+                  	</div>
                   </div>
-                  </div>
-            
                  <div class="form-group">
                     <label class="control-label col-sm-2" for="usr">Fecha inicio:</label>
                     <div class="col-sm-10"> 
                     <input name="fechaIni" type="text" class="form-control" id="fechaIni"value="<%=r.getFechaIni() %> " readonly>
                   </div>
                   </div>
-
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="usr">Fecha fin:</label>
                     <div class="col-sm-10"> 
                     <input name="fechaFin" type="text" class="form-control" id="fechaFin" value=<%=r.getFechaFin()%>  readonly>
                 </div>
               </div>
-
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="usr">Detalle:</label>
                     <div class="col-sm-10"> 
                     <input name="detalle" type="text" class="form-control" id="detalle" value=<%=r.getDetalle()%> readonly>
                   </div>
                 </div>
-
                   <div class="form-group">
                       <label class="control-label col-sm-2" for="usr">Modelo:</label>
                       <div class="col-sm-10"> 
                       <input name="user" type="text" class="form-control" id="usuario" value=<%=r.getAutoReservado().getTipo().getNombre() %> readonly>
                     </div> 
                   </div>
-
                  <div class="form-group">
                       <label class="control-label col-sm-2" for="usr">Auto:</label>
                       <div class="col-sm-10"> 
@@ -559,31 +291,132 @@ $(function(){
                     </div> 
                   </div>
                   
+                  
+			
               </div>
-
               <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-
-                
+                <button type="button" class="btn" data-dismiss="modal">Cancelar</button>
                     <div class="col-sm-10"> 
-                    <button type="submit" class="btn btn-success">Aceptar</button>
+                    <button type="submit" class="btn btn-danger"><i class="fa fa-trash-o fa-lg"></i> Eliminar</button>
                   </div>
               </div>
            </form>
-
         </div>
-       
-        
       </div>
     </div>
-    
     <%}} %>
-    
-     <!--  Aca voy a crear un modal de delete por cada persona -->
+   
+<!--  Modal DELETE -->
 
 
 
 
+ <!--  Modal Editar Reserva  -->
+    <%
+			
+			if (listaRes != null){
+			for(Reserva r : listaRes){
+		%>
+   
+   
+   
+     <div class="modal fade" id="mod<%=r.getId() %>" role="dialog">
+      <div class="modal-dialog">
+      
+        <!-- Modal content-->
+        <div class="modal-content">
+        
+        
+        
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Modificar Reserva</h4>
+          </div>
+          <form class="form-horizontal"  action="aModificarReserva2" method="post">
+          <div class="modal-body">
+   
+            <p>Modifique los campos</p>
+                  
+            <div class="form-group">
+                    <label class="control-label col-sm-2" for="usr">ID:</label>
+                    <div class="col-sm-10"> 
+                    <input name="idReserva" type="text" class="form-control" id="idReserva" value=<%=r.getId()%> readonly>
+                  </div>
+                </div>
+            
+            <%SimpleDateFormat formatoOutput=new SimpleDateFormat("MM/dd/yyyy");%>
+                   <div class="form-group">
+ 					<label class="control-label col-sm-2" for="usr">Inicio:</label>
+ 					<div class="col-sm-10">
+               			<div class='input-group date' id='divMiCalendario3'>            
+                            <input type='text' name="fechaInicio" id="txtFechaInicio" class="form-control" value=<%=formatoOutput.format(r.getFechaIni())%> />
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                 </div>
+                <div class="form-group">
+ 					<label class="control-label col-sm-2" for="usr">Fin:</label>
+ 					<div class="col-sm-10">
+               			<div class='input-group date' id='divMiCalendario4'>            
+                            <input type='text' name="fechaFin" id="txtFechaFin" class="form-control" value=<%=formatoOutput.format(r.getFechaFin())%> />
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                 </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="usr">Detalle:</label>
+                    <div class="col-sm-10"> 
+                    <input name="detalle" type="text" class="form-control" id="detalle" value=<%=r.getDetalle()%> >
+                  </div>
+                </div>
+                  
+                  
+
+			 <div class="form-group">
+                <label class="control-label col-sm-2" for="usr">Modelo:</label>
+                <div class="col-sm-10">
+					<select class="form-control" name="nombreTipo" id="tipoAuto">  <!-- Como tomo datos de un select? es lo mismo que un imput? -->
+				        <%for(TipoAuto t: listaTipos){
+				     if(r.getAutoReservado().getTipo().getNombre().equals(t.getNombre()))
+				     		{%><option selected><%=t.getNombre()%></option><%}
+				     else {%><option><%=t.getNombre()%></option><%}}%>
+      				</select>
+      			</div>	
+			</div>
+                  
+                  <div class="form-group">
+                    <label class="control-label col-sm-2" for="usr">Auto:</label>
+                    <div class="col-sm-10"> 
+                    <input name="nombreAuto" type="text" class="form-control" id="nombreAuto" value=<%=r.getAutoReservado().getNombre()%> readonly>
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="usr">ID Auto:</label>
+                    <div class="col-sm-10"> 
+                    <input name="idAuto" type="text" class="form-control" id="idAuto" value=<%=r.getAutoReservado().getId()%> readonly >
+                  </div>
+                </div>
+                  
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                    <div class="col-sm-10"> 
+                    <button type="submit" class="btn btn-primary">Continuar</button>
+                  </div>
+              </div>
+           </form>
+        </div>
+      </div>
+    </div>
+  
+<%} %>
+<%} %>
+
+ <!--  Modal Editar Reserva  -->
+ 
 </div> 
 
 </body>

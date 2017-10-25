@@ -12,24 +12,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.sun.javafx.collections.NonIterableChange.SimpleRemovedChange;
-
 import controladores.CtrlAuto;
 import controladores.CtrlReserva;
 import controladores.CtrlTipoAuto;
-import entidades.*;
+import entidades.Auto;
+import entidades.TipoAuto;
 
 /**
- * Servlet implementation class aNuevaReserva2
+ * Servlet implementation class ModificarReserva
  */
-@WebServlet("/aNuevaReserva2")
-public class aNuevaReserva2 extends HttpServlet {
+@WebServlet("/aModificarReserva2")
+public class aModificarReserva2 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public aNuevaReserva2() {
+    public aModificarReserva2() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -47,9 +46,9 @@ public class aNuevaReserva2 extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-//		doGet(request, response);
-		
-		
+		int idAuto =Integer.parseInt(request.getParameter("idAuto"));
+		String nombreAuto =request.getParameter("nombreAuto");
+		String idReserva =request.getParameter("idReserva");
 		String stringFechaInicio =request.getParameter("fechaInicio");
 		String stringFechaFin=request.getParameter("fechaFin");		
 		String detalle=request.getParameter("detalle");
@@ -93,11 +92,15 @@ public class aNuevaReserva2 extends HttpServlet {
 				stringFechaFinReformateada  /*"2018-01-05"*/ ,
 				listaAutos);
 
+		Auto autoAnterior = ctrlAuto.getByID(idAuto);
+		if (nombreTipo.equals(autoAnterior.getTipo().getNombre())){
+			listaAutosDisponibles.add(autoAnterior);
+		}
 		
 		
 		request.setAttribute("listaAutos", listaAutosDisponibles);
-		
-		
+		request.setAttribute("nombreAuto", nombreAuto);
+		request.setAttribute("idReserva", idReserva);
 		request.setAttribute("fechaInicio", stringFechaInicio);
 		request.setAttribute("fechaFin", stringFechaFin);
 		request.setAttribute("detalle", detalle);
@@ -106,7 +109,18 @@ public class aNuevaReserva2 extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
-		request.getRequestDispatcher("WEB-INF/NuevaReserva2.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/ModificarReserva2.jsp").forward(request, response);
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		
 	}
