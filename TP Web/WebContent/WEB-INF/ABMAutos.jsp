@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>ABM Autos</title>
+  <title>Administrar Autos</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="style/font-awesome.min.css" rel="stylesheet">
@@ -30,9 +30,10 @@
       <a class="navbar-brand" href="#">Alquiler de Autos</a>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="Start">Home</a></li>
+      <li><a href="Start">Home</a></li>
       <li><a href="aABMPersonas">Personas</a></li> 
-      <li><a href="aABMAutos">Autos</a></li> 
+      <li class="active"><a href="aABMAutos">Autos</a></li> 
+      <li><a href="aABMTiposAuto">Tipos Auto</a></li> 
       <li><a href="aMisReservas">Mis Reservas</a></li>     
     </ul>
   </div>

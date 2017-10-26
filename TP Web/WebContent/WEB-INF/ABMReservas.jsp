@@ -90,10 +90,11 @@
       <a class="navbar-brand" href="#">Alquiler de Autos</a>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="Start">Home</a></li>
+      <li><a href="Start">Home</a></li>
       <li><a href="aABMPersonas">Personas</a></li> 
       <li><a href="aABMAutos">Autos</a></li> 
-      <li><a href="aMisReservas">Mis Reservas</a></li>     
+      <li><a href="aABMTiposAuto">Tipos Auto</a></li> 
+      <li class="active"><a href="aMisReservas">Mis Reservas</a></li>     
     </ul>
   </div>
 </nav>
