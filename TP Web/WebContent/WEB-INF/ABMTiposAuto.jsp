@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Gestionar Tipo de Autos</title>
+  <title>Gestionar Tipos de Autos</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="style/font-awesome.min.css" rel="stylesheet">
@@ -52,7 +52,7 @@
 <div class="container">
 <h3>Bienvenido <%=((Persona)session.getAttribute("user")).getNombre() %></h3>
   <h2>Administrar Tipos de Auto</h2>
-  <p>En la siguiente tabla se muestran todos los tipo de autos</p>
+  <p>En la siguiente tabla se muestran todos los tipos de autos</p>
  
   
  
@@ -77,21 +77,21 @@
       <%
 			ArrayList<TipoAuto> listaTiposAuto = (ArrayList<TipoAuto>)request.getAttribute("listaTiposAuto");
 			if (listaTiposAuto != null){
-			for(TipoAuto p : listaTiposAuto){
+			for(TipoAuto ta : listaTiposAuto){
 		%>
   
       <tr>
-        <td><%= p.getId() %></td>
-        <td><%= p.getNombre() %></td>
+        <td><%= ta.getId() %></td>
+        <td><%= ta.getNombre() %></td>
         
         
       
        
        
-<td><a class="btn btn-primary" href="path/to/settings" aria-label="Delete" data-toggle="modal" data-target="#mod<%=p.getId()%>">
+<td><a class="btn btn-primary" href="path/to/settings" aria-label="Delete" data-toggle="modal" data-target="#mod<%=ta.getId()%>">
   	<i class="fa fa-pencil" aria-hidden="true"></i>
 	</a>
-<a class="btn btn-danger" href="path/to/settings" aria-label="Delete" data-toggle="modal" data-target="#<%=p.getId()%>">
+<a class="btn btn-danger" href="path/to/settings" aria-label="Delete" data-toggle="modal" data-target="#<%=ta.getId()%>">
   <i class="fa fa-trash-o" aria-hidden="true"></i>
 </a></td>
       
@@ -119,7 +119,7 @@
             <button type="button" class="close" data-dismiss="modal">&times;</button>
             <h4 class="modal-title">Agregar nuevo tipo de auto</h4>
           </div>
-          <form class="form-horizontal"  action="AgregarPersona" method="post">
+          <form class="form-horizontal"  action="AgregarTipoAuto" method="post">
           <div class="modal-body">
 
             
@@ -174,12 +174,12 @@
     <%
 			
     if (listaTiposAuto != null){
-		for(TipoAuto p : listaTiposAuto){
+		for(TipoAuto ta : listaTiposAuto){
 		%>
    
    
    
-     <div class="modal fade" id="<%=p.getId() %>" role="dialog">
+     <div class="modal fade" id="<%=ta.getId() %>" role="dialog">
       <div class="modal-dialog">
       
         <!-- Modal content-->
@@ -199,14 +199,14 @@
             <div class="form-group">
                     <label class="control-label col-sm-2" for="usr">ID:</label>
                     <div class="col-sm-10"> 
-                    <input name="idTipoAuto" type="text" class="form-control" id="nombre"value="<%=p.getId()%> " readonly>
+                    <input name="idTipoAuto" type="text" class="form-control" id="idTipoAuto"value="<%=ta.getId()%>" readonly>
                   </div>
                   </div>
             
                  <div class="form-group">
                     <label class="control-label col-sm-2" for="usr">Nombre:</label>
                     <div class="col-sm-10"> 
-                    <input name="nombre" type="text" class="form-control" id="nombre"value="<%=p.getNombre()%> " readonly>
+                    <input name="nombre" type="text" class="form-control" id="nombre"value="<%=ta.getNombre()%>" readonly>
                   </div>
                   </div>
 
@@ -253,12 +253,12 @@
      <%
 			
     if (listaTiposAuto != null){
-		for(TipoAuto p : listaTiposAuto){
+		for(TipoAuto ta : listaTiposAuto){
 		%>
    
    
    
-     <div class="modal fade" id="mod<%=p.getId() %>" role="dialog">
+     <div class="modal fade" id="mod<%=ta.getId() %>" role="dialog">
       <div class="modal-dialog">
       
         <!-- Modal content-->
@@ -270,7 +270,7 @@
             <button type="button" class="close" data-dismiss="modal">&times;</button>
             <h4 class="modal-title">Modificar persona</h4>
           </div>
-          <form class="form-horizontal"  action="ModificarPersona" method="post">
+          <form class="form-horizontal"  action="ModificarTipoAuto" method="post">
           <div class="modal-body">
    
             <p>Modifique los campos que desee</p>
@@ -278,14 +278,14 @@
             <div class="form-group">
                     <label class="control-label col-sm-2" for="usr">ID:</label>
                     <div class="col-sm-10"> 
-                    <input name="idPersona" type="text" class="form-control" id="nombre"value="<%=p.getId()%>" readonly>
+                    <input name="idTipoAuto" type="text" class="form-control" id="nombre"value="<%=ta.getId()%>" readonly>
                   </div>
                   </div>
             
                  <div class="form-group">
                     <label class="control-label col-sm-2" for="usr">Nombre:</label>
                     <div class="col-sm-10"> 
-                    <input name="nombre" type="text" class="form-control" id="nombre"value="<%=p.getNombre()%> " >
+                    <input name="nombre" type="text" class="form-control" id="nombre"value="<%=ta.getNombre()%>" >
                   </div>
                   </div>
 
