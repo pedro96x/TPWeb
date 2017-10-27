@@ -55,7 +55,7 @@ public class aModificarReserva2 extends HttpServlet {
 		String nombreTipo =request.getParameter("nombreTipo");
 		
 		
-		SimpleDateFormat formatoInput=new SimpleDateFormat("MM/dd/yyyy");
+		SimpleDateFormat formatoInput=new SimpleDateFormat("yyyy-MM-dd");
 		SimpleDateFormat formatoOutput=new SimpleDateFormat("yyyy-MM-dd");
 		
 		
