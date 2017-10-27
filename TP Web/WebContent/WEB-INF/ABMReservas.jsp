@@ -102,13 +102,7 @@
  
 <div class="container">
   <h2>Administrar Reservas</h2><br><br><br>
-  
-     <%
-			ArrayList<Reserva>listaRes=(ArrayList<Reserva>)request.getAttribute("listaRes");
-			if (listaRes.size()>0){
-			for(Reserva r : listaRes){
-		%>
-  <p>En esta tabla se muestran todas sus reservas</p>
+    <p>En esta tabla se muestran todas sus reservas</p>
   
 
   <table class="table table-hover">
@@ -128,6 +122,12 @@
        
       </tr>
     </thead>
+     <%
+			ArrayList<Reserva>listaRes=(ArrayList<Reserva>)request.getAttribute("listaRes");
+			if (listaRes.size()>0){
+			for(Reserva r : listaRes){
+		%>
+
     <tbody>
     
    

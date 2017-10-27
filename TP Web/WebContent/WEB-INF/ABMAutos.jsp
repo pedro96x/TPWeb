@@ -145,7 +145,7 @@
                     <div class="form-group">
                 <label class="control-label col-sm-2" for="usr">Tipo:</label>
                 <div class="col-sm-10">
-					<select class="form-control" name="tipo" id="tipo">  <!-- Como tomo datos de un select? es lo mismo que un imput? -->
+					<select class="form-control" name="tipo" id="tipo">  
 				        <%for(int j=0;j<listaTiposAuto.size();j++){
 				        %><option><%=listaTiposAuto.get(j).getNombre()%></option><%}%>
       				</select>
