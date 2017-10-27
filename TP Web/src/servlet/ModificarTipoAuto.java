@@ -1,30 +1,26 @@
 package servlet;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import controladores.CtrlAuto;
-
 import controladores.CtrlTipoAuto;
 import entidades.TipoAuto;
 
 /**
- * Servlet implementation class EliminarAuto
+ * Servlet implementation class ModificarTipoAuto
  */
-@WebServlet("/EliminarAuto")
-public class EliminarAuto extends HttpServlet {
+@WebServlet("/ModificarTipoAuto")
+public class ModificarTipoAuto extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public EliminarAuto() {
+    public ModificarTipoAuto() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -42,28 +38,43 @@ public class EliminarAuto extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String id=request.getParameter("idAuto");
+		
 		try {
-			int idAuto = Integer.parseInt(id);
-		
-		
-		CtrlAuto ctrl = new CtrlAuto();
-		CtrlTipoAuto ctrlT = new CtrlTipoAuto();
-		ArrayList<TipoAuto>listaTiposAuto=new ArrayList<TipoAuto>();
-		ctrl.baja(idAuto);
-		request.setAttribute("listaAutos", ctrl.getArrayList());
-		request.setAttribute("listaTiposAuto", ctrlT.getArrayList());
-		
-		request.getRequestDispatcher("WEB-INF/ABMAutos.jsp").forward(request, response);
-		
-		
+			TipoAuto ta;
+			CtrlTipoAuto ctrl;
+			ta = new TipoAuto();
+			int id =Integer.parseInt(request.getParameter("idTipoAuto"));
+			String nombre = request.getParameter("nombre");
+			
+			
+			ta.setId(id);
+			ta.setNombre(nombre);
+			ta.setCantMaxReservas(4);
+			ta.setMinDiasDeAnti(2);
+			ta.setLimMaxDeTiempoDeReserva(4);
+			
+			try {
+				ctrl = new CtrlTipoAuto();
+				ctrl.modific(ta);
+				
+				request.setAttribute("listaTiposAuto",ctrl.getArrayList());
+				request.getRequestDispatcher("WEB-INF/ABMTiposAuto.jsp").forward(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		} catch (NumberFormatException e) {
-		      //Will Throw exception!
-		      //do something! anything to handle the exception.
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+	
+			
+			
+		
+		
 		
 		
 	}
-	
 
 }

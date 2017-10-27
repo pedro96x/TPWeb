@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>ABM Personas</title>
+  <title>Administrar Personas</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="style/font-awesome.min.css" rel="stylesheet">
@@ -25,12 +25,13 @@
   <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">Alquiler de Autos</a>
+      <a class="navbar-brand" href="Start">Alquiler de Autos</a>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="Start">Home</a></li>
-      <li><a href="aABMPersonas">Personas</a></li> 
+      <li><a href="Start">Home</a></li>
+      <li class="active"><a href="aABMPersonas">Personas</a></li> 
       <li><a href="aABMAutos">Autos</a></li> 
+      <li><a href="aABMTiposAuto">Tipos Auto</a></li> 
       <li><a href="aMisReservas">Mis Reservas</a></li>     
     </ul>
   </div>
@@ -101,11 +102,12 @@
        <% }%>
        
        
-       <td><a class="btn btn-danger" href="path/to/settings" aria-label="Delete" data-toggle="modal" data-target="#<%=p.getId()%>">
-  <i class="fa fa-trash-o" aria-hidden="true"></i>
-</a>  
+<td>
 <a class="btn btn-primary" href="path/to/settings" aria-label="Delete" data-toggle="modal" data-target="#mod<%=p.getId()%>">
-  <i class="fa fa-pencil" aria-hidden="true"></i>
+<i class="fa fa-pencil" aria-hidden="true"></i>
+</a>
+<a class="btn btn-danger" href="path/to/settings" aria-label="Delete" data-toggle="modal" data-target="#<%=p.getId()%>">
+  <i class="fa fa-trash-o" aria-hidden="true"></i>
 </a></td>
       
       <%}

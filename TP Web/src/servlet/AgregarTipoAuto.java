@@ -1,32 +1,26 @@
 package servlet;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import controladores.CtrlAuto;
-import controladores.CtrlPersona;
 import controladores.CtrlTipoAuto;
-import entidades.Auto;
-import entidades.Persona;
 import entidades.TipoAuto;
 
 /**
- * Servlet implementation class AgregarAuto
+ * Servlet implementation class AgregarTipoAuto
  */
-@WebServlet("/AgregarAuto")
-public class AgregarAuto extends HttpServlet {
+@WebServlet("/AgregarTipoAuto")
+public class AgregarTipoAuto extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AgregarAuto() {
+    public AgregarTipoAuto() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -44,44 +38,31 @@ public class AgregarAuto extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-try {
-	CtrlTipoAuto ctrlT = new CtrlTipoAuto();
-	ArrayList<TipoAuto>listaTiposAuto=ctrlT.getArrayList();
-			
+		try {
 			String nombre = request.getParameter("nombre");
-			String tipo= request.getParameter("tipo");
-		
+			TipoAuto ta = new TipoAuto();
+			ta.setNombre(nombre);
+			ta.setCantMaxReservas(4);
+			ta.setMinDiasDeAnti(2);
+			ta.setLimMaxDeTiempoDeReserva(4);
 			
-			Auto a = new Auto();
-			a.setNombre(nombre);
-			TipoAuto obj = new TipoAuto();
-			for (int i = 0; i < listaTiposAuto.size(); i++) {
-				if(listaTiposAuto.get(i).getNombre().equals(tipo)){
-					obj=listaTiposAuto.get(i);
-				}
+			
+			CtrlTipoAuto ctrl = new CtrlTipoAuto();
+			
+			try {
+				ctrl.alta(ta);
+				request.setAttribute("listaTiposAuto",ctrl.getArrayList());
+				request.getRequestDispatcher("WEB-INF/ABMTiposAuto.jsp").forward(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-			a.setTipo(obj);
 			
-		
-			
-			
-//    		if(habilitado=="true"){p.setHabilitado(true);}
-//			if(habilitado == "false"){p.setHabilitado(false);}
-			
-			CtrlAuto ctrl= new CtrlAuto();
-			ctrl.setAuto(a);
-			
-		
-			request.setAttribute("listaAutos", ctrl.getArrayList());
-			request.setAttribute("listaTiposAuto", ctrlT.getArrayList());
-			
-			request.getRequestDispatcher("WEB-INF/ABMAutos.jsp").forward(request, response);
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 	}
 
 }
