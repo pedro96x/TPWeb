@@ -111,27 +111,7 @@
             
           
            
-				 <%-- <div class="form-group">
- 					<label class="control-label col-sm-2" for="usr">Inicio:</label>
- 					<div class="col-sm-10">
-               			<div class='input-group date' id='divMiCalendario1'>            
-                            <input type='text' name="fechaInicio" id="txtFechaInicio" class="form-control" value="<%= (String)request.getAttribute("FechaInicio") %>" readonly/>
-                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
-                            </span>
-                        </div>
-                    </div>
-                 </div>
-
-				 <div class="form-group">
- 					<label class="control-label col-sm-2" for="usr">Fin:</label>
- 					<div class="col-sm-10">
-               			<div class='input-group date' id='divMiCalendario2'>            
-                            <input type='text' name="fechaFin" id="txtFechaFin" class="form-control"  value="<%= (String)request.getAttribute("FechaFin") %>" readonly/>
-                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
-                            </span>
-                        </div>
-                    </div>
-                 </div> --%>
+				
 
 				 <div class="form-group">
                     <label class="control-label col-sm-2" for="usr">Inicio:</label>

@@ -56,7 +56,7 @@ public class AgregarReserva extends HttpServlet {
 		String nombreAuto =request.getParameter("nombreAuto");
 		
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	    Date parsed = null;
 	    try {
 	        parsed = sdf.parse(fechaInicio);
