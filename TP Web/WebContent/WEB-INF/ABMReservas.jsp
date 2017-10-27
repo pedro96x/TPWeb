@@ -101,7 +101,13 @@
  <!--  Menu  -->
  
 <div class="container">
-  <h2>Administrar Reservas</h2>
+  <h2>Administrar Reservas</h2><br><br><br>
+  
+     <%
+			ArrayList<Reserva>listaRes=(ArrayList<Reserva>)request.getAttribute("listaRes");
+			if (listaRes.size()>0){
+			for(Reserva r : listaRes){
+		%>
   <p>En esta tabla se muestran todas sus reservas</p>
   
 
@@ -124,11 +130,7 @@
     </thead>
     <tbody>
     
-      <%
-			ArrayList<Reserva>listaRes=(ArrayList<Reserva>)request.getAttribute("listaRes");
-			if (listaRes != null){
-			for(Reserva r : listaRes){
-		%>
+   
   
       <tr>
 		<td><%= r.getId() %></td>   		
@@ -150,7 +152,8 @@
       <%}
 			}
 			else {%>
-			 <p> No hay Reservas para mostrar </p>  
+			
+			 <h3> No hay Reservas para mostrar </h3>  
 			 <% }
 		%>
       

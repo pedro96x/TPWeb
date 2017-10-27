@@ -50,7 +50,7 @@
 
 
 <div class="container">
-<h3>Bienvenido <%=((Persona)session.getAttribute("user")).getNombre() %></h3>
+
   <h2>Administrar Tipos de Auto</h2>
   <p>En la siguiente tabla se muestran todos los tipos de autos</p>
  

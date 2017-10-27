@@ -49,7 +49,6 @@
 
 
 <div class="container">
-<h3>Bienvenido <%=((Persona)session.getAttribute("user")).getNombre() %></h3>
   <h2>Administrar Personas</h2>
   <p>En la siguiente tabla se muestran todas las personas registradas</p>
  
