@@ -48,8 +48,8 @@ try {
 	CtrlTipoAuto ctrlT = new CtrlTipoAuto();
 	ArrayList<TipoAuto>listaTiposAuto=ctrlT.getArrayList();
 			
-			String nombre = request.getParameter("descripcion");
-			String tipo= request.getParameter("nombreTipo");
+			String nombre = request.getParameter("nombre");
+			String tipo= request.getParameter("tipo");
 		
 			
 			Auto a = new Auto();

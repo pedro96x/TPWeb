@@ -42,7 +42,7 @@ public class EliminarAuto extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String id=request.getParameter("idA");
+		String id=request.getParameter("idAuto");
 		try {
 			int idAuto = Integer.parseInt(id);
 		
