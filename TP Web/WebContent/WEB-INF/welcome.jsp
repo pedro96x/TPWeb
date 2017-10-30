@@ -10,40 +10,77 @@
 		  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		  
 	</head>
 	<body>
 	
-		<nav class="navbar navbar-inverse">
+	<!-- MENU -->
+	
+	
+	
+
+	
+	
+		 <nav class="navbar navbar-inverse">
+		
 		  <div class="container-fluid">
 		    <div class="navbar-header">
 		      <a class="navbar-brand" href="Start">Alquiler de Autos</a>
 		    </div>
-		    <ul class="nav navbar-nav">
+		    
+		    <ul class="nav navbar-nav mr-auto">
 		      <li class="active"><a href="Start">Home</a></li>
 		      <li><a href="aABMPersonas">Personas</a></li> 
 		      <li><a href="aABMAutos">Autos</a></li> 
 		       <li><a href="aABMTiposAuto">Tipos Auto</a></li> 
 		      <li><a href="aMisReservas">Mis Reservas</a></li>     
 		    </ul>
+		    
+		    
+  <ul class="nav navbar-nav navbar-right">
+  
+  
+  <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span><%=" " + ((Persona)session.getAttribute("user")).getNombre() + " " + ((Persona)session.getAttribute("user")).getApellido()%><span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="aLogin"><span class="glyphicon glyphicon-log-out"></span> Salir</a></li>
+          </ul>
+        </li>
+  
+  
+       <%--  <li class="dropdown"><a href="#"><span class="glyphicon glyphicon-user"></span><%=" " + ((Persona)session.getAttribute("user")).getNombre() + " " + ((Persona)session.getAttribute("user")).getApellido()%><span class="caret"></span></a></li>
+         <ul class="dropdown-menu">
+        <li><a href="aLogin"><span class="glyphicon glyphicon-log-out"></span> Salir</a></li>
+        </ul> --%>
+        
+      </ul>
+		    
+		
+		    
+		    
+		    
 		  </div>
-		</nav>
+		</nav> 
+		
+	<!-- /MENU -->	
+		
 		<div class="container">
 		  <h3>Bienvenido <%=((Persona)session.getAttribute("user")).getNombre() %></h3>
 		  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse nec posuere tellus. Etiam faucibus lorem vel viverra mollis. Nulla ligula felis, imperdiet at libero finibus, vulputate porttitor dolor.</p>
 		  <p>  </p>
 		   <form class="form-signin" name="signin" action="aABMPersonas" method="post">
-   <button class="btn btn-lg btn-primary btn-block" type="submit">Personas</button> 
+   <button class="btn btn-lg btn-primary btn-block" type="submit" style="margin= 10px;margin-bottom: 10px;margin-top: 10px;">Personas</button> 
   </form>
-   <form class="form-signin" name="signin" action="aABMAutos" method="post">
-   <button class="btn btn-lg btn-primary btn-block" type="submit">Autos</button> 
+   <form class="form-signin" name="signin" action="aABMAutos" method="post" margin= 10px>
+   <button class="btn btn-lg btn-primary btn-block" type="submit" style="margin= 10px;margin-bottom: 10px;margin-top: 10px;">Autos</button> 
   </form>
    <form class="form-signin" name="signin" action="aABMTiposAuto" method="post">
-   <button class="btn btn-lg btn-primary btn-block" type="submit">Tipos Auto</button> 
+   <button class="btn btn-lg btn-primary btn-block" type="submit" style="margin= 10px;margin-bottom: 10px;margin-top: 10px;">Tipos Auto</button> 
   </form>
   
   <form class="form-signin" name="signin" action="aMisReservas" method="post">
-   <button class="btn btn-lg btn-primary btn-block" type="submit">Mis Reservas</button> 
-  </form>
+   <button class="btn btn-lg btn-primary btn-block" type="submit" style="margin= 10px;margin-bottom: 10px;margin-top: 10px;">Mis Reservas</button> 
+  </form><br>
 		</div>
 	</body>
 </html>
