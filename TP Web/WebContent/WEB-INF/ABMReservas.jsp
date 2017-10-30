@@ -180,7 +180,7 @@
 
 <!-- Primer modal de Agregar reserva -->
 
-  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Agregar Reserva</button>
+  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" style="margin-bottom: 20px;">Agregar Reserva</button>
   <div class="modal fade" id="myModal" role="dialog">
       <div class="modal-dialog">
       

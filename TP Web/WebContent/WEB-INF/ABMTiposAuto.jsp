@@ -121,7 +121,7 @@
   </table>
  
 
-  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Agregar tipo de auto</button>
+  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" style="margin-bottom: 20px;">Agregar tipo de auto</button>
   <div class="modal fade" id="myModal" role="dialog">
       <div class="modal-dialog">
       

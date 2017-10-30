@@ -135,7 +135,7 @@
   </table>
  
 
-  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Agregar Persona</button>
+  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal"style="margin-bottom: 20px;">Agregar Persona</button>
   <div class="modal fade" id="myModal" role="dialog">
       <div class="modal-dialog">
       
