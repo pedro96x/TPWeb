@@ -55,11 +55,18 @@ public class Start extends HttpServlet {
 			
 			entidades.Persona pers=ctrl.compara(per);
 			
+			if (pers != null){
+		
+				
 			request.getSession().setAttribute("user", pers);
 			
 			request.getRequestDispatcher("WEB-INF/welcome.jsp").forward(request, response);
 			//response.getWriter().append(user).append(" ").append(pass);
+			}
+			else{
 			
+				request.getRequestDispatcher("errorLogin.html").forward(request, response);
+			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
