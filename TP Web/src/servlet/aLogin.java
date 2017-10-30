@@ -51,7 +51,7 @@ public class aLogin extends HttpServlet {
 			
 //			response.sendRedirect("/login.html");
 //			request.getRequestDispatcher("WEB-INF/ABMReservas.jsp").forward(request, response);
-			request.getRequestDispatcher("login2.jsp").forward(request, response);
+			request.getRequestDispatcher("login.html").forward(request, response);
 //			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

@@ -30,7 +30,7 @@
 		    </ul>
   			<ul class="nav navbar-nav navbar-right">
 	  			<li class="dropdown">
-		          	<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+		          	<a class="dropdown-toggle" data-toggle="dropdown" href="aLogin">
 		          		<span class="glyphicon glyphicon-user"></span><%=" " + ((Persona)session.getAttribute("user")).getNombre() + " " + ((Persona)session.getAttribute("user")).getApellido()%><span class="caret"></span></a>
 		          	<ul class="dropdown-menu">
 		            	<li>
