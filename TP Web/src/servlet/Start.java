@@ -7,6 +7,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import controladores.CtrlLogin;
 import controladores.CtrlPersona;
 import entidades.Persona;
@@ -18,12 +22,13 @@ import entidades.Persona;
 @WebServlet({ "/Start", "/start" })
 public class Start extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	private Logger logger;
     /**
      * Default constructor. 
      */
     public Start() {
         // TODO Auto-generated constructor stub
+    	logger = LogManager.getLogger(getClass());
     }
 
 	/**
@@ -54,9 +59,9 @@ public class Start extends HttpServlet {
 			CtrlLogin ctrl= new CtrlLogin();
 			
 			entidades.Persona pers=ctrl.compara(per);
-			
-			if (pers != null){
 		
+			if (pers != null){
+				logger.log(Level.INFO,"log in "+pers.getDni());
 				
 			request.getSession().setAttribute("user", pers);
 			
