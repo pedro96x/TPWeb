@@ -17,6 +17,7 @@ import controladores.CtrlReserva;
 import entidades.Auto;
 import entidades.Persona;
 import entidades.Reserva;
+import util.Emailer;
 
 /**
  * Servlet implementation class ModificarReserva
@@ -124,6 +125,7 @@ public class ModificarReserva extends HttpServlet {
 			listaRes = ctrl.getReservasAFututoByIdPersona(id);
 			
 			request.setAttribute("listaRes", listaRes);
+			Emailer.getInstance().send("guidofabio732@gmail.com","Reserva","Has modificado tu reserva");
 			
 			request.getRequestDispatcher("WEB-INF/ABMReservas.jsp").forward(request, response);
 			

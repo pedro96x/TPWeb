@@ -13,6 +13,7 @@ import controladores.CtrlPersona;
 import controladores.CtrlReserva;
 import entidades.Persona;
 import entidades.Reserva;
+import util.Emailer;
 
 /**
  * Servlet implementation class EliminarReserva
@@ -63,6 +64,7 @@ public class EliminarReserva extends HttpServlet {
 			listaRes = ctrl.getReservasAFututoByIdPersona(id1);
 			
 			request.setAttribute("listaRes", listaRes);
+			Emailer.getInstance().send("guidofabio732@gmail.com","Reserva","Has eliminado tu reserva");
 			
 			request.getRequestDispatcher("WEB-INF/ABMReservas.jsp").forward(request, response);
 			

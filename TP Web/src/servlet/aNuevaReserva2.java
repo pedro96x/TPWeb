@@ -18,6 +18,7 @@ import controladores.CtrlAuto;
 import controladores.CtrlReserva;
 import controladores.CtrlTipoAuto;
 import entidades.*;
+import util.Emailer;
 
 /**
  * Servlet implementation class aNuevaReserva2
@@ -102,10 +103,19 @@ public class aNuevaReserva2 extends HttpServlet {
 		request.setAttribute("fechaFin", stringFechaFin);
 		request.setAttribute("detalle", detalle);
 		request.setAttribute("nombreTipo", nombreTipo);
+		
+		
+		
+		
+		
+		
+		
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
+		
+		
 		request.getRequestDispatcher("WEB-INF/NuevaReserva2.jsp").forward(request, response);
 		
 		
