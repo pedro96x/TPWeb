@@ -122,7 +122,10 @@ public class AgregarReserva extends HttpServlet {
 			listaRes = ctrl.getReservasAFututoByIdPersona(id);
 			
 			request.setAttribute("listaRes", listaRes);
-			Emailer.getInstance().send("guidofabio732@gmail.com","Reserva","Has realizado una reserva");
+			Emailer.getInstance().send(((Persona)request.getSession().getAttribute("user")).getUser(),"Reserva","Sr/a "+((Persona) request.getSession().getAttribute("user")).getApellido()+
+					" "+
+					((Persona) request.getSession().getAttribute("user")).getNombre()+"usted ha realizado una reserva desde la fecha: "+fechaInicio+
+					" hasta la fecha: "+fechaFin+" de un auto: "+nombreTipo+" de patente: "+nombreAuto+". Gracias por confiar en GetCars©");
 			
 			request.getRequestDispatcher("WEB-INF/ABMReservas.jsp").forward(request, response);
 			
