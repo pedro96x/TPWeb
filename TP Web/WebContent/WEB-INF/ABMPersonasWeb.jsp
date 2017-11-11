@@ -82,7 +82,7 @@
         <th>Nombre</th>
         <th>Apellido</th>
         <th>DNI</th>
-        <th>Usuario</th>
+        <th>Email</th>
         <th>Contraseña</th>
         <th>Habilitado</th>
         <th></th>
@@ -179,9 +179,9 @@
                 </div>
 
                   <div class="form-group">
-                      <label class="control-label col-sm-2" for="usr">Usuario:</label>
+                      <label class="control-label col-sm-2" for="usr">Email:</label>
                       <div class="col-sm-10"> 
-                      <input name="user" type="text" class="form-control" id="usuario" placeholder="Ingrese Usuario">
+                      <input name="user" type="text" class="form-control" id="usuario" type="email" placeholder="Ingrese email">
                     </div> 
                   </div>
 
@@ -280,7 +280,7 @@
                 </div>
 
                   <div class="form-group">
-                      <label class="control-label col-sm-2" for="usr">Usuario:</label>
+                      <label class="control-label col-sm-2" for="usr">Email:</label>
                       <div class="col-sm-10"> 
                       <input name="user" type="text" class="form-control" id="usuario" value=<%=p.getUser()%> readonly>
                     </div> 
@@ -394,9 +394,9 @@
                 </div>
 
                   <div class="form-group">
-                      <label class="control-label col-sm-2" for="usr">Usuario:</label>
+                      <label class="control-label col-sm-2" for="usr">Email:</label>
                       <div class="col-sm-10"> 
-                      <input name="user" type="text" class="form-control" id="usuario" value=<%=p.getUser()%> >
+                      <input name="user" type="text" class="form-control" type="email" id="usuario" value=<%=p.getUser()%> >
                     </div> 
                   </div>
 

@@ -108,6 +108,7 @@
   
 
   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Continuar</button>
+  
   <div class="modal fade" id="myModal" role="dialog">
       <div class="modal-dialog">
       
@@ -195,6 +196,15 @@ listaAuto= (ArrayList<Auto>)request.getAttribute("listaAutos");
       </div>
     </div>
 </div>
+
+
+
+<script type="text/javascript">
+$(window).load(function(){
+    $('myModal').modal('show');
+});
+</script>
+
 
 </body>
 </html>

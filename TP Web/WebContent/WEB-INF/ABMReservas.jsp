@@ -114,6 +114,19 @@
 	<!-- /MENU -->	
  
 <div class="container">
+
+
+<% boolean errorNoHayAutos = (boolean)request.getAttribute("errorNoHayAutos");%>
+
+<%if(errorNoHayAutos){%>
+	<div class="alert alert-warning alert-dismissable">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+    <strong>Algo salio mal!</strong> No hay autos disponibles para el modelo y fecha seleccionada, por favor intente  con otra fecha o modelo.
+  </div>
+<%}%>
+
+
+
   <h2>Administrar Reservas</h2><br><br><br>
     <p>En esta tabla se muestran todas sus reservas</p>
   
@@ -136,7 +149,24 @@
       </tr>
     </thead>
      <%
-			ArrayList<Reserva>listaRes=(ArrayList<Reserva>)request.getAttribute("listaRes");
+			
+     
+     
+     
+     
+     CtrlReserva ctrl= new CtrlReserva();
+		int id = 0;
+		ArrayList<Reserva>listaRes=new ArrayList<Reserva>();
+		
+		id = ((Persona) request.getSession().getAttribute("user")).getId();
+		
+		listaRes = ctrl.getReservasAFututoByIdPersona(id);
+		
+	
+     
+     
+     
+     
 			if (listaRes.size()>0){
 			for(Reserva r : listaRes){
 		%>

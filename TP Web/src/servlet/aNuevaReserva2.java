@@ -18,6 +18,7 @@ import controladores.CtrlAuto;
 import controladores.CtrlReserva;
 import controladores.CtrlTipoAuto;
 import entidades.*;
+import excepciones.ExceptionNoHayAutos;
 import util.Emailer;
 
 /**
@@ -105,18 +106,34 @@ public class aNuevaReserva2 extends HttpServlet {
 		request.setAttribute("nombreTipo", nombreTipo);
 		
 		
+		if (listaAutos.size() == 0 ){
+			throw new ExceptionNoHayAutos();
+			//request.getRequestDispatcher("WEB-INF/ErrorNoHayAutos.jsp").forward(request, response);
+		}
+
+		request.getRequestDispatcher("WEB-INF/NuevaReserva2.jsp").forward(request, response);
 		
 		
+		}catch (ExceptionNoHayAutos e) {
+			
+			 
+			 
+			  //request.getRequestDispatcher(e.getPaginaError()).forward(request, response);
+			 
+			 request.setAttribute("errorNoHayAutos", true);
+			 request.getRequestDispatcher("WEB-INF/ABMReservas.jsp").forward(request, response);
+		}
 		
-		
-		
-		} catch (ParseException e) {
+		 catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}		
+		}	
 		
 		
-		request.getRequestDispatcher("WEB-INF/NuevaReserva2.jsp").forward(request, response);
+	 	
+		
+		
+		
 		
 		
 	}

@@ -76,15 +76,8 @@ public class aMisReservas extends HttpServlet {
 //		}
 			
 		try{
-			CtrlReserva ctrl= new CtrlReserva();
-			int id = 0;
-			ArrayList<Reserva>listaRes=new ArrayList<Reserva>();
 			
-			id = ((Persona) request.getSession().getAttribute("user")).getId();
-			
-			listaRes = ctrl.getReservasAFututoByIdPersona(id);
-			
-			request.setAttribute("listaRes", listaRes);
+			request.setAttribute("errorNoHayAutos", false);
 			
 			request.getRequestDispatcher("WEB-INF/ABMReservas.jsp").forward(request, response);
 			
