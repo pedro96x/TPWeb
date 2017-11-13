@@ -83,14 +83,16 @@ public class aModificarReserva2 extends HttpServlet {
 			if(tipo.getNombre().equals(nombreTipo) ){ tipoAuto= tipo;}
 		} 
 		
-		ArrayList<Auto> listaAutos = ctrlAuto.getAutosByID(tipoAuto.getId());
-		
 		CtrlReserva ctrlReserva = new CtrlReserva();
 		
-		ArrayList<Auto> listaAutosDisponibles = ctrlReserva.getAutosDisponibles(
-				stringFechaInicioReformateada  /*"2018-01-01"*/ ,
-				stringFechaFinReformateada  /*"2018-01-05"*/ ,
-				listaAutos);
+//		ArrayList<Auto> listaAutos = ctrlAuto.getAutosByID(tipoAuto.getId());
+//		
+//		ArrayList<Auto> listaAutosDisponibles = ctrlReserva.getAutosDisponibles(
+//				stringFechaInicioReformateada  /*"2018-01-01"*/ ,
+//				stringFechaFinReformateada  /*"2018-01-05"*/ ,
+//				listaAutos);
+		
+		ArrayList<Auto> listaAutosDisponibles = ctrlReserva.getAutosDisponiblesByFechasAndTipo(fechaInicio, fechaFin, tipoAuto.getId());
 
 		Auto autoAnterior = ctrlAuto.getByID(idAuto);
 		if (nombreTipo.equals(autoAnterior.getTipo().getNombre())){

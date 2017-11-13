@@ -86,16 +86,17 @@ public class aNuevaReserva2 extends HttpServlet {
 			if(tipo.getNombre().equals(nombreTipo) ){ tipoAuto= tipo;}
 		} 
 		
-		ArrayList<Auto> listaAutos = ctrlAuto.getAutosByID(tipoAuto.getId());
-		
 		CtrlReserva ctrlReserva = new CtrlReserva();
+//		ArrayList<Auto> listaAutos = ctrlAuto.getAutosByID(tipoAuto.getId());
+//		
+//		
+//		
+//		ArrayList<Auto> listaAutosDisponibles = ctrlReserva.getAutosDisponibles(
+//				stringFechaInicioReformateada  /*"2018-01-01"*/ ,
+//				stringFechaFinReformateada  /*"2018-01-05"*/ ,
+//				listaAutos);
 		
-		ArrayList<Auto> listaAutosDisponibles = ctrlReserva.getAutosDisponibles(
-				stringFechaInicioReformateada  /*"2018-01-01"*/ ,
-				stringFechaFinReformateada  /*"2018-01-05"*/ ,
-				listaAutos);
-
-		
+		ArrayList<Auto> listaAutosDisponibles = ctrlReserva.getAutosDisponiblesByFechasAndTipo(fechaInicio, fechaFin, tipoAuto.getId());
 		
 		request.setAttribute("listaAutos", listaAutosDisponibles);
 		
@@ -106,7 +107,7 @@ public class aNuevaReserva2 extends HttpServlet {
 		request.setAttribute("nombreTipo", nombreTipo);
 		
 		
-		if (listaAutos.size() == 0 ){
+		if (listaAutosDisponibles.size() == 0 ){
 			throw new ExceptionNoHayAutos();
 			//request.getRequestDispatcher("WEB-INF/ErrorNoHayAutos.jsp").forward(request, response);
 		}

@@ -67,7 +67,7 @@ public class EliminarReserva extends HttpServlet {
 			Emailer.getInstance().send(((Persona)request.getSession().getAttribute("user")).getUser(),"Reserva","Sr/a "+((Persona) request.getSession().getAttribute("user")).getApellido()+
 					" "+
 					((Persona) request.getSession().getAttribute("user")).getNombre()+"usted ha eliminado exitosamente su reserva. Gracias por confiar en GetCars©");
-			
+			request.setAttribute("errorNoHayAutos", false);
 			request.getRequestDispatcher("WEB-INF/ABMReservas.jsp").forward(request, response);
 			
 		}

@@ -1,6 +1,6 @@
 package controladores;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.ArrayList;
 
 import data.DataAuto;
@@ -24,23 +24,23 @@ public class CtrlReserva {
 
 	
 //		NuevoDate.seSolapan(reservas.get(i).getFechaIni(),reservas.get(i).getFechaFin(),fechaI,fechaF))
-	public ArrayList<Auto> getAutosDisponibles(String fechaI, String fechaF, ArrayList<Auto> arrayMismoTipoAutos) {
-		ArrayList <Reserva> reservas = dataRes.getReservas();
-		ArrayList <Auto> autosDisponibles = new ArrayList <Auto>();
-		
-		for (int i = 0; i < reservas.size(); i++) {
-			for (int j = 0; j < arrayMismoTipoAutos.size(); j++) {
-				java.sql.Date f1 = reservas.get(i).getFechaIni();
-				java.sql.Date f2 = reservas.get(i).getFechaFin();
-				if((reservas.get(i).getAutoReservado().getId()==arrayMismoTipoAutos.get(j).getId())&&(NuevoDate.seSolapan(f1,f2,fechaI,fechaF))){
-					arrayMismoTipoAutos.remove(arrayMismoTipoAutos.get(j));
-					
-				}
-			}
-			
-		}
-		return arrayMismoTipoAutos;
-	}
+//	public ArrayList<Auto> getAutosDisponibles(String fechaI, String fechaF, ArrayList<Auto> arrayMismoTipoAutos) {
+//		ArrayList <Reserva> reservas = dataRes.getReservas();
+//		ArrayList <Auto> autosDisponibles = new ArrayList <Auto>();
+//		
+//		for (int i = 0; i < reservas.size(); i++) {
+//			for (int j = 0; j < arrayMismoTipoAutos.size(); j++) {
+//				java.sql.Date f1 = reservas.get(i).getFechaIni();
+//				java.sql.Date f2 = reservas.get(i).getFechaFin();
+//				if((reservas.get(i).getAutoReservado().getId()==arrayMismoTipoAutos.get(j).getId())&&(NuevoDate.seSolapan(f1,f2,fechaI,fechaF))){
+//					arrayMismoTipoAutos.remove(arrayMismoTipoAutos.get(j));
+//					
+//				}
+//			}
+//			
+//		}
+//		return arrayMismoTipoAutos;
+//	}
 		
 
 
@@ -57,5 +57,10 @@ public class CtrlReserva {
 		dataRes.update(res);
 		
 	}
+	
+	public ArrayList<Auto> getAutosDisponiblesByFechasAndTipo(java.util.Date fechaI,java.util.Date fechaF,int idTipoAuto) {
+		return dataRes.getAutosDisponiblesByFechasAndTipo(fechaI,fechaF,idTipoAuto);
+	}
+	
 	
 }

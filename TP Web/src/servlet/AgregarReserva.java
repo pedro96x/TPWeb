@@ -126,7 +126,7 @@ public class AgregarReserva extends HttpServlet {
 					" "+
 					((Persona) request.getSession().getAttribute("user")).getNombre()+"usted ha realizado una reserva desde la fecha: "+fechaInicio+
 					" hasta la fecha: "+fechaFin+" de un auto: "+nombreTipo+" de patente: "+nombreAuto+". Gracias por confiar en GetCars©");
-			
+			request.setAttribute("errorNoHayAutos", false);
 			request.getRequestDispatcher("WEB-INF/ABMReservas.jsp").forward(request, response);
 			
 		}

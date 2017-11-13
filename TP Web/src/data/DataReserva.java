@@ -1,5 +1,6 @@
 package data;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -200,6 +201,87 @@ public class DataReserva {
 			e.printStackTrace();
 		}
 	}
+
+	public ArrayList<Auto> getAutosDisponiblesByFechasAndTipo(java.util.Date fechaI, java.util.Date fechaF, int idTipoAuto) {
+		
+		ArrayList<Auto> autos = new ArrayList<Auto>();
+//		autos =null;
+		Auto auto=null;
+		ResultSet rs = null;
+		PreparedStatement stmt = null;
+		
+		try{
+			stmt = FactoryConexion.getInstancia().getConn().prepareStatement(
+					"select aut.id_auto, aut.id_tipoauto, aut.nombre,"
+					+ " tipo.nombre_tipo_auto, tipo.lim_max_tiempo_reserva, tipo.dias_de_ant_nec, tipo.cant_max_res"
+					+ " from autos aut"
+					+ " inner join tiposdeauto tipo"
+					+ " on tipo.id = aut.id_tipoauto"
+					+ " where aut.id_tipoauto = ? "
+					+ " and aut.id_auto not in("
+					+ " select au.id_auto "
+					+ " from reservas res "
+					+ " inner join autos au"
+					+ " on au.id_auto = res.auto_reservado"
+					+ " inner join tiposdeauto tip"
+					+ " on tip.id = au.id_tipoauto"
+					+ " where au.id_tipoauto=? "
+					+ " and "
+					+ " (( ? between res.fechain and res.fechafin) "
+					+ " or "
+					+ " ( ? between res.fechain and res.fechafin) "
+					+ " or "
+					+ " (res.fechain between  ? and  ? )"
+					+ " or"
+					+ " (res.fechafin between  ?  and  ? ))"
+					+ " )"
+					+ " ;");
+			
+			stmt.setInt(1, idTipoAuto);
+			stmt.setInt(2, idTipoAuto);
+			stmt.setDate(3, new java.sql.Date(fechaI.getTime()));
+			stmt.setDate(4, new java.sql.Date(fechaF.getTime()));
+			stmt.setDate(5, new java.sql.Date(fechaI.getTime()));
+			stmt.setDate(6, new java.sql.Date(fechaF.getTime()));
+			stmt.setDate(7, new java.sql.Date(fechaI.getTime()));
+			stmt.setDate(8, new java.sql.Date(fechaF.getTime()));
+		rs = stmt.executeQuery();
+			while (rs != null && rs.next()){
+				auto = new Auto();
+				auto.setNombre(rs.getString("aut.nombre"));
+				auto.setId(rs.getInt("aut.id_auto"));
+				
+				TipoAuto tipo = new TipoAuto();
+				tipo.setId(rs.getInt("aut.id_tipoauto"));
+				tipo.setNombre(rs.getString("tipo.nombre_tipo_auto"));
+				tipo.setCantMaxReservas(rs.getInt("tipo.cant_max_res"));
+				tipo.setLimMaxDeTiempoDeReserva(rs.getInt("tipo.lim_max_tiempo_reserva"));
+				tipo.setMinDiasDeAnti(rs.getInt("tipo.dias_de_ant_nec"));
+				auto.setTipo(tipo);
+
+				
+				
+				autos.add(auto);
+			}
+		} catch (SQLException e){
+			e.printStackTrace();
+		}
+		
+		try{
+			if(rs != null) rs.close();
+			if(stmt != null) stmt.close();
+			FactoryConexion.getInstancia().releaseConn();
+		} catch (SQLException e){
+			e.printStackTrace();
+		}
+		return autos;
+	}
+
+	
+	
+	
+	
+	
 	
 //	public ArrayList<Auto> getAutosDisponibles (date fechain, date fechaFin, TipoAuto tipo ){
 //		
