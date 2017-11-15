@@ -83,7 +83,7 @@
 
 
 
-	<!-- MENU -->
+		<!-- MENU -->
 	
 		 <nav class="navbar navbar-inverse">
 		  <div class="container-fluid">
@@ -115,24 +115,17 @@
 		  </div>
 		</nav> 
 		
-	<!-- /MENU -->	
+	<!-- /MENU -->		
  
 <div class="container">
 
 
-<% boolean errorNoHayAutos = (boolean)request.getAttribute("errorNoHayAutos");%>
 
-<%if(errorNoHayAutos){%>
-	<div class="alert alert-warning alert-dismissable">
-    <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
-    <strong>Algo salio mal!</strong> No hay autos disponibles para el modelo y fecha seleccionada, por favor intente  con otra fecha o modelo.
-  </div>
-<%}%>
 
 
 
   <h2>Administrar Reservas</h2><br><br><br>
-    <p>En esta tabla se muestran todas sus reservas</p>
+    <p>En esta tabla se muestran todas las reservas de todos los usuarios</p>
   
 
   <table class="table table-hover">
@@ -159,18 +152,10 @@
      
      
      CtrlReserva ctrl= new CtrlReserva();
-		int id = 0;
-		ArrayList<Reserva>listaRes=new ArrayList<Reserva>();
+
+		ArrayList<Reserva>listaRes= ctrl.getReservas();
 		
-		id = ((Persona) request.getSession().getAttribute("user")).getId();
-		
-		listaRes = ctrl.getReservasAFututoByIdPersona(id);
-		
-	
-     
-     
-     
-     
+
 			if (listaRes.size()>0){
 			for(Reserva r : listaRes){
 		%>
@@ -191,9 +176,9 @@
         	<a class="btn btn-danger" href="path/to/settings" aria-label="Delete" data-toggle="modal" data-target="#<%=r.getId()%>">
  				<i class="fa fa-trash-o" aria-hidden="true"></i>
 			</a>  
-			<a class="btn btn-primary" href="path/to/settings" aria-label="Delete" data-toggle="modal" data-target="#mod<%=r.getId()%>">
+			<%-- <a class="btn btn-primary" href="path/to/settings" aria-label="Delete" data-toggle="modal" data-target="#mod<%=r.getId()%>">
   				<i class="fa fa-pencil" aria-hidden="true"></i>
-			</a>
+			</a> --%>
 		</td>
       
       <%}
@@ -267,6 +252,9 @@ ArrayList<TipoAuto> listaTipos = ctrlTipoAuto.getArrayList();
       				</select>
       			</div>	
 			</div>
+			
+			
+			
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
@@ -343,7 +331,9 @@ ArrayList<TipoAuto> listaTipos = ctrlTipoAuto.getArrayList();
                     </div> 
                   </div>
                   
-                  <input type="hidden" name="paginaAnterior" value="ABMReservas"> 
+                  <input type="hidden" name="paginaAnterior" value="TodasLasReservas"> 
+                  
+                  <input type="hidden" name="idPersona" value=<%=r.getIdPersona() %>> 
 			
               </div>
               <div class="modal-footer">
@@ -364,7 +354,7 @@ ArrayList<TipoAuto> listaTipos = ctrlTipoAuto.getArrayList();
 
 
  <!--  Modal Editar Reserva  -->
-    <%
+<%--     <%
 			
 			if (listaRes != null){
 			for(Reserva r : listaRes){
@@ -466,7 +456,7 @@ ArrayList<TipoAuto> listaTipos = ctrlTipoAuto.getArrayList();
   
 <%} %>
 <%} %>
-
+ --%>
  <!--  Modal Editar Reserva  -->
  
 </div> 

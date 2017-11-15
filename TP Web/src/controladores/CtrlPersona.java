@@ -33,4 +33,8 @@ public class CtrlPersona {
 	
 		return dataPer.getAll();
 	}
+
+	public Persona getById(int idPer) {
+		return dataPer.getById(idPer);
+	}
 }

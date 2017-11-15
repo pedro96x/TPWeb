@@ -56,6 +56,9 @@ public class AgregarPersona extends HttpServlet {
 			String user=request.getParameter("user");
 			String pass=request.getParameter("pass");
 			String habilitado= request.getParameter("habilitado");
+			String tipo= request.getParameter("tipo_persona");
+			
+			
 			
 			Persona p = new Persona();
 			p.setNombre(nombre);
@@ -63,6 +66,7 @@ public class AgregarPersona extends HttpServlet {
 			p.setDni(Integer.parseInt(dni));
 			p.setUser(user);
 			p.setPass(pass);
+			p.setTipo(tipo);
 		
 			p.setHabilitado(Boolean.valueOf(habilitado));
 			
@@ -72,7 +76,7 @@ public class AgregarPersona extends HttpServlet {
 			CtrlPersona ctrl= new CtrlPersona();
 			try {
 			ctrl.alta(p);
-			request.setAttribute("listaPersonas", ctrl.getAll());
+			
 			request.getRequestDispatcher("WEB-INF/ABMPersonasWeb.jsp").forward(request, response);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block

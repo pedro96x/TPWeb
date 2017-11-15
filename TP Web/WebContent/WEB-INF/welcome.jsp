@@ -23,9 +23,13 @@
 		    </div>
 		    <ul class="nav navbar-nav mr-auto">
 		      <li class="active"><a href="Start">Home</a></li>
+		      <%if (((Persona)session.getAttribute("user")).getTipo().equals("ADM")){ %>
+		      
 		      <li><a href="aABMPersonas">Personas</a></li> 
 		      <li><a href="aABMAutos">Autos</a></li> 
 		       <li><a href="aABMTiposAuto">Tipos Auto</a></li> 
+		       <li><a href="aTodasLasReservas">Todas las Reservas</a></li> 
+		       <%} %>
 		      <li><a href="aMisReservas">Mis Reservas</a></li>     
 		    </ul>
   			<ul class="nav navbar-nav navbar-right">
@@ -47,6 +51,8 @@
 		<div class="container">
 		  <h3>Bienvenido <%=((Persona)session.getAttribute("user")).getNombre() %></h3>
 		  
+		  <%if (((Persona)session.getAttribute("user")).getTipo().equals("ADM")){ %>
+		  
 		   <form class="form-signin" name="signin" action="aABMPersonas" method="post">
    <button class="btn btn-lg btn-primary btn-block" type="submit" style="margin= 10px;margin-bottom: 10px;margin-top: 10px;">Personas</button> 
   </form>
@@ -56,7 +62,10 @@
    <form class="form-signin" name="signin" action="aABMTiposAuto" method="post">
    <button class="btn btn-lg btn-primary btn-block" type="submit" style="margin= 10px;margin-bottom: 10px;margin-top: 10px;">Tipos Auto</button> 
   </form>
-  
+  <form class="form-signin" name="signin" action="aTodasLasReservas" method="post">
+   <button class="btn btn-lg btn-primary btn-block" type="submit" style="margin= 10px;margin-bottom: 10px;margin-top: 10px;">Todas las Reservas</button> 
+  </form>
+  			<%} %>
   <form class="form-signin" name="signin" action="aMisReservas" method="post">
    <button class="btn btn-lg btn-primary btn-block" type="submit" style="margin= 10px;margin-bottom: 10px;margin-top: 10px;">Mis Reservas</button> 
   </form><br>

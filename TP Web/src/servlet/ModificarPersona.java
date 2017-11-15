@@ -48,7 +48,7 @@ public class ModificarPersona extends HttpServlet {
 		String user=request.getParameter("user");
 		String pass=request.getParameter("pass");
 		String habilitado=request.getParameter("habilitado");
-		
+		String tip=request.getParameter("tipo_persona");
 		
 		
 		
@@ -66,6 +66,7 @@ public class ModificarPersona extends HttpServlet {
 				p.setPass(pass);
 				p.setUser(user);
 				p.setHabilitado(hab);
+				p.setTipo(tip);
 				
 		CtrlPersona ctrlPersona = new CtrlPersona();
 		ctrlPersona.modific(p);

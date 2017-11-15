@@ -10,8 +10,9 @@ public class Persona implements Serializable {
 	String apellido;
 	boolean habilitado;
 	private int id;
+	String tipo;
 	
-	String tipo;// Para promocion. Puede ser admin, usuario o gerente.
+	
 	
 	public String getUser() {
 		return user;
@@ -71,5 +72,11 @@ public class Persona implements Serializable {
 		this.apellido = apellido;
 	
 	}
-	
+
+	public void setTipo(String tip) {
+		this.tipo=tip;
+	}
+	public String getTipo(){
+		return tipo;
+	}
 }

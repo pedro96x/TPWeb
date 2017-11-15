@@ -50,23 +50,41 @@ public class DataReserva {
 
 	public ArrayList<Reserva> getReservas(){
 		
-		Statement stmt=null;
+		PreparedStatement stmt = null;
 		ResultSet rs=null;
 		ArrayList<Reserva> reservas= new ArrayList<Reserva>();
 		try {
 			stmt = FactoryConexion.getInstancia()
-					.getConn().createStatement();
-			rs = stmt.executeQuery("select * from tp.reservas");
+					.getConn().prepareStatement("SELECT * FROM tp.reservas res "
+							+ "inner join autos aut "
+							+ "on aut.id_auto = res.auto_reservado "
+							+ "inner join tiposdeauto tip "
+							+ "on tip.id = aut.id_tipoauto ");
+			
+			rs = stmt.executeQuery();
 			if(rs!=null){
 				while(rs.next()){
 					Reserva res=new Reserva();
-					res.setFechaIni(rs.getDate("fechain"));
-					res.setFechaFin(rs.getDate("fechafin"));
-					res.setDetalle(rs.getString("detalle"));
+					res.setId(rs.getInt("res.id"));
+					res.setFechaIni(rs.getDate("res.fechain"));
+					res.setFechaFin(rs.getDate("res.fechafin"));
+					res.setDetalle(rs.getString("res.detalle"));
+					res.setIdPersona(rs.getInt("res.id_persona"));
+				
 					Auto au = new Auto();
-					au.setId(rs.getInt("auto_reservado"));
+					au.setNombre(rs.getString("aut.nombre"));
+					au.setId(rs.getInt("aut.id_auto"));
+					
+					TipoAuto tipo = new TipoAuto();
+					tipo.setId(rs.getInt("tip.id"));
+					tipo.setNombre(rs.getString("tip.nombre_tipo_auto"));
+					tipo.setCantMaxReservas(rs.getInt("tip.cant_max_res"));
+					tipo.setLimMaxDeTiempoDeReserva(rs.getInt("tip.lim_max_tiempo_reserva"));
+					tipo.setMinDiasDeAnti(rs.getInt("tip.dias_de_ant_nec"));
+					
+					au.setTipo(tipo);
 					res.setAutoReservado(au);
-					res.setIdPersona(rs.getInt("id_persona"));
+
 					reservas.add(res);
 				}
 			}

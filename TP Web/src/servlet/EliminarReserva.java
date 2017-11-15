@@ -45,31 +45,33 @@ public class EliminarReserva extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		String id=request.getParameter("idReserva");
+		String paginaAnterior=request.getParameter("paginaAnterior");
+		String idPersona=request.getParameter("idPersona");
 		try {
 			int idReserva = Integer.parseInt(id);
-		
+			int idPer = Integer.parseInt(idPersona);
 		
 		CtrlReserva ctrlReserva = new CtrlReserva();
+		CtrlPersona ctrlPersona = new CtrlPersona();
 		
 		ctrlReserva.deleteById(idReserva);
+		Persona per = ctrlPersona.getById(idPer);
 		
-		
-		
-			CtrlReserva ctrl= new CtrlReserva();
-			int id1 = 0;
-			ArrayList<Reserva>listaRes=new ArrayList<Reserva>();
+		if(paginaAnterior.equals("ABMReservas")){
 			
-			id1 = ((Persona) request.getSession().getAttribute("user")).getId();
-			
-			listaRes = ctrl.getReservasAFututoByIdPersona(id1);
-			
-			request.setAttribute("listaRes", listaRes);
-			Emailer.getInstance().send(((Persona)request.getSession().getAttribute("user")).getUser(),"Reserva","Sr/a "+((Persona) request.getSession().getAttribute("user")).getApellido()+
+			Emailer.getInstance().send(((Persona)request.getSession().getAttribute("user")).getUser(),"Reserva cancelada","Sr/a "+((Persona) request.getSession().getAttribute("user")).getApellido()+
 					" "+
 					((Persona) request.getSession().getAttribute("user")).getNombre()+"usted ha eliminado exitosamente su reserva. Gracias por confiar en GetCars©");
 			request.setAttribute("errorNoHayAutos", false);
 			request.getRequestDispatcher("WEB-INF/ABMReservas.jsp").forward(request, response);
-			
+		}
+		else{
+
+			Emailer.getInstance().send(per.getUser(),"Reserva cancelada","Sr/a "+per.getApellido()+
+					" "+
+					"Lamentamos informarle que su reserva fue cancelada por el aministrador del sistema. Gracias por confiar en GetCars©");
+			request.getRequestDispatcher("WEB-INF/TodasLasReservas.jsp").forward(request, response);
+		}
 		}
 		 catch (Exception e) {
 				// TODO Auto-generated catch block

@@ -1,6 +1,7 @@
 <%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="entidades.Persona"%>
+<%@page import="controladores.CtrlPersona"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -22,7 +23,7 @@
 
 
 
-	<!-- MENU -->
+		<!-- MENU -->
 	
 		 <nav class="navbar navbar-inverse">
 		  <div class="container-fluid">
@@ -31,14 +32,18 @@
 		    </div>
 		    <ul class="nav navbar-nav mr-auto">
 		      <li class="active"><a href="Start">Home</a></li>
+		      <%if (((Persona)session.getAttribute("user")).getTipo().equals("ADM")){ %>
+		      
 		      <li><a href="aABMPersonas">Personas</a></li> 
 		      <li><a href="aABMAutos">Autos</a></li> 
 		       <li><a href="aABMTiposAuto">Tipos Auto</a></li> 
+		       <li><a href="aTodasLasReservas">Todas las Reservas</a></li> 
+		       <%} %>
 		      <li><a href="aMisReservas">Mis Reservas</a></li>     
 		    </ul>
   			<ul class="nav navbar-nav navbar-right">
 	  			<li class="dropdown">
-		          	<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+		          	<a class="dropdown-toggle" data-toggle="dropdown" href="aLogin">
 		          		<span class="glyphicon glyphicon-user"></span><%=" " + ((Persona)session.getAttribute("user")).getNombre() + " " + ((Persona)session.getAttribute("user")).getApellido()%><span class="caret"></span></a>
 		          	<ul class="dropdown-menu">
 		            	<li>
@@ -84,6 +89,7 @@
         <th>DNI</th>
         <th>Email</th>
         <th>Contraseña</th>
+        <th>Tipo</th>
         <th>Habilitado</th>
         <th></th>
        
@@ -93,7 +99,10 @@
     <tbody>
     
       <%
-			ArrayList<Persona>listaPers=(ArrayList<Persona>)request.getAttribute("listaPersonas");
+      
+      CtrlPersona ctrl= new CtrlPersona();
+	
+			ArrayList<Persona>listaPers=ctrl.getAll();
 			if (listaPers != null){
 			for(Persona p : listaPers){
 		%>
@@ -105,8 +114,24 @@
         <td><%= p.getDni() %></td>
         <td><%= p.getUser() %></td>
         <td><%= p.getPass() %></td>
+          
+       
+       
+         <%if (p.getTipo().equals("ADM")  ){ %>
+        <td>Administrador</td>
+        <%} %>
+        <%if (p.getTipo().equals("ENC") ){ %>
+        <td>Encargado</td>
+        <%} %>
+        <%if (p.getTipo().equals("USR") ){ %>
+        <td>Usuario</td>
+        <%} %>
         
-        <%if (p.isHabilitado()){ %>
+        <%if (p.getTipo() == null ){ %>
+        <td>SIN TIPO</td>
+        <%} %>
+        
+         <%if (p.isHabilitado()){ %>
       <td><label><i class="fa fa-check" style="font-size:20px;color:green;" aria-hidden="true"></i></label></td>
        <!--  <td><label><input type="checkbox" value="true" checked="checked"></label></td> -->
         <%}
@@ -160,28 +185,28 @@
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="usr">Nombre:</label>
                     <div class="col-sm-10"> 
-                    <input name="nombre" type="text" class="form-control" id="nombre"placeholder="Ingrese Nombre">
+                    <input name="nombre" type="text" class="form-control" id="nombre"placeholder="Ingrese Nombre" required>
                   </div>
                   </div>
 
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="usr">Apellido:</label>
                     <div class="col-sm-10"> 
-                    <input name="apellido" type="text" class="form-control" id="apellido" placeholder="Ingrese Apellido">
+                    <input name="apellido" type="text" class="form-control" id="apellido" placeholder="Ingrese Apellido" required>
                 </div>
               </div>
 
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="usr">DNI:</label>
                     <div class="col-sm-10"> 
-                    <input name="dni" type="text" class="form-control" id="dni" placeholder="Ingrese DNI">
+                    <input name="dni" type="text" class="form-control" id="dni" placeholder="Ingrese DNI" required>
                   </div>
                 </div>
 
                   <div class="form-group">
                       <label class="control-label col-sm-2" for="usr">Email:</label>
                       <div class="col-sm-10"> 
-                      <input name="user" type="text" class="form-control" id="usuario" type="email" placeholder="Ingrese email">
+                      <input name="user" type="email" class="form-control" id="usuario"  placeholder="Ingrese email" required>
                     </div> 
                   </div>
 
@@ -189,7 +214,7 @@
                   <label class="control-label col-sm-2" for="pwd">Contraseña:</label>
                   <div class="col-sm-10"> 
                     
-                    <input name="pass" type="password" id="password" placeholder="Ingrese contraseña" name="password" class="form-control" data-toggle="password">
+                    <input name="pass" type="password" id="password" placeholder="Ingrese contraseña" name="password" class="form-control" data-toggle="password" required>
                   </div>
                 </div>
 
@@ -200,7 +225,33 @@
                     </div> 
                   </div>
                   
+                  
+                  
+                    <div class="form-group">
+                      <label class="control-label col-sm-2" for="usr">Tipo:</label>
+                      <div class="col-sm-10"> 
+                      <div class="radio">
+					      <label><input type="radio" name="tipo_persona" value="ADM">Administrador</label>
+					    </div>
+					  <div class="radio">
+					      <label><input type="radio" name="tipo_persona" value="ENC">Encargado</label>
+					    </div>
+					  <div class="radio">
+					      <label><input type="radio" name="tipo_persona" value="USR" checked="checked" >Usuario</label>
+					    </div>
+					    
+                    </div> 
+                  </div> 
+                  
+                  
+                  
+                  
               </div>
+              
+              
+              
+              
+              
 
               <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
@@ -375,28 +426,28 @@
                  <div class="form-group">
                     <label class="control-label col-sm-2" for="usr">Nombre:</label>
                     <div class="col-sm-10"> 
-                    <input name="nombre" type="text" class="form-control" id="nombre"value="<%=p.getNombre()%> " >
+                    <input name="nombre" type="text" class="form-control" id="nombre"value="<%=p.getNombre()%> " required>
                   </div>
                   </div>
 
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="usr">Apellido:</label>
                     <div class="col-sm-10"> 
-                    <input name="apellido" type="text" class="form-control" id="apellido" value=<%=p.getApellido()%>  >
+                    <input name="apellido" type="text" class="form-control" id="apellido" value=<%=p.getApellido()%>  required>
                 </div>
               </div>
 
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="usr">DNI:</label>
                     <div class="col-sm-10"> 
-                    <input name="dni" type="text" class="form-control" id="dni" value=<%=p.getDni()%> >
+                    <input name="dni" type="text" class="form-control" id="dni" value=<%=p.getDni()%> required>
                   </div>
                 </div>
 
                   <div class="form-group">
                       <label class="control-label col-sm-2" for="usr">Email:</label>
                       <div class="col-sm-10"> 
-                      <input name="user" type="text" class="form-control" type="email" id="usuario" value=<%=p.getUser()%> >
+                      <input name="user"  class="form-control" type="email" id="usuario" value=<%=p.getUser()%> required>
                     </div> 
                   </div>
 
@@ -404,7 +455,7 @@
                   <label class="control-label col-sm-2" for="pwd">Contraseña:</label>
                   <div class="col-sm-10"> 
                   
-                    <input name="pass" type="text" class="form-control" id="password" value=<%=p.getPass()%> >
+                    <input name="pass" type="text" class="form-control" id="password" value=<%=p.getPass()%> required>
                     
                   </div>
                 </div>
@@ -424,6 +475,26 @@
              
                     </div> 
                   </div>
+                  
+                  
+                  
+                  <div class="form-group">
+                      <label class="control-label col-sm-2" for="usr">Tipo:</label>
+                      <div class="col-sm-10"> 
+                      <div class="radio">
+                     
+					      <label><input type="radio" name="tipo_persona" value="ADM" <%if(p.getTipo().equals("ADM")){ %> checked="checked" <%} %>>Administrador</label>
+					    </div>
+					  <div class="radio">
+					      <label><input type="radio" name="tipo_persona" value="ENC" <%if(p.getTipo().equals("ENC")){ %> checked="checked" <%} %>>Encargado</label>
+					    </div>
+					  <div class="radio">
+					      <label><input type="radio" name="tipo_persona" value="USR" <%if(p.getTipo().equals("USR")){ %> checked="checked" <%} %> >Usuario</label>
+					    </div>
+					    
+                    </div> 
+                  </div> 
+                  
                   
                   
                   

@@ -16,7 +16,8 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-show-password/1.0.3/bootstrap-show-password.min.js"></script>
   
-  
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   
  <!--  necesario para el calendario -->
 
@@ -63,7 +64,7 @@
 
 
 
-	<!-- MENU -->
+		<!-- MENU -->
 	
 		 <nav class="navbar navbar-inverse">
 		  <div class="container-fluid">
@@ -72,14 +73,18 @@
 		    </div>
 		    <ul class="nav navbar-nav mr-auto">
 		      <li class="active"><a href="Start">Home</a></li>
+		      <%if (((Persona)session.getAttribute("user")).getTipo().equals("ADM")){ %>
+		      
 		      <li><a href="aABMPersonas">Personas</a></li> 
 		      <li><a href="aABMAutos">Autos</a></li> 
 		       <li><a href="aABMTiposAuto">Tipos Auto</a></li> 
+		       <li><a href="aTodasLasReservas">Todas las Reservas</a></li> 
+		       <%} %>
 		      <li><a href="aMisReservas">Mis Reservas</a></li>     
 		    </ul>
   			<ul class="nav navbar-nav navbar-right">
 	  			<li class="dropdown">
-		          	<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+		          	<a class="dropdown-toggle" data-toggle="dropdown" href="aLogin">
 		          		<span class="glyphicon glyphicon-user"></span><%=" " + ((Persona)session.getAttribute("user")).getNombre() + " " + ((Persona)session.getAttribute("user")).getApellido()%><span class="caret"></span></a>
 		          	<ul class="dropdown-menu">
 		            	<li>
@@ -109,7 +114,7 @@
 
   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Continuar</button>
   
-  <div class="modal fade" id="myModal" role="dialog">
+  <div class="modal fade" id="myModal" role="dialog" >
       <div class="modal-dialog">
       
         <!-- Modal content-->
@@ -197,13 +202,12 @@ listaAuto= (ArrayList<Auto>)request.getAttribute("listaAutos");
     </div>
 </div>
 
-
-
-<script type="text/javascript">
-$(window).load(function(){
-    $('myModal').modal('show');
-});
+<!-- PARA QUE SE MUESTRE EL MODAL APENAS CARGA -->
+<script>
+$("#myModal").modal('show');
 </script>
+<!-- PARA QUE SE MUESTRE EL MODAL APENAS CARGA -->
+
 
 
 </body>
