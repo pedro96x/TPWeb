@@ -1,5 +1,5 @@
 package servlet;
-
+import entidades.Persona;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -7,7 +7,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import controladores.CtrlTipoAuto;
+import excepciones.ExceptionNoSePuedeEliminar;
 
 /**
  * Servlet implementation class EliminarTipoAuto
@@ -15,12 +20,14 @@ import controladores.CtrlTipoAuto;
 @WebServlet("/EliminarTipoAuto")
 public class EliminarTipoAuto extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+	private Logger logger;   
     /**
      * @see HttpServlet#HttpServlet()
      */
     public EliminarTipoAuto() {
-        super();
+        
+    	
+    	logger = LogManager.getLogger(getClass());
         // TODO Auto-generated constructor stub
     }
 
@@ -46,10 +53,21 @@ public class EliminarTipoAuto extends HttpServlet {
 			CtrlTipoAuto ctrl = new CtrlTipoAuto();
 			
 			try {
-				ctrl.baja(id);
-				request.setAttribute("listaTiposAuto", ctrl.getArrayList());
-				request.getRequestDispatcher("WEB-INF/ABMTiposAuto.jsp").forward(request,response);
-			} catch (Exception e) {
+				
+					
+					ctrl.baja(id);
+			
+					request.setAttribute("listaTiposAuto", ctrl.getArrayList());
+					request.getRequestDispatcher("WEB-INF/ABMTiposAuto.jsp").forward(request,response);
+				} catch (ExceptionNoSePuedeEliminar e) {
+					// TODO Auto-generated catch block
+					
+					logger.log(Level.ERROR,"Eliminar tipos incluidos en reservas "+"39455528");
+					request.setAttribute("mensaje", e.getMensajeDeError());
+					request.getRequestDispatcher("WEB-INF/PaginaDeError.jsp").forward(request, response);
+				}
+				
+			 catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}

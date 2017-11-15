@@ -1,8 +1,11 @@
 package data;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
-import entidades.*;
 
-import java.sql.*;
+import entidades.TipoAuto;
+import excepciones.ExceptionNoSePuedeEliminar;
 public class DataTipoAuto {
 
 
@@ -78,7 +81,7 @@ public class DataTipoAuto {
 	}
 
 
-public void deleteByID(int id){
+public void deleteByID(int id) throws ExceptionNoSePuedeEliminar{
 	
 PreparedStatement stmt=null;
 	
@@ -88,7 +91,7 @@ PreparedStatement stmt=null;
 		 stmt.executeUpdate();
 		
 	} catch (SQLException e) {
-		e.printStackTrace();
+		throw new ExceptionNoSePuedeEliminar();
     }
 	
 	try {
