@@ -25,10 +25,7 @@ public class EliminarTipoAuto extends HttpServlet {
      * @see HttpServlet#HttpServlet()
      */
     public EliminarTipoAuto() {
-        
-    	
-    	logger = LogManager.getLogger(getClass());
-        // TODO Auto-generated constructor stub
+    	logger = LogManager.getLogger(getClass());   
     }
 
 	/**
