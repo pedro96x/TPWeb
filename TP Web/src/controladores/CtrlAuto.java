@@ -4,14 +4,14 @@ import java.util.ArrayList;
 
 import data.DataAuto;
 import entidades.Auto;
-import excepciones.ExceptionNoSePuedeEliminar;
+import excepciones.ExceptionErrorGen;
 
 public class CtrlAuto {
 	DataAuto dataAuto = new DataAuto();
 	public void setAuto(Auto auto) {
 		dataAuto.setAuto(auto);
 	}
-	public void baja(int id) throws ExceptionNoSePuedeEliminar {
+	public void baja(int id) throws ExceptionErrorGen {
 		dataAuto.bajaByID(id);
 	}
 	public void actualizar(Auto auto) {

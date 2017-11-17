@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import data.*;
 import entidades.*;
-import excepciones.ExceptionNoSePuedeEliminar;
+import excepciones.ExceptionErrorGen;
 
 public class CtrlTipoAuto {
 	
@@ -19,7 +19,7 @@ public class CtrlTipoAuto {
 		dataTipoAuto.setTipoAuto(tipoauto);
 	}
 	
-	public void baja(int id) throws ExceptionNoSePuedeEliminar {
+	public void baja(int id) throws ExceptionErrorGen {
 		dataTipoAuto.deleteByID(id);	
 	}
 	

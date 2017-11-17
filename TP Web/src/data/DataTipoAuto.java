@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import entidades.TipoAuto;
-import excepciones.ExceptionNoSePuedeEliminar;
+import excepciones.ExceptionErrorGen;
 public class DataTipoAuto {
 
 
@@ -82,7 +82,7 @@ public void setTipoAuto(TipoAuto tipoauto){
 	}
 
 
-public void deleteByID(int id) throws ExceptionNoSePuedeEliminar{
+public void deleteByID(int id) throws ExceptionErrorGen{
 	
 PreparedStatement stmt=null;
 	
@@ -92,7 +92,7 @@ PreparedStatement stmt=null;
 		 stmt.executeUpdate();
 		
 	} catch (SQLException e) {
-		throw new ExceptionNoSePuedeEliminar("No se puede eliminar este tipo de auto debido "
+		throw new ExceptionErrorGen("No se puede eliminar este tipo de auto debido "
 										+ "a que existen reservas y/o autos que lo utilizan.");
     }
 	

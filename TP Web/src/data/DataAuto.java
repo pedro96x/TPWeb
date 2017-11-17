@@ -10,7 +10,7 @@ import entidades.Auto;
 import entidades.Persona;
 import entidades.Reserva;
 import entidades.TipoAuto;
-import excepciones.ExceptionNoSePuedeEliminar;
+import excepciones.ExceptionErrorGen;
 
 import entidades.Auto;
 
@@ -84,7 +84,7 @@ public class DataAuto {
 		}
 
 
-	public void bajaByID(int id) throws ExceptionNoSePuedeEliminar {
+	public void bajaByID(int id) throws ExceptionErrorGen {
 		
 	PreparedStatement stmt=null;
 		
@@ -95,7 +95,7 @@ public class DataAuto {
 			
 		} catch (SQLException e) {
 			
-			throw new ExceptionNoSePuedeEliminar("No se puede eliminar este auto debido"
+			throw new ExceptionErrorGen("No se puede eliminar este auto debido"
 					+ " a que existen reservas que lo utilizan.");
 	    }
 		

@@ -2,10 +2,10 @@ package excepciones;
 
 
 
-public class ExceptionNoSePuedeEliminar extends Exception {
+public class ExceptionErrorGen extends Exception {
 	private String mensajeDeError;
 	
-	public ExceptionNoSePuedeEliminar(String msg)  {
+	public ExceptionErrorGen(String msg)  {
 	this.setMensajeDeError(msg);
 }
 	public String getMensajeDeError() {

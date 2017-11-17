@@ -11,6 +11,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 
 import com.sun.javafx.collections.NonIterableChange.SimpleRemovedChange;
 
@@ -18,6 +25,8 @@ import controladores.CtrlAuto;
 import controladores.CtrlReserva;
 import controladores.CtrlTipoAuto;
 import entidades.*;
+
+import excepciones.ExceptionErrorGen;
 import excepciones.ExceptionNoHayAutos;
 import util.Emailer;
 
@@ -27,13 +36,12 @@ import util.Emailer;
 @WebServlet("/aNuevaReserva2")
 public class aNuevaReserva2 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+	private Logger logger;     
     /**
      * @see HttpServlet#HttpServlet()
      */
     public aNuevaReserva2() {
-        super();
-        // TODO Auto-generated constructor stub
+    	logger = LogManager.getLogger(getClass());
     }
 
 	/**
@@ -74,7 +82,10 @@ public class aNuevaReserva2 extends HttpServlet {
 			Date fechaFin=formatoInput.parse(stringFechaFin);
 			
 			stringFechaFinReformateada = formatoOutput.format(fechaFin);
-	
+			if((fechaInicio.compareTo(fechaFin))>0){
+				throw new ExceptionErrorGen("La fecha de inicio debe ser menor que la fecha de fin");
+			}
+			
 		CtrlAuto ctrlAuto = new CtrlAuto();
 		CtrlTipoAuto ctrlTipoAuto = new CtrlTipoAuto();
 		
@@ -126,8 +137,20 @@ public class aNuevaReserva2 extends HttpServlet {
 		}
 		
 		 catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			    
+			 	ExceptionErrorGen a =  new ExceptionErrorGen("Algo salió mal");
+			    HttpSession session = request.getSession();
+				int dni = ((Persona)session.getAttribute("user")).getDni();
+				logger.log(Level.ERROR,"ERROR: Error al convertir fecha"+dni);
+				request.setAttribute("mensaje", a.getMensajeDeError());
+				request.getRequestDispatcher("WEB-INF/PaginaDeError.jsp").forward(request, response);
+		} catch (ExceptionErrorGen e) {
+			HttpSession session = request.getSession();
+			int dni = ((Persona)session.getAttribute("user")).getDni();
+			logger.log(Level.ERROR,"ERROR: Fecha inicio menor a fecha fin "+dni);
+			request.setAttribute("mensaje", e.getMensajeDeError());
+			request.getRequestDispatcher("WEB-INF/PaginaDeError.jsp").forward(request, response);
+			
 		}	
 		
 		

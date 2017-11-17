@@ -13,7 +13,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import controladores.CtrlTipoAuto;
-import excepciones.ExceptionNoSePuedeEliminar;
+import excepciones.ExceptionErrorGen;
 import entidades.Persona;
 
 /**
@@ -58,7 +58,7 @@ public class EliminarTipoAuto extends HttpServlet {
 			
 					request.setAttribute("listaTiposAuto", ctrl.getArrayList());
 					request.getRequestDispatcher("WEB-INF/ABMTiposAuto.jsp").forward(request,response);
-				} catch (ExceptionNoSePuedeEliminar e) {
+				} catch (ExceptionErrorGen e) {
 					// TODO Auto-generated catch block
 					
 					HttpSession session = request.getSession();

@@ -19,7 +19,7 @@ import controladores.CtrlAuto;
 import controladores.CtrlTipoAuto;
 import entidades.Persona;
 import entidades.TipoAuto;
-import excepciones.ExceptionNoSePuedeEliminar;
+import excepciones.ExceptionErrorGen;
 
 /**
  * Servlet implementation class EliminarAuto
@@ -63,7 +63,7 @@ public class EliminarAuto extends HttpServlet {
 			request.setAttribute("listaAutos", ctrl.getArrayList());
 			request.setAttribute("listaTiposAuto", ctrlT.getArrayList());
 			request.getRequestDispatcher("WEB-INF/ABMAutos.jsp").forward(request, response);
-		} catch (ExceptionNoSePuedeEliminar e) {
+		} catch (ExceptionErrorGen e) {
 			HttpSession session = request.getSession();
 			int dni = ((Persona)session.getAttribute("user")).getDni();
 			logger.log(Level.INFO,"ERROR: No se puede eliminar autos incluidos en reservas "+dni);
