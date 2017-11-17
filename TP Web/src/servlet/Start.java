@@ -48,7 +48,7 @@ public class Start extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		try {
+		
 			String user=request.getParameter("user");
 			String pass=request.getParameter("pass");
 			
@@ -73,10 +73,9 @@ public class Start extends HttpServlet {
 				request.getRequestDispatcher("errorLogin.html").forward(request, response);
 			}
 			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		//doGet(request, response);
+//		ver
+		
+		
 	}
 
 }

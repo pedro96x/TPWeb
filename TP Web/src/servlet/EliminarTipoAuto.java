@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -13,6 +14,7 @@ import org.apache.logging.log4j.Logger;
 
 import controladores.CtrlTipoAuto;
 import excepciones.ExceptionNoSePuedeEliminar;
+import entidades.Persona;
 
 /**
  * Servlet implementation class EliminarTipoAuto
@@ -59,7 +61,9 @@ public class EliminarTipoAuto extends HttpServlet {
 				} catch (ExceptionNoSePuedeEliminar e) {
 					// TODO Auto-generated catch block
 					
-					logger.log(Level.ERROR,"Eliminar tipos incluidos en reservas "+"39455528");
+					HttpSession session = request.getSession();
+					int dni = ((Persona)session.getAttribute("user")).getDni();
+					logger.log(Level.ERROR,"ERROR: No se puede eliminar tipos de auto incluidos en reservas "+dni);
 					request.setAttribute("mensaje", e.getMensajeDeError());
 					request.getRequestDispatcher("WEB-INF/PaginaDeError.jsp").forward(request, response);
 				}

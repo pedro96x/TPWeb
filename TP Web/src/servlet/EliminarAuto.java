@@ -8,11 +8,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import controladores.CtrlAuto;
 
 import controladores.CtrlTipoAuto;
+import entidades.Persona;
 import entidades.TipoAuto;
+import excepciones.ExceptionNoSePuedeEliminar;
 
 /**
  * Servlet implementation class EliminarAuto
@@ -20,13 +27,13 @@ import entidades.TipoAuto;
 @WebServlet("/EliminarAuto")
 public class EliminarAuto extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private Logger logger;   
        
     /**
      * @see HttpServlet#HttpServlet()
      */
     public EliminarAuto() {
-        super();
-        // TODO Auto-generated constructor stub
+    	logger = LogManager.getLogger(getClass()); 
     }
 
 	/**
@@ -50,11 +57,22 @@ public class EliminarAuto extends HttpServlet {
 		CtrlAuto ctrl = new CtrlAuto();
 		CtrlTipoAuto ctrlT = new CtrlTipoAuto();
 		ArrayList<TipoAuto>listaTiposAuto=new ArrayList<TipoAuto>();
-		ctrl.baja(idAuto);
-		request.setAttribute("listaAutos", ctrl.getArrayList());
-		request.setAttribute("listaTiposAuto", ctrlT.getArrayList());
 		
-		request.getRequestDispatcher("WEB-INF/ABMAutos.jsp").forward(request, response);
+		try {
+			ctrl.baja(idAuto);
+			request.setAttribute("listaAutos", ctrl.getArrayList());
+			request.setAttribute("listaTiposAuto", ctrlT.getArrayList());
+			request.getRequestDispatcher("WEB-INF/ABMAutos.jsp").forward(request, response);
+		} catch (ExceptionNoSePuedeEliminar e) {
+			HttpSession session = request.getSession();
+			int dni = ((Persona)session.getAttribute("user")).getDni();
+			logger.log(Level.INFO,"ERROR: No se puede eliminar autos incluidos en reservas "+dni);
+			request.setAttribute("mensaje", e.getMensajeDeError());
+			request.getRequestDispatcher("WEB-INF/PaginaDeError.jsp").forward(request, response);
+			
+		}
+		
+		
 		
 		
 		} catch (NumberFormatException e) {

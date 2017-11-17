@@ -92,7 +92,8 @@ PreparedStatement stmt=null;
 		 stmt.executeUpdate();
 		
 	} catch (SQLException e) {
-		throw new ExceptionNoSePuedeEliminar();
+		throw new ExceptionNoSePuedeEliminar("No se puede eliminar este tipo de auto debido "
+										+ "a que existen reservas y/o autos que lo utilizan.");
     }
 	
 	try {

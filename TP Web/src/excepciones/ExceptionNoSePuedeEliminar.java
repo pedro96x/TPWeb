@@ -3,10 +3,10 @@ package excepciones;
 
 
 public class ExceptionNoSePuedeEliminar extends Exception {
-	private String mensajeDeError="No se puede eliminar este tipo de auto debido a que existen reservas que lo utilizan.";
-
-	public ExceptionNoSePuedeEliminar()  {
+	private String mensajeDeError;
 	
+	public ExceptionNoSePuedeEliminar(String msg)  {
+	this.setMensajeDeError(msg);
 }
 	public String getMensajeDeError() {
 		return mensajeDeError;
