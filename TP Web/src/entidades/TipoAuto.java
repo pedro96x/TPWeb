@@ -11,6 +11,8 @@ public class TipoAuto implements Serializable { //Esta clase va a representar el
 	
 	int limMaxDeTiempoDeReserva; //Cantidad maxima de horas que un usuario puede reservar un auto, Ejemplo: 140 (horas)
 	
+	private String permiso;
+	
 	public int getId() {
 		return id;
 	}
@@ -52,4 +54,13 @@ public class TipoAuto implements Serializable { //Esta clase va a representar el
 	}
 
 	int minDiasDeAnti; //Cantidad minima de dias necesarios para hacer la reserva, Ejemplo: 2 (dias)
+	
+
+	public void setPermiso(String tipo_permiso) {
+		this.permiso =tipo_permiso;
+	}
+
+	public String getPermiso() {
+		return permiso;
+	}
 }

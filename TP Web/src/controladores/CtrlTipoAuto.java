@@ -34,4 +34,7 @@ public class CtrlTipoAuto {
 	public ArrayList<TipoAuto> getArrayList() {
 		return dataTipoAuto.getArrayList();
 	}
+	public ArrayList<TipoAuto> getTipoAutosForUser(){
+		return dataTipoAuto.getTipoAutosForUser();
+	}
 }

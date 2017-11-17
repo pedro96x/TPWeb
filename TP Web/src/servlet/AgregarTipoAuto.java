@@ -40,11 +40,13 @@ public class AgregarTipoAuto extends HttpServlet {
 		// TODO Auto-generated method stub
 		try {
 			String nombre = request.getParameter("nombre");
+			String tipo_permiso = request.getParameter("tipo_permiso");
 			TipoAuto ta = new TipoAuto();
 			ta.setNombre(nombre);
 			ta.setCantMaxReservas(4);
 			ta.setMinDiasDeAnti(2);
 			ta.setLimMaxDeTiempoDeReserva(4);
+			ta.setPermiso(tipo_permiso);
 			
 			
 			CtrlTipoAuto ctrl = new CtrlTipoAuto();

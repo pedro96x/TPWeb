@@ -86,8 +86,8 @@
       <tr>
         <th>ID</th>
         <th>Nombre</th>
-        <th></th>
-       
+        <th>Pueden reservar</th>
+		<th></th>       
        
       </tr>
     </thead>
@@ -102,6 +102,9 @@
       <tr>
         <td><%= ta.getId() %></td>
         <td><%= ta.getNombre() %></td>
+        
+        <%if(ta.getPermiso().equals("ALL")){%><td>Todos</td><%}%>
+        <%if(ta.getPermiso().equals("ENC")){%><td>Encargados y Admins</td><%}%>
         
         
       
@@ -124,7 +127,9 @@
       </tbody>
   </table>
  
-
+ 
+   <!--  MODAL NUEVO TIPO AUTO -->
+   
   <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" style="margin-bottom: 20px;">Agregar tipo de auto</button>
   <div class="modal fade" id="myModal" role="dialog">
       <div class="modal-dialog">
@@ -155,7 +160,17 @@
                   </div>
 
               
-
+ 				<div class="form-group">
+                      <label class="control-label col-sm-2" for="usr">Pueden reservar:</label>
+                      <div class="col-sm-10"> 
+                      <div class="radio">
+					      <label><input type="radio" name="tipo_permiso" value="ALL" checked="checked">Todos los usuarios</label>
+					    </div>
+					  <div class="radio">
+					      <label><input type="radio" name="tipo_permiso" value="ENC">Solo Encargados (y administradores)</label>
+					    </div>
+                    </div> 
+                  </div> 
            
 
                  
@@ -177,13 +192,15 @@
            </form>
 
         </div>
-        <!-- Script para ocultar la contraseña-->
+       <!--  <!-- Script para ocultar la contraseña-->
         <script type="text/javascript"> 
           $("#password").password('toggle');     
-        </script>
+        </script> -->
         
       </div>
     </div>
+    
+    <!--  MODAL NUEVO TIPO AUTO -->
     
     
     
@@ -231,17 +248,18 @@
 
                
 
-              
+              <div class="form-group">
+                      <label class="control-label col-sm-2" for="usr">Pueden reservar:</label>
+                      <div class="col-sm-10"> 
+                      <div class="radio">
+					      <label><input type="radio" name="tipo_permiso" value="ALL"<%if(ta.getPermiso().equals("ALL")){%> checked="checked"<%}%> disabled>Todos los usuarios</label>
+					    </div>
+					  <div class="radio">
+					      <label><input type="radio" name="tipo_permiso"  value="ENC"<%if(ta.getPermiso().equals("ENC")){%> checked="checked"<%}%> disabled>Solo Encargados (y administradores)</label>
+					    </div>
+                    </div> 
+                  </div> 
 
-                  
-
-               
-
-               
-                      
-             
-               
-                  
                   
                   
               </div>
@@ -308,18 +326,18 @@
                   </div>
                   </div>
 
-              
+                 <div class="form-group">
+                      <label class="control-label col-sm-2" for="usr">Pueden reservar:</label>
+                      <div class="col-sm-10"> 
+                      <div class="radio">
+					      <label><input type="radio" name="tipo_permiso" value="ALL"<%if(ta.getPermiso().equals("ALL")){%> checked="checked"<%}%>>Todos los usuarios</label>
+					    </div>
+					  <div class="radio">
+					      <label><input type="radio" name="tipo_permiso" value="ENC"<%if(ta.getPermiso().equals("ENC")){%> checked="checked"<%}%>>Solo Encargados (y administradores)</label>
+					    </div>
+                    </div> 
+                  </div> 
 
-               
-
-                 
-
-               
-
-              
-                  
-                  
-                  
                   
               </div>
 

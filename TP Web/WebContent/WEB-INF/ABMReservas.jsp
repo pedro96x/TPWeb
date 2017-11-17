@@ -254,9 +254,19 @@
                     <input name="detalle" type="text" class="form-control" id="apellido" placeholder="Ingrese detalle" required>
                 </div>
               </div>
+              
+              
+              
+              
 <% 
+Persona per = (Persona)session.getAttribute("user");
+ArrayList<TipoAuto> listaTipos = new ArrayList<TipoAuto>();
 CtrlTipoAuto ctrlTipoAuto = new CtrlTipoAuto();
-ArrayList<TipoAuto> listaTipos = ctrlTipoAuto.getArrayList(); 
+
+if( per.getTipo().equals("AMD") || per.getTipo().equals("ENC")  ) {
+listaTipos = ctrlTipoAuto.getArrayList(); 
+}
+else{ listaTipos = ctrlTipoAuto.getTipoAutosForUser();}
 %>
 			<div class="form-group">
                 <label class="control-label col-sm-2" for="usr">Modelo:</label>

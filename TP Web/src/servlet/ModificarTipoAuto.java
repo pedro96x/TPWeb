@@ -45,6 +45,7 @@ public class ModificarTipoAuto extends HttpServlet {
 			ta = new TipoAuto();
 			int id =Integer.parseInt(request.getParameter("idTipoAuto"));
 			String nombre = request.getParameter("nombre");
+			String tipo_permiso = request.getParameter("tipo_permiso");
 			
 			
 			ta.setId(id);
@@ -52,6 +53,7 @@ public class ModificarTipoAuto extends HttpServlet {
 			ta.setCantMaxReservas(4);
 			ta.setMinDiasDeAnti(2);
 			ta.setLimMaxDeTiempoDeReserva(4);
+			ta.setPermiso(tipo_permiso);
 			
 			try {
 				ctrl = new CtrlTipoAuto();
