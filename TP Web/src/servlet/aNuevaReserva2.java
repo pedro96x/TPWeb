@@ -77,13 +77,13 @@ public class aNuevaReserva2 extends HttpServlet {
 			
 			stringFechaInicioReformateada = formatoOutput.format(fechaInicio);
 			
-			
+			Date today = new Date();
 			
 			Date fechaFin=formatoInput.parse(stringFechaFin);
 			
 			stringFechaFinReformateada = formatoOutput.format(fechaFin);
-			if((fechaInicio.compareTo(fechaFin))>0){
-				throw new ExceptionErrorGen("La fecha de inicio debe ser menor que la fecha de fin");
+			if((fechaInicio.after(fechaFin)) || (fechaInicio.before(today))){
+				throw new ExceptionErrorGen("La fecha de inicio debe ser menor que la fecha de fin y posterior a la fecha actual");
 			}
 			
 		CtrlAuto ctrlAuto = new CtrlAuto();
@@ -147,7 +147,7 @@ public class aNuevaReserva2 extends HttpServlet {
 		} catch (ExceptionErrorGen e) {
 			HttpSession session = request.getSession();
 			int dni = ((Persona)session.getAttribute("user")).getDni();
-			logger.log(Level.ERROR,"ERROR: Fecha inicio menor a fecha fin "+dni);
+			logger.log(Level.ERROR,"ERROR: Fecha inicio mayor a fecha fin o menor a fecha actual"+dni);
 			request.setAttribute("mensaje", e.getMensajeDeError());
 			request.getRequestDispatcher("WEB-INF/PaginaDeError.jsp").forward(request, response);
 			
