@@ -124,8 +124,8 @@
 
 
 
-  <h2>Administrar Reservas</h2><br><br><br>
-    <p>En esta tabla se muestran todas las reservas de todos los usuarios</p>
+  <h2>Administrar todas las Reservas</h2><br><br><br>
+    <p>En esta tabla se muestran todas las reservas (que no hayan iniciado) de todos los usuarios/gerentes/administradores</p>
   
 
   <table class="table table-hover">

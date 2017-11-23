@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import javax.mail.Session;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -64,7 +65,8 @@ public class aNuevaReserva2 extends HttpServlet {
 		String stringFechaFin=request.getParameter("fechaFin");		
 		String detalle=request.getParameter("detalle");
 		String nombreTipo =request.getParameter("nombreTipo");
-		
+		HttpSession session= request.getSession();
+		Persona pers = (Persona)session.getAttribute("user");
 		
 		SimpleDateFormat formatoInput=new SimpleDateFormat("yyyy-MM-dd");
 		SimpleDateFormat formatoOutput=new SimpleDateFormat("yyyy-MM-dd");
@@ -98,7 +100,13 @@ public class aNuevaReserva2 extends HttpServlet {
 		} 
 		
 		CtrlReserva ctrlReserva = new CtrlReserva();
-//		ArrayList<Auto> listaAutos = ctrlAuto.getAutosByID(tipoAuto.getId());
+
+		if(!ctrlReserva.puedeReservar(pers, tipoAuto, fechaInicio, fechaFin)){
+			throw new ExceptionErrorGen("Ya supero la cantidad maxima de reservas de este tipo de elemento");
+		}
+		
+		
+		//		ArrayList<Auto> listaAutos = ctrlAuto.getAutosByID(tipoAuto.getId());
 //		
 //		
 //		
@@ -139,15 +147,16 @@ public class aNuevaReserva2 extends HttpServlet {
 		 catch (ParseException e) {
 			    
 			 	ExceptionErrorGen a =  new ExceptionErrorGen("Algo salió mal");
-			    HttpSession session = request.getSession();
+			    
 				int dni = ((Persona)session.getAttribute("user")).getDni();
-				logger.log(Level.ERROR,"ERROR: Error al convertir fecha"+dni);
+				logger.log(Level.ERROR,"ERROR:"+ e.getMessage() +dni);
 				request.setAttribute("mensaje", a.getMensajeDeError());
 				request.getRequestDispatcher("WEB-INF/PaginaDeError.jsp").forward(request, response);
 		} catch (ExceptionErrorGen e) {
-			HttpSession session = request.getSession();
+			
 			int dni = ((Persona)session.getAttribute("user")).getDni();
-			logger.log(Level.ERROR,"ERROR: Fecha inicio mayor a fecha fin o menor a fecha actual"+dni);
+			e.setDni(dni);
+			logger.log(Level.ERROR,"ERROR: " + e.getMensajeDeError() + dni);
 			request.setAttribute("mensaje", e.getMensajeDeError());
 			request.getRequestDispatcher("WEB-INF/PaginaDeError.jsp").forward(request, response);
 			

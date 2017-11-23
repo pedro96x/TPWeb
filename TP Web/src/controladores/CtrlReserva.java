@@ -5,7 +5,9 @@ import java.util.ArrayList;
 
 import data.DataAuto;
 import data.DataReserva;
+import data.DataTipoAuto;
 import entidades.Auto;
+import entidades.Persona;
 import entidades.Reserva;
 import entidades.TipoAuto;
 import manejoTiempo.NuevoDate;
@@ -13,6 +15,7 @@ import manejoTiempo.NuevoDate;
 public class CtrlReserva {
 		DataReserva dataRes = new DataReserva();
 		DataAuto dataAuto = new DataAuto();
+		DataTipoAuto dataTipo = new DataTipoAuto();
 		
 		public ArrayList<Reserva> getReservas(){	
 			return dataRes.getReservas();
@@ -61,6 +64,24 @@ public class CtrlReserva {
 	public ArrayList<Auto> getAutosDisponiblesByFechasAndTipo(java.util.Date fechaI,java.util.Date fechaF,int idTipoAuto) {
 		return dataRes.getAutosDisponiblesByFechasAndTipo(fechaI,fechaF,idTipoAuto);
 	}
+	
+	
+	public boolean puedeReservar(Persona pers, TipoAuto tipo, Date fechaIni, Date fechaFin){
+		int cantidad = 0;
+		cantidad = dataRes.getCantDeReservasByPersonaAndTipoAutoAndFechas(pers, tipo, fechaIni, fechaFin);
+		if (cantidad >= tipo.getCantMaxReservas()){
+			return false;
+		}
+		else {return true;}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 }

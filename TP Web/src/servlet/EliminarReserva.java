@@ -46,16 +46,15 @@ public class EliminarReserva extends HttpServlet {
 		
 		String id=request.getParameter("idReserva");
 		String paginaAnterior=request.getParameter("paginaAnterior");
-		String idPersona=request.getParameter("idPersona");
+		
 		try {
 			int idReserva = Integer.parseInt(id);
-			int idPer = Integer.parseInt(idPersona);
+		
 		
 		CtrlReserva ctrlReserva = new CtrlReserva();
 		CtrlPersona ctrlPersona = new CtrlPersona();
-		
 		ctrlReserva.deleteById(idReserva);
-		Persona per = ctrlPersona.getById(idPer);
+		
 		
 		if(paginaAnterior.equals("ABMReservas")){
 			
@@ -66,7 +65,11 @@ public class EliminarReserva extends HttpServlet {
 			request.getRequestDispatcher("WEB-INF/ABMReservas.jsp").forward(request, response);
 		}
 		else{
-
+			String idPersona=request.getParameter("idPersona");
+			int idPer = Integer.parseInt(idPersona);
+			
+			Persona per = ctrlPersona.getById(idPer);
+			
 			Emailer.getInstance().send(per.getUser(),"Reserva cancelada","Sr/a "+per.getApellido()+
 					" "+
 					"Lamentamos informarle que su reserva fue cancelada por el aministrador del sistema. Gracias por confiar en GetCars©");

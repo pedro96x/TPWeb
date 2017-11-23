@@ -1,8 +1,10 @@
 package excepciones;
 
-
+import org.apache.logging.log4j.Level;
 
 public class ExceptionErrorGen extends Exception {
+	int dni = 0;
+	
 	private String mensajeDeError;
 	
 	public ExceptionErrorGen(String msg)  {
@@ -13,6 +15,13 @@ public class ExceptionErrorGen extends Exception {
 	}
 	public void setMensajeDeError(String mensajeDeError) {
 		this.mensajeDeError = mensajeDeError;
-	}}
+	}
+	public void setDni(int dni) {
+	this.dni = dni;
+		
+	}
+	
+	
+}
 
 

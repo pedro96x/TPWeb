@@ -263,7 +263,7 @@ Persona per = (Persona)session.getAttribute("user");
 ArrayList<TipoAuto> listaTipos = new ArrayList<TipoAuto>();
 CtrlTipoAuto ctrlTipoAuto = new CtrlTipoAuto();
 
-if( per.getTipo().equals("AMD") || per.getTipo().equals("ENC")  ) {
+if( per.getTipo().equals("ADM") || per.getTipo().equals("ENC")  ) {
 listaTipos = ctrlTipoAuto.getArrayList(); 
 }
 else{ listaTipos = ctrlTipoAuto.getTipoAutosForUser();}

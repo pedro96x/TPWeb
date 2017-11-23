@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import entidades.Auto;
+import entidades.Persona;
 import entidades.Reserva;
 import entidades.TipoAuto;
 
@@ -59,7 +60,8 @@ public class DataReserva {
 							+ "inner join autos aut "
 							+ "on aut.id_auto = res.auto_reservado "
 							+ "inner join tiposdeauto tip "
-							+ "on tip.id = aut.id_tipoauto ");
+							+ "on tip.id = aut.id_tipoauto "
+							+ " where res.fechain > current_date()");
 			
 			rs = stmt.executeQuery();
 			if(rs!=null){
@@ -301,10 +303,69 @@ public class DataReserva {
 	
 	
 	
-//	public ArrayList<Auto> getAutosDisponibles (date fechain, date fechaFin, TipoAuto tipo ){
-//		
-//	}
-	
+	public int getCantDeReservasByPersonaAndTipoAutoAndFechas(Persona pers, TipoAuto tipo, java.util.Date fechaIni, java.util.Date fechaFin) {
+		PreparedStatement stmt = null;
+		ResultSet rs=null;
+		int cantidad = 0;
+		try {
+			stmt = FactoryConexion.getInstancia()
+					.getConn().prepareStatement( 
+							
+							 " select count(res.id) cant "
+							+" from reservas res  "
+							+" inner join autos aut "
+							+" on aut.id_auto = res.auto_reservado "
+							+" inner join tiposdeauto tip "
+							+" on aut.id_tipoauto = tip.id  "
+							+" where (res.id_persona=?) and (tip.id = ?) "
+							+" and (res.fechain > current_date()) "
+							+" and ( "
+								+" ( ? between res.fechain and res.fechafin)  "
+								+" or "
+								+" ( ? between res.fechain and res.fechafin)  "
+								+" or "
+								+" (res.fechain between  ? and  ? ) "
+								+" or "
+								+" (res.fechafin between  ? and ? ) "
+							+") " 					 
+							+"group by res.id_persona, tip.nombre_tipo_auto "
+							+ " ;"
+							
+							);
+			
+			stmt.setInt(1, pers.getId());
+			stmt.setInt(2, tipo.getId());
+			stmt.setDate(3, new java.sql.Date(fechaIni.getTime()));
+			stmt.setDate(4, new java.sql.Date(fechaFin.getTime()));
+			stmt.setDate(5, new java.sql.Date(fechaIni.getTime()));
+			stmt.setDate(6, new java.sql.Date(fechaFin.getTime()));
+			stmt.setDate(7, new java.sql.Date(fechaIni.getTime()));
+			stmt.setDate(8, new java.sql.Date(fechaFin.getTime()));
+			
+			rs = stmt.executeQuery();
+			if(rs!=null){
+				while(rs.next()){
+					cantidad = rs.getInt("cant");
+				}
+			}
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+
+		try {
+			if(rs!=null) rs.close();
+			if(stmt!=null) stmt.close();
+			FactoryConexion.getInstancia().releaseConn();
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+		return cantidad;
+		
+	}
 	
 	
 	
