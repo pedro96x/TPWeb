@@ -87,7 +87,10 @@
         <th>ID</th>
         <th>Nombre</th>
         <th>Pueden reservar</th>
-		<th></th>       
+		<th>Cantidad Max.</th>
+		<th>Limite (en dias)</th>
+		<th>Dias de anticipacion necesarios</th>       
+        <th></th> 
        
       </tr>
     </thead>
@@ -106,6 +109,9 @@
         <%if(ta.getPermiso().equals("ALL")){%><td>Todos</td><%}%>
         <%if(ta.getPermiso().equals("ENC")){%><td>Encargados y Admins</td><%}%>
         
+        <td><%= ta.getCantMaxReservas() %></td>
+        <td><%= ta.getLimMaxDeTiempoDeReserva() %></td>
+        <td><%= ta.getMinDiasDeAnti() %></td>
         
       
        
@@ -158,6 +164,27 @@
                     <input name="nombre" type="text" class="form-control" id="nombre"placeholder="Ingrese Nombre">
                   </div>
                   </div>
+                  
+                  <div class="form-group">
+                    <label class="control-label col-sm-2" for="usr">Cantidad maxima:</label>
+                    <div class="col-sm-10"> 
+                    <input name="cantMax" type="text" class="form-control" id="cantMax"placeholder="Ingrese Cantidad maxima">
+                  </div>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label class="control-label col-sm-2" for="usr">Limite de tiempo (en dias):</label>
+                    <div class="col-sm-10"> 
+                    <input name="limite" type="text" class="form-control" id="limite"placeholder="Ingrese Limite">
+                  </div>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label class="control-label col-sm-2" for="usr">Dias de anticipacion necesarios:</label>
+                    <div class="col-sm-10"> 
+                    <input name="anti" type="text" class="form-control" id="anti"placeholder="Ingrese dias de Anticipacion">
+                  </div>
+                  </div>
 
               
  				<div class="form-group">
@@ -204,7 +231,7 @@
     
     
     
-   <!--  Aca voy a crear un modal de delete por cada persona -->
+   <!--  MODAL DELETE TIPO AUTO -->
    
    
     <%
@@ -245,7 +272,27 @@
                     <input name="nombre" type="text" class="form-control" id="nombre"value="<%=ta.getNombre()%>" readonly>
                   </div>
                   </div>
-
+                  
+                  <div class="form-group">
+                    <label class="control-label col-sm-2" for="usr">Cantidad maxima:</label>
+                    <div class="col-sm-10"> 
+                    <input name="cantMax" type="text" class="form-control" id="cantMax"value="<%=ta.getCantMaxReservas()%>" readonly>
+                  </div>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label class="control-label col-sm-2" for="usr">Limite de tiempo (en dias):</label>
+                    <div class="col-sm-10"> 
+                    <input name="limite" type="text" class="form-control" id="limite"value="<%=ta.getLimMaxDeTiempoDeReserva()%>" readonly>
+                  </div>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label class="control-label col-sm-2" for="usr">Dias de anticipacion necesarios:</label>
+                    <div class="col-sm-10"> 
+                    <input name="anti" type="text" class="form-control" id="anti"value="<%=ta.getMinDiasDeAnti()%>" readonly>
+                  </div>
+                  </div>
                
 
               <div class="form-group">
@@ -282,7 +329,7 @@
     
     <%}} %>
     
-     <!--  Aca voy a crear un modal de delete por cada persona -->
+      <!--  MODAL DELETE TIPO AUTO -->
      
      <!--  Aca voy a crear un modal de actualizar por cada persona -->
      
@@ -325,7 +372,28 @@
                     <input name="nombre" type="text" class="form-control" id="nombre"value="<%=ta.getNombre()%>" >
                   </div>
                   </div>
-
+					
+					<div class="form-group">
+                    <label class="control-label col-sm-2" for="usr">Cantidad maxima:</label>
+                    <div class="col-sm-10"> 
+                    <input name="cantMax" type="text" class="form-control" id="cantMax"value="<%=ta.getCantMaxReservas()%>">
+                  </div>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label class="control-label col-sm-2" for="usr">Limite de tiempo (en dias):</label>
+                    <div class="col-sm-10"> 
+                    <input name="limite" type="text" class="form-control" id="limite" value="<%=ta.getLimMaxDeTiempoDeReserva()%>">
+                  </div>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label class="control-label col-sm-2" for="usr">Dias de anticipacion necesarios:</label>
+                    <div class="col-sm-10"> 
+                    <input name="anti" type="text" class="form-control" id="anti" value="<%=ta.getMinDiasDeAnti()%>">
+                  </div>
+                  </div>
+                  
                  <div class="form-group">
                       <label class="control-label col-sm-2" for="usr">Pueden reservar:</label>
                       <div class="col-sm-10"> 

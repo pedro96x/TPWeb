@@ -102,7 +102,16 @@ public class aNuevaReserva2 extends HttpServlet {
 		CtrlReserva ctrlReserva = new CtrlReserva();
 
 		if(!ctrlReserva.puedeReservar(pers, tipoAuto, fechaInicio, fechaFin)){
-			throw new ExceptionErrorGen("Ya supero la cantidad maxima de reservas de este tipo de elemento");
+			throw new ExceptionErrorGen("Ya supero la cantidad maxima de reservas de "+tipoAuto.getNombre()+". Solo se permite reservar "+tipoAuto.getCantMaxReservas()+" al mismo tiempo.");
+		}
+		
+		if (tipoAuto.getLimMaxDeTiempoDeReserva()< ((fechaFin.getTime()-fechaInicio.getTime())/86400000)) {
+			throw new ExceptionErrorGen("Supero la cantidad de dias de reserva maximos para "+tipoAuto.getNombre()+" ("+ tipoAuto.getLimMaxDeTiempoDeReserva() +" dias).");
+		}
+		Date hoy = new Date();
+	
+		if(((fechaInicio.getTime()-hoy.getTime())/86400000) < tipoAuto.getMinDiasDeAnti()){
+			throw new ExceptionErrorGen("Para reservar "+tipoAuto.getNombre()+" necesita hacerlo con al menos "+tipoAuto.getMinDiasDeAnti()+" dias de anticipacion.");
 		}
 		
 		

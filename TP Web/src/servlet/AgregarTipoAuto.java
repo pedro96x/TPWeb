@@ -41,11 +41,14 @@ public class AgregarTipoAuto extends HttpServlet {
 		try {
 			String nombre = request.getParameter("nombre");
 			String tipo_permiso = request.getParameter("tipo_permiso");
+			String cantMax = request.getParameter("cantMax");
+			String limite = request.getParameter("limite");
+			String anti = request.getParameter("anti");
 			TipoAuto ta = new TipoAuto();
 			ta.setNombre(nombre);
-			ta.setCantMaxReservas(4);
-			ta.setMinDiasDeAnti(2);
-			ta.setLimMaxDeTiempoDeReserva(4);
+			ta.setCantMaxReservas(Integer.parseInt(cantMax));
+			ta.setMinDiasDeAnti(Integer.parseInt(anti));
+			ta.setLimMaxDeTiempoDeReserva(Integer.parseInt(limite));
 			ta.setPermiso(tipo_permiso);
 			
 			
