@@ -11,6 +11,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import controladores.CtrlAuto;
 import controladores.CtrlReserva;
@@ -25,13 +30,13 @@ import util.Emailer;
 @WebServlet("/AgregarReserva")
 public class AgregarReserva extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private Logger logger;   
        
     /**
      * @see HttpServlet#HttpServlet()
      */
     public AgregarReserva() {
-        super();
-        // TODO Auto-generated constructor stub
+    	logger = LogManager.getLogger(getClass());
     }
 
 	/**
@@ -130,6 +135,14 @@ public class AgregarReserva extends HttpServlet {
 			request.getRequestDispatcher("WEB-INF/ABMReservas.jsp").forward(request, response);
 			
 		}
+		catch(java.lang.RuntimeException a){
+			HttpSession session = request.getSession();
+			int dni = ((Persona)session.getAttribute("user")).getDni();
+			logger.log(Level.INFO,"ERROR: No se puede eliminar autos incluidos en reservas "+dni);
+			request.setAttribute("mensaje", "No se pudo enviar el mail");
+			request.getRequestDispatcher("WEB-INF/PaginaDeError.jsp").forward(request, response);
+		}
+
 		 catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

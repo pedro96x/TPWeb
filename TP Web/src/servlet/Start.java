@@ -69,13 +69,9 @@ public class Start extends HttpServlet {
 			response.getWriter().append(user).append(" ").append(pass);
 			}
 			else{
-			
+				logger.log(Level.ERROR,"Usuario o contraseña incorrectos.");
 				request.getRequestDispatcher("errorLogin.html").forward(request, response);
-			}
-			
-//		ver
-		
-		
+			}						
 	}
 
 }

@@ -16,7 +16,7 @@ public class DataLogin {
 		
 		try{
 			stmt = FactoryConexion.getInstancia().getConn().prepareStatement(
-					"select id, nombre, apellido, dni, habilitado, user, pass, tipo_per FROM personasTP where user=? and pass = ? and habilitado =1");
+					"select id, nombre, apellido, dni, habilitado, user, pass, tipo_per FROM personasTP where user=? and pass = ? and habilitado = 1");
 		stmt.setString(1, per.getUser());
 		stmt.setString(2, per.getPass());
 		rs = stmt.executeQuery();
