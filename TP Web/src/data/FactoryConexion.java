@@ -9,10 +9,12 @@ import java.sql.*;
 public class FactoryConexion {
 	
 	private String driver="com.mysql.jdbc.Driver";
-	private String host="localhost";
+	private String host="node8910-javatp.fr-1.paas.massivegrid.net" ;  
+	//private String host="localhost" ;               
 	private String port="3306";
 	private String user="root";
-	private String password="5300";
+	private String password="RRRxlc56591";
+	//private String password="5300";
 	private String db="tp";
 	
 	private static FactoryConexion instancia;

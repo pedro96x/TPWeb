@@ -17,7 +17,7 @@ public class DataPersona {
 		
 		try{
 			stmt = FactoryConexion.getInstancia().getConn().prepareStatement(
-					"select id, nombre, apellido, dni, habilitado, user, pass, tipo_per FROM personasTP where dni=?");
+					"select id, nombre, apellido, dni, habilitado, user, pass, tipo_per FROM personastp where dni=?");
 		stmt.setInt(1, docu);
 		rs = stmt.executeQuery();
 			if (rs != null && rs.next()){
@@ -149,7 +149,7 @@ public ArrayList<Persona> getAll() {
 			stmt = FactoryConexion.getInstancia()
 					.getConn().createStatement();
 			rs = stmt.executeQuery("select id, nombre, apellido, dni, habilitado, user, pass, tipo_per "
-									+ " FROM personasTP ;");
+									+ " FROM personastp ;");
 			if(rs!=null){
 				while(rs.next()){
 					p = new Persona();
@@ -194,7 +194,7 @@ public Persona getById(int idPer) {
 	
 	try{
 		stmt = FactoryConexion.getInstancia().getConn().prepareStatement(
-				"select id, nombre, apellido, dni, habilitado, user, pass, tipo_per FROM personasTP where id=?");
+				"select id, nombre, apellido, dni, habilitado, user, pass, tipo_per FROM personastp where id=?");
 	stmt.setInt(1, idPer);
 	rs = stmt.executeQuery();
 		if (rs != null && rs.next()){

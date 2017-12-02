@@ -57,17 +57,16 @@ public class EliminarAuto extends HttpServlet {
 		CtrlAuto ctrl = new CtrlAuto();
 		CtrlTipoAuto ctrlT = new CtrlTipoAuto();
 		ArrayList<TipoAuto>listaTiposAuto=new ArrayList<TipoAuto>();
-		HttpSession session = request.getSession();
-		int dni = ((Persona)session.getAttribute("user")).getDni();
+		
 		try {
 			ctrl.baja(idAuto);
-			logger.log(Level.INFO,"Auto eliminado "+dni);
 			request.setAttribute("listaAutos", ctrl.getArrayList());
 			request.setAttribute("listaTiposAuto", ctrlT.getArrayList());
 			request.getRequestDispatcher("WEB-INF/ABMAutos.jsp").forward(request, response);
 		} catch (ExceptionErrorGen e) {
-			
-			logger.log(Level.ERROR,"No se puede eliminar autos incluidos en reservas "+dni);
+			HttpSession session = request.getSession();
+			int dni = ((Persona)session.getAttribute("user")).getDni();
+			logger.log(Level.INFO,"ERROR: No se puede eliminar autos incluidos en reservas "+dni);
 			request.setAttribute("mensaje", e.getMensajeDeError());
 			request.getRequestDispatcher("WEB-INF/PaginaDeError.jsp").forward(request, response);
 			
